@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
+
+    private ActionManager actionManager;
+
     private static MainFrame instance;
 
     private MainFrame(){
@@ -31,7 +34,10 @@ public class MainFrame extends JFrame {
         MyMenuBar menu = new MyMenuBar();
         setJMenuBar(menu);
 
-        MyToolBar toolBar = new MyToolBar();
+        actionManager = new ActionManager();
+
+
+        MyToolBar toolBar = new MyToolBar(actionManager);
         add(toolBar, BorderLayout.NORTH);
     }
 }
