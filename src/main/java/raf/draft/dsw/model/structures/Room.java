@@ -1,4 +1,14 @@
 package raf.draft.dsw.model.structures;
 
-public class Room {
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.Leaf;
+
+public class Room extends Leaf {
+    public Room(String name) {
+        super(name);
+    }
+
+    public Room(String name, DraftNode parent) {
+        super(name, parent);
+    }
 }

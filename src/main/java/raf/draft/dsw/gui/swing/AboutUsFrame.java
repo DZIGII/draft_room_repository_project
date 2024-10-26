@@ -1,7 +1,5 @@
 package raf.draft.dsw.gui.swing;
 
-import raf.draft.dsw.controller.AboutUsAction;
-
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;

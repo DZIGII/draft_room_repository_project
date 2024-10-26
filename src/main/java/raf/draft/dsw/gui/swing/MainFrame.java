@@ -1,5 +1,7 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.model.ActionManager;
+
 import javax.swing.*;
 import java.awt.*;
 
