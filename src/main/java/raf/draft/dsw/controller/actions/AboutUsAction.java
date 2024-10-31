@@ -29,10 +29,8 @@ public class AboutUsAction extends AbstactRoomAction {
         return icon;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         new AboutUsFrame();
-
     }
 }

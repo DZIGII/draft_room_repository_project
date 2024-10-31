@@ -33,7 +33,7 @@ public class AboutUsFrame extends JFrame {
         setTitle("About students");
 
         student1 = new JLabel("Nikola Raskovic RN 101/2024");
-        student2 = new JLabel("Nikola Jovic SI 101/2023");
+        student2 = new JLabel("Nikola Jovic SI 63/2023");
 
         studentIcon1 = loadIcon("/images/nikolaraskovic.png");
         studentIcon2 = loadIcon("/images/nikolajovic.png");

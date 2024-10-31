@@ -9,6 +9,10 @@ public abstract class DraftNodeComposite extends DraftNode {
         super(name);
     }
 
+    public DraftNodeComposite(String name, DraftNode parent) {
+        super(name, parent);
+    }
+
     public DraftNodeComposite(String name, ArrayList<DraftNode> children) {
         super(name);
         setParent(null);
@@ -20,13 +24,22 @@ public abstract class DraftNodeComposite extends DraftNode {
         this.children = children;
     }
 
-    private void addChild(DraftNode dn){
+    public void addChild(DraftNode dn){
         children.add(dn);
         dn.setParent(this);
     }
 
-    private void removeChild(DraftNode dn){
+    public void removeChild(DraftNode dn){
         children.remove(dn);
+    }
+
+    public DraftNode getChildByName(String name) {
+        for (DraftNode child: this.getChildren()) {
+            if (name.equals(child.getName())) {
+                return child;
+            }
+        }
+        return null;
     }
 
     public ArrayList<DraftNode> getChildren() {

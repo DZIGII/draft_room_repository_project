@@ -1,7 +1,7 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.ExitAction;
-import raf.draft.dsw.model.ActionManager;
+import raf.draft.dsw.controller.actions.ActionManager;
 
 import javax.swing.*;
 

@@ -1,10 +1,13 @@
 package raf.draft.dsw.core;
 
 import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.model.repository.DraftRoomRepository;
 
 public class ApplicationFramework {
     //buduca polja za model celog projekta
     private static ApplicationFramework instance;
+
+    protected DraftRoomRepository draftRoomRepository;
 
     private ApplicationFramework(){
         initialize();

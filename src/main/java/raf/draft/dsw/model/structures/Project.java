@@ -10,6 +10,10 @@ public class Project extends DraftNodeComposite {
     private String creatorName;
     private String pathToProjectResources;
 
+    public Project(String name, DraftNode parent) {
+        super(name, parent);
+    }
+
     public Project(String name, String projectName, String creatorName, String pathToProjectResources) {
         super(name);
         this.projectName = projectName;

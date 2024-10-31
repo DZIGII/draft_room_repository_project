@@ -30,4 +30,12 @@ public abstract class DraftNode {
     public void setParent(DraftNode parent) {
         this.parent = parent;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof DraftNode && obj != null) {
+            return this.getName().equals(((DraftNode)obj).getName());
+        }
+        return false;
+    }
 }

@@ -1,7 +1,4 @@
-package raf.draft.dsw.model;
-
-import raf.draft.dsw.controller.actions.AboutUsAction;
-import raf.draft.dsw.controller.actions.ExitAction;
+package raf.draft.dsw.controller.actions;
 
 public class ActionManager {
 
