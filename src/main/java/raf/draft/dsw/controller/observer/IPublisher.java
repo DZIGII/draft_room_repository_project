@@ -1,4 +1,8 @@
 package raf.draft.dsw.controller.observer;
 
-public class IPublisher {
+import java.util.List;
+
+public interface IPublisher {
+
+    void notifySubscribers();
 }
