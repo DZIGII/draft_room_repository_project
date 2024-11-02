@@ -4,8 +4,11 @@ public class ActionManager {
 
     private ExitAction exitAction;
     private NewProjectAction newProjectAction;
+    private AboutUsAction aboutUsAction;
     private ChooseBuildingAction chooseBuildingAction;
     private ChooseRoomAction chooseRoomAction;
+    private DeleteNodeAction deleteNodeAction;
+    private RenameAction renameAction;
 
     public ActionManager() {
         initialiseActions();
@@ -16,6 +19,9 @@ public class ActionManager {
         newProjectAction = new NewProjectAction();
         chooseBuildingAction = new ChooseBuildingAction();
         chooseRoomAction = new ChooseRoomAction();
+        deleteNodeAction = new DeleteNodeAction();
+        renameAction = new RenameAction();
+        aboutUsAction = new AboutUsAction();
     }
 
     public ExitAction getExitAction() {
@@ -48,5 +54,29 @@ public class ActionManager {
 
     public void setChooseRoomAction(ChooseRoomAction chooseRoomAction) {
         this.chooseRoomAction = chooseRoomAction;
+    }
+
+    public DeleteNodeAction getDeleteNodeAction() {
+        return deleteNodeAction;
+    }
+
+    public void setDeleteNodeAction(DeleteNodeAction deleteNodeAction) {
+        this.deleteNodeAction = deleteNodeAction;
+    }
+
+    public RenameAction getRenameAction() {
+        return renameAction;
+    }
+
+    public void setRenameAction(RenameAction renameAction) {
+        this.renameAction = renameAction;
+    }
+
+    public AboutUsAction getAboutUsAction() {
+        return aboutUsAction;
+    }
+
+    public void setAboutUsAction(AboutUsAction aboutUsAction) {
+        this.aboutUsAction = aboutUsAction;
     }
 }
