@@ -1,0 +1,86 @@
+package raf.draft.dsw.gui.swing;
+
+import raf.draft.dsw.controller.actions.ChooseBuildingAction;
+import raf.draft.dsw.controller.actions.ChooseRoomAction;
+import raf.draft.dsw.core.ApplicationFramework;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+
+public class ChooseDraftNodeFrame extends JFrame{
+    private JLabel buildingLabel;
+    private JLabel roomLabel;
+
+    private ImageIcon buildingIcon;
+    private ImageIcon roomIcon;
+
+    private JButton buildingButton;
+    private JButton roomButton;
+
+    private ChooseBuildingAction buildingAction;
+    private ChooseRoomAction roomAction;
+
+
+    public ChooseDraftNodeFrame(){
+        initElements();
+        showElements();
+    }
+
+    public void initElements() {
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setSize(screenWidth / 4, screenHeight / 4);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Choose Draft Room Item");
+
+//        buildingLabel = new JLabel("Building");
+//        roomLabel = new JLabel("Room");
+
+        buildingIcon = loadIcon("/images/building.png");
+        roomIcon = loadIcon("/images/room.png");
+
+        buildingButton = new JButton(buildingIcon);
+        roomButton = new JButton(roomIcon);
+
+        buildingAction = new ChooseBuildingAction();
+        roomAction = new ChooseRoomAction();
+
+        buildingButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseBuildingAction());
+        roomButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseRoomAction());
+
+    }
+
+    public void showElements() {
+        JPanel jp = new JPanel();
+        jp.setLayout(new GridLayout(1, 2));
+        jp.add(buildingButton, BorderLayout.CENTER);
+        jp.add(roomButton, BorderLayout.CENTER);
+//        jp.add(buildingLabel, BorderLayout.CENTER);
+//        jp.add(roomLabel, BorderLayout.CENTER);
+
+        this.add(jp);
+        setVisible(true);
+    }
+
+    public ImageIcon loadIcon(String path) {
+        ImageIcon icon = null;
+        URL ImageURL = getClass().getResource(path);
+        if(ImageURL != null)
+        {
+            Image img = new ImageIcon(ImageURL).getImage();
+            Image newImg = img.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            icon = new ImageIcon(newImg);
+        }
+        else
+        {
+            System.err.println("File not found");
+        }
+        return icon;
+    }
+}

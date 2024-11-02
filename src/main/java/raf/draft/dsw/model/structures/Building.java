@@ -10,6 +10,10 @@ public class Building extends DraftNodeComposite {
         super(name);
     }
 
+    public Building(String name, DraftNode parent) {
+        super(name, parent);
+    }
+
     public Building(String name, ArrayList<DraftNode> children) {
         super(name, children);
     }

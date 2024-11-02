@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
 
     private ActionManager actionManager;
-    private DraftTree draftTree;
+    private DraftTreeImplementation draftTree;
     private DraftRoomRepository draftRoomRepository;
 
     private static MainFrame instance;
@@ -70,11 +70,11 @@ public class MainFrame extends JFrame {
         this.actionManager = actionManager;
     }
 
-    public DraftTree getDraftTree() {
+    public DraftTreeImplementation getDraftTree() {
         return draftTree;
     }
 
-    public void setDraftTree(DraftTree draftTree) {
+    public void setDraftTree(DraftTreeImplementation draftTree) {
         this.draftTree = draftTree;
     }
 
