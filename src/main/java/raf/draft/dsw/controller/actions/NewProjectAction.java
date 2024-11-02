@@ -1,5 +1,6 @@
 package raf.draft.dsw.controller.actions;
 
+import raf.draft.dsw.gui.swing.AboutUsFrame;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 
@@ -29,7 +30,7 @@ public class NewProjectAction extends AbstactRoomAction{
             System.err.println("Resource not found: " + fileName);
         }
         return icon;
-    };
+    }
 
     public void actionPerformed(ActionEvent arg0) {
         DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();

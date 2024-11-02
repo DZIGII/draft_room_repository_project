@@ -1,16 +1,17 @@
 package raf.draft.dsw.model.repository;
 
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
+import raf.draft.dsw.model.structures.ProjectExplorer;
 
 public class DraftRoomExplorerImplementation implements DraftRoomRepository{
-    private DraftNodeComposite root;
+    private ProjectExplorer root;
 
-    public DraftRoomExplorerImplementation(DraftNodeComposite root) {
-        this.root = root;
+    public DraftRoomExplorerImplementation() {
+        this.root = new ProjectExplorer("My Project Explorer");
     }
 
     @Override
-    public DraftNodeComposite getRoot() {
+    public ProjectExplorer getRoot() {
         return root;
     }
 }

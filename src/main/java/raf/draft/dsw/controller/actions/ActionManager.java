@@ -3,9 +3,15 @@ package raf.draft.dsw.controller.actions;
 public class ActionManager {
 
     private ExitAction exitAction;
-    private AboutUsAction aboutUsAction;
+    private NewProjectAction newProjectAction;
 
     public ActionManager() {
+        initialiseActions();
+    }
+
+    private void initialiseActions() {
+        exitAction = new ExitAction();
+        newProjectAction = new NewProjectAction();
     }
 
     public ExitAction getExitAction() {
@@ -16,11 +22,11 @@ public class ActionManager {
         this.exitAction = exitAction;
     }
 
-    public AboutUsAction getAboutUsAction() {
-        return aboutUsAction;
+    public NewProjectAction getNewProjectAction() {
+        return newProjectAction;
     }
 
-    public void setAboutUsAction(AboutUsAction aboutUsAction) {
-        this.aboutUsAction = aboutUsAction;
+    public void setNewProjectAction(NewProjectAction newProjectAction) {
+        this.newProjectAction = newProjectAction;
     }
 }

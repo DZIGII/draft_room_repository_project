@@ -4,6 +4,8 @@ import raf.draft.dsw.controller.actions.ActionManager;
 import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.gui.swing.tree.DraftTree;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
+import raf.draft.dsw.model.repository.DraftRoomExplorerImplementation;
+import raf.draft.dsw.model.repository.DraftRoomRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,21 +15,25 @@ public class MainFrame extends JFrame {
 
     private ActionManager actionManager;
     private DraftTree draftTree;
+    private DraftRoomRepository draftRoomRepository;
 
     private static MainFrame instance;
 
     private MainFrame(){
-        initialize();
     }
 
     public static MainFrame getInstance(){
         if(instance == null){
             instance = new MainFrame();
+            instance.initialize();
         }
         return instance;
     }
 
     private void initialize(){
+        actionManager = new ActionManager();
+        draftTree = new DraftTreeImplementation();
+
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
@@ -40,23 +46,28 @@ public class MainFrame extends JFrame {
         MyMenuBar menu = new MyMenuBar();
         setJMenuBar(menu);
 
-        actionManager = new ActionManager();
-
         MyToolBar toolBar = new MyToolBar(actionManager);
         add(toolBar, BorderLayout.NORTH);
 
-        draftTree = new DraftTreeImplementation();
+        draftRoomRepository = new DraftRoomExplorerImplementation();
+        JTree projectExplorer = draftTree.generateTree(draftRoomRepository.getRoot());
+        JPanel desktop = new JPanel();
 
-//        JTree projectExplorer = draftTree.generateTree(ApplicationFramework.getInstance().);
-//        JPanel desktop = new JPanel();
-//
-//        JScrollPane scroll=new JScrollPane(projectExplorer);
-//        scroll.setMinimumSize(new Dimension(200,150));
-//        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-//        getContentPane().add(split,BorderLayout.CENTER);
-//        split.setDividerLocation(250);
-//        split.setOneTouchExpandable(true);
+        JScrollPane scroll=new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200,150));
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        getContentPane().add(split,BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
 
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
+
+    public void setActionManager(ActionManager actionManager) {
+        this.actionManager = actionManager;
     }
 
     public DraftTree getDraftTree() {
@@ -65,5 +76,13 @@ public class MainFrame extends JFrame {
 
     public void setDraftTree(DraftTree draftTree) {
         this.draftTree = draftTree;
+    }
+
+    public DraftRoomRepository getDraftRoomRepository() {
+        return draftRoomRepository;
+    }
+
+    public void setDraftRoomRepository(DraftRoomRepository draftRoomRepository) {
+        this.draftRoomRepository = draftRoomRepository;
     }
 }
