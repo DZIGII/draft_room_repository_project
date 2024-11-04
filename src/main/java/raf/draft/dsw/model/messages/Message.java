@@ -1,17 +1,19 @@
 package raf.draft.dsw.model.messages;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message {
 
     private String content; //sadrzaj poruke
     private String messageType; // (npr. "GREŠKA", "UPOZORENJE", "OBAVEŠTENJE")
-    private Timestamp timestamp; // Vreme generisanja poruke
+    private LocalDateTime timestamp; // Vreme generisanja poruke
 
-    public Message(String content, String messageType, Timestamp timestamp) {
+    public Message(String content, String messageType) {
         this.content = content;
         this.messageType = messageType;
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
     }
 
     public String getContent() {
@@ -30,11 +32,16 @@ public class Message {
         this.messageType = messageType;
     }
 
-    public Timestamp getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + messageType + "][" + timestamp.format(DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm")) + "] " + content;
     }
 }
