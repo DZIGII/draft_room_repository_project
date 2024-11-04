@@ -13,7 +13,6 @@ public class ChooseRoomAction extends AbstactRoomAction {
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();

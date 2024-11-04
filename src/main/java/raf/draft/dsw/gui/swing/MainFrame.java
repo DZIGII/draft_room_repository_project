@@ -1,16 +1,18 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.ActionManager;
+import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.gui.swing.tree.DraftTree;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
+import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.repository.DraftRoomExplorerImplementation;
 import raf.draft.dsw.model.repository.DraftRoomRepository;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame{
     //buduca polja za sve komponente view-a na glavnom prozoru
 
     private ActionManager actionManager;
@@ -85,4 +87,16 @@ public class MainFrame extends JFrame {
     public void setDraftRoomRepository(DraftRoomRepository draftRoomRepository) {
         this.draftRoomRepository = draftRoomRepository;
     }
+
+
+//    Vidi za Implementiranje ISubsribera na MainFrame
+
+//implements ISubscriber
+
+
+
+//    @Override
+//    public void recive(Message message) {
+//        JOptionPane.showMessageDialog(null, message.toString(), "Notification", JOptionPane.INFORMATION_MESSAGE);
+//    }
 }

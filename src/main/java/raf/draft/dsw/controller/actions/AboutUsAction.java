@@ -13,22 +13,6 @@ public class AboutUsAction extends AbstactRoomAction {
         putValue(NAME, "About Us");
     }
 
-    public Icon loadIcon(String path) {
-        Icon icon = null;
-        URL ImageURL = getClass().getResource(path);
-        if(ImageURL != null)
-        {
-            Image img = new ImageIcon(ImageURL).getImage();
-            Image newImg = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-            icon = new ImageIcon(newImg);
-        }
-        else
-        {
-            System.err.println("File not found");
-        }
-        return icon;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         new AboutUsFrame();
