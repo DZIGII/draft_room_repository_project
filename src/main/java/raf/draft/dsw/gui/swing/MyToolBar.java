@@ -15,5 +15,6 @@ public class MyToolBar extends JToolBar {
         add(am.getNewProjectAction());
         add(am.getRenameAction());
         add(am.getDeleteNodeAction());
+        add(am.getEditProjectAction());
     }
 }

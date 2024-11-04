@@ -58,4 +58,13 @@ public class Project extends DraftNodeComposite {
     public void setPathToProjectResources(String pathToProjectResources) {
         this.pathToProjectResources = pathToProjectResources;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectName='" + projectName + '\'' +
+                ", creatorName='" + creatorName + '\'' +
+                ", pathToProjectResources='" + pathToProjectResources + '\'' +
+                '}';
+    }
 }

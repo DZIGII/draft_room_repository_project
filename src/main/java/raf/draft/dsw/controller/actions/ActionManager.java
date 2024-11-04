@@ -9,6 +9,7 @@ public class ActionManager {
     private ChooseRoomAction chooseRoomAction;
     private DeleteNodeAction deleteNodeAction;
     private RenameAction renameAction;
+    private EditProjectAction editProjectAction;
 
     public ActionManager() {
         initialiseActions();
@@ -22,10 +23,19 @@ public class ActionManager {
         deleteNodeAction = new DeleteNodeAction();
         renameAction = new RenameAction();
         aboutUsAction = new AboutUsAction();
+        editProjectAction = new EditProjectAction();
     }
 
     public ExitAction getExitAction() {
         return exitAction;
+    }
+
+    public EditProjectAction getEditProjectAction() {
+        return editProjectAction;
+    }
+
+    public void setEditProjectAction(EditProjectAction editProjectAction) {
+        this.editProjectAction = editProjectAction;
     }
 
     public void setExitAction(ExitAction exitAction) {
