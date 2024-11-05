@@ -39,17 +39,11 @@ public class ChooseDraftNodeFrame extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Choose Draft Room Item");
 
-//        buildingLabel = new JLabel("Building");
-//        roomLabel = new JLabel("Room");
-
         buildingIcon = loadIcon("/images/building.png");
         roomIcon = loadIcon("/images/room.png");
 
         buildingButton = new JButton(buildingIcon);
         roomButton = new JButton(roomIcon);
-
-        buildingAction = new ChooseBuildingAction();
-        roomAction = new ChooseRoomAction();
 
         buildingButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseBuildingAction());
         roomButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseRoomAction());

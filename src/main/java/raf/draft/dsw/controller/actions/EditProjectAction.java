@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 
 public class EditProjectAction extends AbstactRoomAction {
+    private EditProjectFrame frame;
 
     public EditProjectAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
@@ -21,32 +22,23 @@ public class EditProjectAction extends AbstactRoomAction {
         putValue(SHORT_DESCRIPTION, "Edit Project");
     }
 
-    public Icon loadIcon(String fileName) {
-        URL imageURL = getClass().getResource(fileName);
-        Icon icon = null;
-
-        if (imageURL != null) {
-            ImageIcon originalImg = new ImageIcon(imageURL);
-            Image scaledImage = originalImg.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-            icon = new ImageIcon(scaledImage);
-        }
-        else {
-            System.err.println("Resource not found: " + fileName);
-        }
-        return icon;
-    }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
         if(selected instanceof Project) {
             System.out.println(selected);
-            new EditProjectFrame(selected);
+            frame = new EditProjectFrame();
         }
         else {
             //Ovde bi trebao observer sa nekim alertom da se ne moze menjati nesto sto nije tip Project
         }
     }
 
+    public EditProjectFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(EditProjectFrame frame) {
+        this.frame = frame;
+    }
 }

@@ -9,7 +9,11 @@ public class ActionManager {
     private ChooseRoomAction chooseRoomAction;
     private DeleteNodeAction deleteNodeAction;
     private RenameAction renameAction;
+    private RenameSaveAction renameSaveAction;
     private EditProjectAction editProjectAction;
+    private EditProjectExitAction editProjectExitAction;
+    private EditProjectSaveAction editProjectSaveAction;
+    private RenameExitAction renameExitAction;
 
     public ActionManager() {
         initialiseActions();
@@ -22,8 +26,12 @@ public class ActionManager {
         chooseRoomAction = new ChooseRoomAction();
         deleteNodeAction = new DeleteNodeAction();
         renameAction = new RenameAction();
+        renameSaveAction = new RenameSaveAction();
+        renameExitAction = new RenameExitAction();
         aboutUsAction = new AboutUsAction();
         editProjectAction = new EditProjectAction();
+        editProjectExitAction = new EditProjectExitAction();
+        editProjectSaveAction = new EditProjectSaveAction();
     }
 
     public ExitAction getExitAction() {
@@ -88,5 +96,37 @@ public class ActionManager {
 
     public void setAboutUsAction(AboutUsAction aboutUsAction) {
         this.aboutUsAction = aboutUsAction;
+    }
+
+    public EditProjectSaveAction getEditProjectSaveAction() {
+        return editProjectSaveAction;
+    }
+
+    public void setEditProjectSaveAction(EditProjectSaveAction editProjectSaveAction) {
+        this.editProjectSaveAction = editProjectSaveAction;
+    }
+
+    public RenameSaveAction getRenameSaveAction() {
+        return renameSaveAction;
+    }
+
+    public void setRenameSaveAction(RenameSaveAction renameSaveAction) {
+        this.renameSaveAction = renameSaveAction;
+    }
+
+    public EditProjectExitAction getEditProjectExitAction() {
+        return editProjectExitAction;
+    }
+
+    public void setEditProjectExitAction(EditProjectExitAction editProjectExitAction) {
+        this.editProjectExitAction = editProjectExitAction;
+    }
+
+    public RenameExitAction getRenameExitAction() {
+        return renameExitAction;
+    }
+
+    public void setRenameExitAction(RenameExitAction renameExitAction) {
+        this.renameExitAction = renameExitAction;
     }
 }

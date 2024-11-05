@@ -93,4 +93,20 @@ public class DraftTreeImplementation implements DraftTree {
     public void setChild(DraftNode child) {
         this.child = child;
     }
+
+    public DraftTreeView getTreeView() {
+        return treeView;
+    }
+
+    public void setTreeView(DraftTreeView treeView) {
+        this.treeView = treeView;
+    }
+
+    public DefaultTreeModel getTreeModel() {
+        return treeModel;
+    }
+
+    public void setTreeModel(DefaultTreeModel treeModel) {
+        this.treeModel = treeModel;
+    }
 }

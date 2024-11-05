@@ -20,13 +20,10 @@ public class EditProjectFrame extends JFrame {
     JTextField newAuthor = new JTextField();
     JTextField newPath = new JTextField();
 
-    JButton saveBtn = new JButton("Sacuvaj promenu");
-    JButton exitBtn = new JButton("Izlaz");
+    JButton saveBtn = new JButton("Save change");
+    JButton exitBtn = new JButton("Exit");
 
-    private Project node;
-
-    public EditProjectFrame(DraftNode node) throws HeadlessException {
-        this.node = (Project) node;
+    public EditProjectFrame() throws HeadlessException {
         initialize();
         showel();
         controller();
@@ -43,9 +40,9 @@ public class EditProjectFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Edit Project");
 
-        newNamelbl.setText("Novi naziv:");
-        newAuthorlbl.setText("Novi autor:");
-        newPathlbl.setText("Nova putanja:");
+        newNamelbl.setText("New name: ");
+        newAuthorlbl.setText("New author: ");
+        newPathlbl.setText("New root:");
     }
 
     public void showel() {
@@ -88,25 +85,39 @@ public class EditProjectFrame extends JFrame {
     }
 
     void controller() {
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                node.setProjectName(newName.getText());
-                node.setCreatorName(newAuthor.getText());
-                node.setPathToProjectResources(newPath.getText());
-
-                newName.setText("");
-                newAuthor.setText("");
-                newPath.setText("");
-                succses.setText("Uspesno ste sacuvali promenu");
-            }
-        });
-        exitBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        saveBtn.addActionListener(MainFrame.getInstance().getActionManager().getEditProjectSaveAction());
+        exitBtn.addActionListener(MainFrame.getInstance().getActionManager().getEditProjectExitAction());
     }
 
+    public JTextField getNewName() {
+        return newName;
+    }
+
+    public void setNewName(JTextField newName) {
+        this.newName = newName;
+    }
+
+    public JTextField getNewAuthor() {
+        return newAuthor;
+    }
+
+    public void setNewAuthor(JTextField newAuthor) {
+        this.newAuthor = newAuthor;
+    }
+
+    public JTextField getNewPath() {
+        return newPath;
+    }
+
+    public void setNewPath(JTextField newPath) {
+        this.newPath = newPath;
+    }
+
+    public JLabel getSuccses() {
+        return succses;
+    }
+
+    public void setSuccses(JLabel succses) {
+        this.succses = succses;
+    }
 }

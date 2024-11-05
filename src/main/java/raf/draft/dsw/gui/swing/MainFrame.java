@@ -90,7 +90,6 @@ public class MainFrame extends JFrame{
 
 
 //    Vidi za Implementiranje ISubsribera na MainFrame
-
 //implements ISubscriber
 
 

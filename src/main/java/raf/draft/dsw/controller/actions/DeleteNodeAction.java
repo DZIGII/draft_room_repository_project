@@ -1,5 +1,8 @@
 package raf.draft.dsw.controller.actions;
 
+import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +19,10 @@ public class DeleteNodeAction extends AbstactRoomAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
+        if (selected != null && selected.getParent() != null) {
+            MainFrame.getInstance().getDraftTree().getTreeModel().removeNodeFromParent(selected);
+            System.out.println("Deleted successfully node "+ selected);
+        }
     }
 }

@@ -10,18 +10,14 @@ import java.awt.event.KeyEvent;
 public class MyMenuBar extends JMenuBar {
     public MyMenuBar(){
         JMenu fileMenu = new JMenu("File");
-        JMenu aboutUsMenu = new JMenu("About Us");
         fileMenu.setMnemonic(KeyEvent.VK_F);
-
-        AboutUsAction aboutUsAction = new AboutUsAction();
 
         fileMenu.add(MainFrame.getInstance().getActionManager().getExitAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getNewProjectAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getRenameAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getDeleteNodeAction());
         fileMenu.add(MainFrame.getInstance().getActionManager().getEditProjectAction());
-        aboutUsMenu.add(MainFrame.getInstance().getActionManager().getAboutUsAction());
+        fileMenu.add(MainFrame.getInstance().getActionManager().getAboutUsAction());
         add(fileMenu);
-        add(aboutUsMenu);
     }
 }

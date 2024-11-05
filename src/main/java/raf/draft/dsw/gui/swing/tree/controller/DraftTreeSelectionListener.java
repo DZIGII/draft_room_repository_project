@@ -1,6 +1,7 @@
 package raf.draft.dsw.gui.swing.tree.controller;
 
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.structures.Project;
 
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -13,5 +14,9 @@ public class DraftTreeSelectionListener implements TreeSelectionListener {
         DraftTreeItem treeItemSelected = (DraftTreeItem) path.getLastPathComponent();
         System.out.println("Selected node: "+ treeItemSelected.getDraftNode().getName());
         System.out.println("Path to selected node: "+e.getPath());
+        if(treeItemSelected.getDraftNode() instanceof Project)
+        {
+            System.out.println(treeItemSelected.getDraftNode());
+        }
     }
 }
