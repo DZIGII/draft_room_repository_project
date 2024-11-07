@@ -5,6 +5,7 @@ import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.core.ApplicationFramework;
 import raf.draft.dsw.gui.swing.tree.DraftTree;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
+import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.repository.DraftRoomExplorerImplementation;
 import raf.draft.dsw.model.repository.DraftRoomRepository;
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame{
     private ActionManager actionManager;
     private DraftTreeImplementation draftTree;
     private DraftRoomRepository draftRoomRepository;
+    private JPanel tabPanel;
 
     private static MainFrame instance;
 
@@ -53,15 +55,18 @@ public class MainFrame extends JFrame{
 
         draftRoomRepository = new DraftRoomExplorerImplementation();
         JTree projectExplorer = draftTree.generateTree(draftRoomRepository.getRoot());
+        projectExplorer.addMouseListener(new DoubleClickListener());
         JPanel desktop = new JPanel();
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
         JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-        getContentPane().add(split,BorderLayout.CENTER);
+        getContentPane().add(split,BorderLayout.WEST);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
+        tabPanel = new JPanel(new BorderLayout());
+        add(tabPanel, BorderLayout.CENTER);
     }
 
     public ActionManager getActionManager() {
@@ -86,6 +91,13 @@ public class MainFrame extends JFrame{
 
     public void setDraftRoomRepository(DraftRoomRepository draftRoomRepository) {
         this.draftRoomRepository = draftRoomRepository;
+    }
+
+    public void setTabFrame(JTabbedPane tabFrame) {
+        tabPanel.removeAll();
+        tabPanel.add(tabFrame, BorderLayout.CENTER);
+        tabPanel.revalidate();
+        tabPanel.repaint();
     }
 
 

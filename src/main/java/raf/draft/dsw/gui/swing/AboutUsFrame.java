@@ -6,14 +6,14 @@ import java.net.URL;
 
 public class AboutUsFrame extends JFrame {
 
-    JLabel student1;
-    JLabel student2;
+    private JLabel student1;
+    private JLabel student2;
 
-    ImageIcon studentIcon1;
-    ImageIcon studentIcon2;
+    private ImageIcon studentIcon1;
+    private ImageIcon studentIcon2;
 
-    JLabel imageLabel1;
-    JLabel imageLabel2;
+    private JLabel imageLabel1;
+    private JLabel imageLabel2;
 
 
     public AboutUsFrame() {
@@ -53,7 +53,7 @@ public class AboutUsFrame extends JFrame {
         jp.add(student2);
 
 
-       this.add(jp);
+        this.add(jp);
 
         setVisible(true);
     }
@@ -74,4 +74,51 @@ public class AboutUsFrame extends JFrame {
         return icon;
     }
 
+    public JLabel getStudent1() {
+        return student1;
+    }
+
+    public void setStudent1(JLabel student1) {
+        this.student1 = student1;
+    }
+
+    public JLabel getStudent2() {
+        return student2;
+    }
+
+    public void setStudent2(JLabel student2) {
+        this.student2 = student2;
+    }
+
+    public ImageIcon getStudentIcon1() {
+        return studentIcon1;
+    }
+
+    public void setStudentIcon1(ImageIcon studentIcon1) {
+        this.studentIcon1 = studentIcon1;
+    }
+
+    public ImageIcon getStudentIcon2() {
+        return studentIcon2;
+    }
+
+    public void setStudentIcon2(ImageIcon studentIcon2) {
+        this.studentIcon2 = studentIcon2;
+    }
+
+    public JLabel getImageLabel1() {
+        return imageLabel1;
+    }
+
+    public void setImageLabel1(JLabel imageLabel1) {
+        this.imageLabel1 = imageLabel1;
+    }
+
+    public JLabel getImageLabel2() {
+        return imageLabel2;
+    }
+
+    public void setImageLabel2(JLabel imageLabel2) {
+        this.imageLabel2 = imageLabel2;
+    }
 }
