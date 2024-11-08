@@ -1,24 +1,26 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.controller.observer.ISubscriber;
+import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.model.structures.Room;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
-public class TabFrame extends JPanel {
+public class TabFrame extends JPanel implements ISubscriber {
 
     public String title;
-    public String iconPath;
+    public Room room;
+    public String roomName;
 
-
-    public TabFrame(String title, String iconPath) {
-        this.title = title;
-        this.iconPath = iconPath;
+    public TabFrame(String title) {
         show();
     }
 
     public TabFrame() {
-
+        show();
     }
 
     public void show() {
@@ -51,4 +53,42 @@ public class TabFrame extends JPanel {
         return panel;
     }
 
+
+    @Override
+    public void recive(Object notification) {
+        String update = (String) notification;
+        if(!roomName.equals(room.getName())) {
+            for(int i = 0;i < MainFrame.getInstance().getTabFrame().getTabCount(); i++) {
+                if(MainFrame.getInstance().getTabFrame().getTitleAt(i).equals(roomName)) {
+                    MainFrame.getInstance().getTabFrame().remove(i);
+                    MainFrame.getInstance().getTabFrame().addTab(update, this);
+                }
+            }
+            roomName = update;
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 }

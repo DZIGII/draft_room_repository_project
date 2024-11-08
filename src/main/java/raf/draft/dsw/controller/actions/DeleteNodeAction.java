@@ -2,6 +2,9 @@ package raf.draft.dsw.controller.actions;
 
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.model.messages.MessageType;
+import raf.draft.dsw.model.structures.ProjectExplorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +23,10 @@ public class DeleteNodeAction extends AbstactRoomAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
-        if (selected != null && selected.getParent() != null) {
+        if(selected.getDraftNode() instanceof ProjectExplorer){
+            Message message=new Message("ProjectExplorer cant be deleted!", "ERROR");
+            JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+        }else if (selected != null && selected.getParent() != null) {
             MainFrame.getInstance().getDraftTree().getTreeModel().removeNodeFromParent(selected);
             System.out.println("Deleted successfully node "+ selected);
         }

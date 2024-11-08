@@ -19,21 +19,25 @@ public class MessageGenerator implements IPublisher {
         notifySubscribers(message);
     }
 
+
+
+    @Override
+    public void notifySubscribers(Object message) {
+        for (ISubscriber subscriber : subscribers) {
+            if(subscriber instanceof Logger) {
+                ((Logger)subscriber).log(message.toString());
+            }
+        }
+    }
+
+    @Override
     public void subscribe(ISubscriber logger) {
         subscribers.add(logger);
     }
 
+    @Override
     public void unsubscribe(ISubscriber logger) {
         subscribers.remove(logger);
-    }
-
-    @Override
-    public void notifySubscribers(Message message) {
-        for (ISubscriber subscriber : subscribers) {
-            if(subscriber instanceof ISubscriber) {
-                ((Logger)subscriber).log(message.toString());
-            }
-        }
     }
 
     public List<ISubscriber> getSubscribers() {

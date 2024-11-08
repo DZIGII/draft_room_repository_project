@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
     private ActionManager actionManager;
     private DraftTreeImplementation draftTree;
     private DraftRoomRepository draftRoomRepository;
-    private JPanel tabPanel;
+    private JTabbedPane tabFrame;
 
     private static MainFrame instance;
 
@@ -65,8 +65,8 @@ public class MainFrame extends JFrame{
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
-        tabPanel = new JPanel(new BorderLayout());
-        add(tabPanel, BorderLayout.CENTER);
+        tabFrame = new JTabbedPane();
+        add(tabFrame, BorderLayout.CENTER);
     }
 
     public ActionManager getActionManager() {
@@ -93,12 +93,24 @@ public class MainFrame extends JFrame{
         this.draftRoomRepository = draftRoomRepository;
     }
 
-    public void setTabFrame(JTabbedPane tabFrame) {
-        tabPanel.removeAll();
-        tabPanel.add(tabFrame, BorderLayout.CENTER);
-        tabPanel.revalidate();
-        tabPanel.repaint();
+    public JTabbedPane getTabFrame() {
+        return tabFrame;
     }
+
+    public void setTabFrame(JTabbedPane tabFrame) {
+        this.tabFrame = tabFrame;
+    }
+
+    public static void setInstance(MainFrame instance) {
+        MainFrame.instance = instance;
+    }
+
+    //    public void setTabFrame(JTabbedPane tabFrame) {
+//        tabPanel.removeAll();
+//        tabPanel.add(tabFrame, BorderLayout.CENTER);
+//        tabPanel.revalidate();
+//        tabPanel.repaint();
+//    }
 
 
 //    Vidi za Implementiranje ISubsribera na MainFrame

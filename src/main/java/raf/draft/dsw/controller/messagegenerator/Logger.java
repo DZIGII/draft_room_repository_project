@@ -7,7 +7,7 @@ public abstract class Logger implements ISubscriber {
     public abstract void log(String message);
 
     @Override
-    public void recive(Message message) {
+    public void recive(Object message) {
         log(message.toString());
     }
 }

@@ -1,6 +1,7 @@
 package raf.draft.dsw.gui.swing.tree;
 
 import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
+import raf.draft.dsw.gui.swing.TabFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.gui.swing.tree.view.DraftTreeView;
 import raf.draft.dsw.model.nodes.DraftNode;
@@ -44,7 +45,8 @@ public class DraftTreeImplementation implements DraftTree {
         }
         else if(parent instanceof Building) {
             brojac3++;
-            return new Room("Room " + brojac3, parent);
+            TabFrame tf=new TabFrame();
+            return new Room("Room " + brojac3, parent, tf);
         }
         return null;
     }
