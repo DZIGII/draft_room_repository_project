@@ -23,7 +23,6 @@ public class DraftRepository {
         } else if (parent instanceof Project) {
             frameChooseDraftNode = new ChooseDraftNodeFrame();
             frameChooseDraftNode.setVisible(true);
-            System.out.println("budi drugi pls");
             return chosenFactory;
         } else if (parent instanceof Building) {
             return roomFactory;

@@ -17,7 +17,6 @@ public class ChooseBuildingAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("building action");
         MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BuildingFactory());
 
         MainFrame.getInstance().getDraftTree().getRepository().getFrameChooseDraftNode().dispose();

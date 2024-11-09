@@ -13,9 +13,6 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class ChooseDraftNodeFrame extends JDialog{
-    private JLabel buildingLabel;
-    private JLabel roomLabel;
-
     private ImageIcon buildingIcon;
     private ImageIcon roomIcon;
 
@@ -25,22 +22,8 @@ public class ChooseDraftNodeFrame extends JDialog{
 
     public ChooseDraftNodeFrame(){
         setModal(true);
-        setTitle("Choose Node Type");
-        setSize(300, 200);
-        setLocationRelativeTo(null);
-
-        JButton buildingButton = new JButton("Building");
-        JButton roomButton = new JButton("Room");
-
-        buildingButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseBuildingAction());
-
-        roomButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseRoomAction());
-
-        add(buildingButton);
-        add(roomButton);
-        setLayout(new FlowLayout());
-//        initElements();
-//        showElements();
+        initElements();
+        showElements();
     }
 
     public void initElements() {
@@ -69,11 +52,7 @@ public class ChooseDraftNodeFrame extends JDialog{
         jp.setLayout(new GridLayout(1, 2));
         jp.add(buildingButton, BorderLayout.CENTER);
         jp.add(roomButton, BorderLayout.CENTER);
-//        jp.add(buildingLabel, BorderLayout.CENTER);
-//        jp.add(roomLabel, BorderLayout.CENTER);
-
         this.add(jp);
-        setVisible(true);
     }
 
     public ImageIcon loadIcon(String path) {
