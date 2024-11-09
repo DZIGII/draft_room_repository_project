@@ -4,9 +4,11 @@ import raf.draft.dsw.gui.swing.EditProjectFrame;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RenameNodeFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.ProjectExplorer;
+import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +28,14 @@ public class RenameAction extends AbstactRoomAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        frame = new RenameNodeFrame();
+        if((DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode() != null)
+        {
+            frame = new RenameNodeFrame();
+        }
+        else{
+            Message message=new Message("Please select node that you want to rename!", "WARNING");
+            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public RenameNodeFrame getFrame() {

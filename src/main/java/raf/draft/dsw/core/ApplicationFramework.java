@@ -1,11 +1,6 @@
 package raf.draft.dsw.core;
 
-import raf.draft.dsw.controller.messagegenerator.Logger;
-import raf.draft.dsw.controller.messagegenerator.LoggerFactory;
-import raf.draft.dsw.controller.messagegenerator.MessageGenerator;
 import raf.draft.dsw.gui.swing.MainFrame;
-import raf.draft.dsw.model.repository.DraftRoomExplorerImplementation;
-import raf.draft.dsw.model.repository.DraftRoomRepository;
 
 public class ApplicationFramework {
     //buduca polja za model celog projekta

@@ -1,7 +1,11 @@
 package raf.draft.dsw.controller.actions;
 
+import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.factories.BuildingFactory;
+import raf.draft.dsw.model.factories.RoomFactory;
+import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Building;
 
 import javax.swing.*;
@@ -13,10 +17,9 @@ public class ChooseBuildingAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
-        MainFrame.getInstance().getDraftTree().addChosenChild(selected, new Building("Building"));
+        System.out.println("building action");
+        MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BuildingFactory());
 
-        MainFrame.getInstance().getDraftTree().getFrame().dispose();
-        MainFrame.getInstance().getDraftTree().getFrame().setVisible(false);
+        MainFrame.getInstance().getDraftTree().getRepository().getFrameChooseDraftNode().dispose();
     }
 }

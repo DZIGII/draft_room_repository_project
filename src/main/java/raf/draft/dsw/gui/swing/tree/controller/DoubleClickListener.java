@@ -22,26 +22,26 @@ public class DoubleClickListener implements MouseListener {
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
             if(selected instanceof Project) {
-                MainFrame.getInstance().getTabFrame().removeAll();
+//                MainFrame.getInstance().getTabFrame().removeAll();
                 ArrayList<DraftNode> projectNodes = ((Project) selected).getChildren();
                 JTabbedPane tabFrame = new JTabbedPane();
                 Icon icon = new TabFrame().loadIcon("/images/room.png");
-                Color colorBuilding = new Building("").getColor();
 
                 int cnt = 0;
+
                 for(DraftNode node : projectNodes) {
                     if(node instanceof Building) {
                         Building b = (Building) node;
                         for(DraftNode room : b.getChildren()) {
                             Room r = (Room) room;
                             MainFrame.getInstance().getTabFrame().addTab(r.getName(), r.getTab());
-                            //tabFrame.addTab(room.getName(), icon, new TabFrame());
-                            //tabFrame.setBackgroundAt(cnt++, colorBuilding);
+//                            tabFrame.addTab(room.getName(), icon, new TabFrame());
+//                            tabFrame.setBackgroundAt(cnt++, ((Building)(selected.getParent())).getColor());
                         }
                     }
-                    if(node instanceof Room) { // znaci da je Room
-                       // tabFrame.addTab(node.getName(), icon, new TabFrame());
-                        //tabFrame.setBackgroundAt(cnt++, Color.green);
+                    if(node instanceof Room) {
+//                       tabFrame.addTab(node.getName(), icon, new TabFrame());
+//                       tabFrame.setBackgroundAt(cnt++, Color.green);
                     }
                 }
 

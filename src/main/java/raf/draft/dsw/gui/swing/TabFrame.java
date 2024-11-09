@@ -53,7 +53,6 @@ public class TabFrame extends JPanel implements ISubscriber {
         return panel;
     }
 
-
     @Override
     public void recive(Object notification) {
         String update = (String) notification;

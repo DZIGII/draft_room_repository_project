@@ -1,13 +1,9 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.ActionManager;
-import raf.draft.dsw.controller.observer.ISubscriber;
-import raf.draft.dsw.core.ApplicationFramework;
-import raf.draft.dsw.gui.swing.tree.DraftTree;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
 import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
-import raf.draft.dsw.model.messages.Message;
-import raf.draft.dsw.model.repository.DraftRoomExplorerImplementation;
+import raf.draft.dsw.model.DraftRoomExplorerImplementation;
 import raf.draft.dsw.model.repository.DraftRoomRepository;
 
 import javax.swing.*;

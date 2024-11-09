@@ -3,6 +3,9 @@ package raf.draft.dsw.controller.actions;
 import raf.draft.dsw.gui.swing.AboutUsFrame;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +22,22 @@ public class NewProjectAction extends AbstactRoomAction{
     }
 
     public void actionPerformed(ActionEvent arg0) {
-        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
-        MainFrame.getInstance().getDraftTree().addChild(selected);
+        if((DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode()!=null)
+        {
+            DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
+            if(selected.getDraftNode() instanceof Room)
+            {
+                Message message=new Message("Room does not have childrens", "ERROR");
+                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                MainFrame.getInstance().getDraftTree().addChild(selected);
+            }
+        }
+        else{
+            Message message=new Message("Please select project explorer to add his first child!", "WARNING");
+            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 }

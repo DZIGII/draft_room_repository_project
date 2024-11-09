@@ -1,6 +1,7 @@
 package raf.draft.dsw.controller.actions;
 
 import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.gui.swing.RenameNodeFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.messages.MessageType;
@@ -22,13 +23,20 @@ public class DeleteNodeAction extends AbstactRoomAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
-        if(selected.getDraftNode() instanceof ProjectExplorer){
-            Message message=new Message("ProjectExplorer cant be deleted!", "ERROR");
-            JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if (selected != null && selected.getParent() != null) {
-            MainFrame.getInstance().getDraftTree().getTreeModel().removeNodeFromParent(selected);
-            System.out.println("Deleted successfully node "+ selected);
+        if((DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode() != null)
+        {
+            DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
+            if(selected.getDraftNode() instanceof ProjectExplorer){
+                Message message=new Message("ProjectExplorer cant be deleted!", "ERROR");
+                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+            }else if (selected != null && selected.getParent() != null) {
+                MainFrame.getInstance().getDraftTree().getTreeModel().removeNodeFromParent(selected);
+                System.out.println("Deleted successfully node "+ selected);
+            }
+        }
+        else{
+            Message message=new Message("Please select node that you want to delete!", "WARNING");
+            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

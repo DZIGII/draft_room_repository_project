@@ -1,7 +1,9 @@
 package raf.draft.dsw.controller.actions;
 
 import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.DraftNodeComposite;
 import raf.draft.dsw.model.structures.Project;
 
 import javax.swing.*;
@@ -15,7 +17,6 @@ public class RenameSaveAction extends AbstactRoomAction{
         selected.setName(MainFrame.getInstance().getActionManager().getRenameAction().getFrame().getNewNodeNameTF().getText());
 
         MainFrame.getInstance().getActionManager().getRenameAction().getFrame().getNewNodeNameTF().setText("");
-        MainFrame.getInstance().getActionManager().getRenameAction().getFrame().getSuccses().setText("You have successfully renamed project!");
 
         SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
     }

@@ -3,6 +3,8 @@ package raf.draft.dsw.gui.swing;
 import raf.draft.dsw.controller.actions.ChooseBuildingAction;
 import raf.draft.dsw.controller.actions.ChooseRoomAction;
 import raf.draft.dsw.core.ApplicationFramework;
+import raf.draft.dsw.model.factories.BuildingFactory;
+import raf.draft.dsw.model.factories.RoomFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class ChooseDraftNodeFrame extends JFrame{
+public class ChooseDraftNodeFrame extends JDialog{
     private JLabel buildingLabel;
     private JLabel roomLabel;
 
@@ -20,13 +22,25 @@ public class ChooseDraftNodeFrame extends JFrame{
     private JButton buildingButton;
     private JButton roomButton;
 
-    private ChooseBuildingAction buildingAction;
-    private ChooseRoomAction roomAction;
-
 
     public ChooseDraftNodeFrame(){
-        initElements();
-        showElements();
+        setModal(true);
+        setTitle("Choose Node Type");
+        setSize(300, 200);
+        setLocationRelativeTo(null);
+
+        JButton buildingButton = new JButton("Building");
+        JButton roomButton = new JButton("Room");
+
+        buildingButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseBuildingAction());
+
+        roomButton.addActionListener(MainFrame.getInstance().getActionManager().getChooseRoomAction());
+
+        add(buildingButton);
+        add(roomButton);
+        setLayout(new FlowLayout());
+//        initElements();
+//        showElements();
     }
 
     public void initElements() {

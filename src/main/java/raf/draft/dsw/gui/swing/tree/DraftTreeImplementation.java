@@ -4,8 +4,10 @@ import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
 import raf.draft.dsw.gui.swing.TabFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.gui.swing.tree.view.DraftTreeView;
+import raf.draft.dsw.model.factories.DraftNodeFactory;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
+import raf.draft.dsw.model.repository.DraftRepository;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.ProjectExplorer;
@@ -18,12 +20,8 @@ import java.util.Random;
 public class DraftTreeImplementation implements DraftTree {
     private DraftTreeView treeView;
     private DefaultTreeModel treeModel;
-    private ChooseDraftNodeFrame frame;
     private DraftNode child;
-
-    public static int brojac = 0;
-    public static int brojac2 = 0;
-    public static int brojac3 = 0;
+    private DraftRepository repository = new DraftRepository();
 
     @Override
     public DraftTreeView generateTree(ProjectExplorer projectExplorer) {
@@ -34,19 +32,9 @@ public class DraftTreeImplementation implements DraftTree {
     }
 
     private DraftNode createChild(DraftNode parent) {
-        if (parent instanceof ProjectExplorer) {
-            brojac++;
-            return new Project("Project " + brojac, parent);
-        }
-        else if(parent instanceof Project) {
-            frame = new ChooseDraftNodeFrame();
-            frame.setVisible(true);
-            return null;
-        }
-        else if(parent instanceof Building) {
-            brojac3++;
-            TabFrame tf=new TabFrame();
-            return new Room("Room " + brojac3, parent, tf);
+        DraftNodeFactory factory = repository.getFactory(parent);
+        if (factory != null) {
+            return factory.createNode(parent);
         }
         return null;
     }
@@ -62,30 +50,23 @@ public class DraftTreeImplementation implements DraftTree {
             ((DraftNodeComposite) parent.getDraftNode()).addChild(child);
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
-        }
-    }
 
-    public void addChosenChild(DraftTreeItem parent, DraftNode newChild) {
-        if (!(parent.getDraftNode() instanceof DraftNodeComposite)) {
-            return;
         }
-        parent.add(new DraftTreeItem(newChild));
-        ((DraftNodeComposite) parent.getDraftNode()).addChild(newChild);
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
     }
+//
+//    public void addChosenChild(DraftTreeItem parent, DraftNode newChild) {
+//        if (!(parent.getDraftNode() instanceof DraftNodeComposite)) {
+//            return;
+//        }
+//        parent.add(new DraftTreeItem(newChild));
+//        ((DraftNodeComposite) parent.getDraftNode()).addChild(newChild);
+//        treeView.expandPath(treeView.getSelectionPath());
+//        SwingUtilities.updateComponentTreeUI(treeView);
+//    }
 
     @Override
     public DraftTreeItem getSelectedNode() {
         return (DraftTreeItem) treeView.getLastSelectedPathComponent();
-    }
-
-    public ChooseDraftNodeFrame getFrame() {
-        return frame;
-    }
-
-    public void setFrame(ChooseDraftNodeFrame frame) {
-        this.frame = frame;
     }
 
     public DraftNode getChild() {
@@ -110,5 +91,13 @@ public class DraftTreeImplementation implements DraftTree {
 
     public void setTreeModel(DefaultTreeModel treeModel) {
         this.treeModel = treeModel;
+    }
+
+    public DraftRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(DraftRepository repository) {
+        this.repository = repository;
     }
 }

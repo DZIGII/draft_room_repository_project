@@ -3,8 +3,10 @@ package raf.draft.dsw.controller.actions;
 import raf.draft.dsw.gui.swing.EditProjectFrame;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Project;
+import raf.draft.dsw.model.structures.ProjectExplorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,13 +26,21 @@ public class EditProjectAction extends AbstactRoomAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
-        if(selected instanceof Project) {
-            System.out.println(selected);
-            frame = new EditProjectFrame();
+        if((DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode() != null)
+        {
+            DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
+            if(selected instanceof Project) {
+                System.out.println(selected);
+                frame = new EditProjectFrame();
+            }
+            else {
+                Message message=new Message("You can edit only project", "ERROR");
+                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        else {
-            //Ovde bi trebao observer sa nekim alertom da se ne moze menjati nesto sto nije tip Project
+        else{
+            Message message=new Message("Please select node that you want to edit!", "WARNING");
+            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
         }
     }
 

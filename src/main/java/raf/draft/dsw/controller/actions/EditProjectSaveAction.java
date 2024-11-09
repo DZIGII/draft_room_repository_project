@@ -18,13 +18,13 @@ public class EditProjectSaveAction extends AbstactRoomAction{
         if(selected instanceof Project)
         {
             ((Project) selected).setProjectName(MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewName().getText());
+            selected.setName(MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewName().getText());
             ((Project) selected).setCreatorName(MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewAuthor().getText());
             ((Project) selected).setPathToProjectResources(MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewPath().getText());
 
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewName().setText("");
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewAuthor().setText("");
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewPath().setText("");
-            MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getSuccses().setText("You have successfully renamed project!");
 
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
         }

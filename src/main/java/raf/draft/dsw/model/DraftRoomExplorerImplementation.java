@@ -1,9 +1,9 @@
-package raf.draft.dsw.model.repository;
+package raf.draft.dsw.model;
 
-import raf.draft.dsw.model.nodes.DraftNodeComposite;
+import raf.draft.dsw.model.repository.DraftRoomRepository;
 import raf.draft.dsw.model.structures.ProjectExplorer;
 
-public class DraftRoomExplorerImplementation implements DraftRoomRepository{
+public class DraftRoomExplorerImplementation implements DraftRoomRepository {
     private ProjectExplorer root;
 
     public DraftRoomExplorerImplementation() {

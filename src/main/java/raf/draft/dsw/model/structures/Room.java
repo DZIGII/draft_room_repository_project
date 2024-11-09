@@ -22,13 +22,15 @@ public class Room extends Leaf implements IPublisher {
         this.tab = tab;
         subscribe(tab);
         tab.setRoom(this);
-
-
         tab.setRoomName(this.getName());
     }
 
-    public Room(String name) {
-        super(name);
+    public Room(String name, DraftNode parent) {
+        super(name,parent);
+        this.tab = new TabFrame();
+        subscribe(tab);
+        tab.setRoom(this);
+        tab.setRoomName(this.getName());
     }
 
     @Override
