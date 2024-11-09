@@ -19,39 +19,37 @@ public class DoubleClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
+            Icon icon = new TabFrame().loadIcon("/images/room.png");
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
             if(selected instanceof Project) {
-//                MainFrame.getInstance().getTabFrame().removeAll();
-                ArrayList<DraftNode> projectNodes = ((Project) selected).getChildren();
-                JTabbedPane tabFrame = new JTabbedPane();
-                Icon icon = new TabFrame().loadIcon("/images/room.png");
+                MainFrame.getInstance().getTabFrame().removeAll();
+                ArrayList<DraftNode> projectNodes = ((DraftNodeComposite) selected).getChildren();
+
 
                 int cnt = 0;
 
                 for(DraftNode node : projectNodes) {
                     if(node instanceof Building) {
-                        Building b = (Building) node;
-                        for(DraftNode room : b.getChildren()) {
+                        for(DraftNode room : ((Building) node).getChildren()) {
                             Room r = (Room) room;
-                            MainFrame.getInstance().getTabFrame().addTab(r.getName(), r.getTab());
-//                            tabFrame.addTab(room.getName(), icon, new TabFrame());
-//                            tabFrame.setBackgroundAt(cnt++, ((Building)(selected.getParent())).getColor());
+                            MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, r.getTab());
+//                            MainFrame.getInstance().getTabFrame().setBackground(((Building)(node)).getColor());
                         }
                     }
                     if(node instanceof Room) {
-//                       tabFrame.addTab(node.getName(), icon, new TabFrame());
-//                       tabFrame.setBackgroundAt(cnt++, Color.green);
+                        MainFrame.getInstance().getTabFrame().addTab(node.getName(), icon, ((Room) node).getTab());
+//                        MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt++, ((Building)(node)).getColor());
                     }
                 }
 
-                MainFrame.getInstance().setTabFrame(tabFrame);
+                MainFrame.getInstance().setTabFrame(MainFrame.getInstance().getTabFrame());
 
             }
             if(selected instanceof Room) {
                 Room room = (Room) selected;
                 MainFrame.getInstance().getTabFrame().removeAll();
-                MainFrame.getInstance().getTabFrame().addTab(room.getName(), room.getTab());
+                MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, room.getTab());
 
             }
         }

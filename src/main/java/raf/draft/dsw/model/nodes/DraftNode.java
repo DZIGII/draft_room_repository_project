@@ -29,8 +29,6 @@ public abstract class DraftNode {
         {
             name = newName;
 
-            MainFrame.getInstance().getActionManager().getRenameAction().getFrame().getNewNodeNameTF().setText("");
-
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
             Message message=new Message("You have successfully renamed project!", "INFORMATION");
             JOptionPane.showMessageDialog(null,message,"INFORMATION", JOptionPane.INFORMATION_MESSAGE);
