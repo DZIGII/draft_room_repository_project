@@ -9,4 +9,5 @@ public interface IPublisher {
     void subscribe(ISubscriber logger);
     void unsubscribe(ISubscriber logger);
     void notifyDeleted();
+    void notifyAdded();
 }

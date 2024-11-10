@@ -16,4 +16,9 @@ public class ConsoleLogger extends Logger {
     public void nodeDeleted() {
 
     }
+
+    @Override
+    public void nodeAdded() {
+
+    }
 }

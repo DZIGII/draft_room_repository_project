@@ -25,4 +25,9 @@ public class FileLogger extends Logger {
     public void nodeDeleted() {
 
     }
+
+    @Override
+    public void nodeAdded() {
+
+    }
 }

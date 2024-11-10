@@ -5,4 +5,5 @@ import raf.draft.dsw.model.messages.Message;
 public interface ISubscriber {
     void recive(Object notification);
     void nodeDeleted();
+    void nodeAdded();
 }

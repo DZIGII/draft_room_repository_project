@@ -19,7 +19,6 @@ public class DoubleClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
-            e.consume();
             Icon icon = new TabFrame().loadIcon("/images/room.png");
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
@@ -47,10 +46,20 @@ public class DoubleClickListener implements MouseListener {
                 MainFrame.getInstance().setTabFrame(MainFrame.getInstance().getTabFrame());
 
             }
-            if(selected instanceof Room) {
+            else if(selected instanceof Room) {
+                MainFrame.getInstance().getTabFrame().removeAll();
                 Room room = (Room) selected;
                 MainFrame.getInstance().getTabFrame().removeAll();
                 MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, room.getTab());
+
+            }
+            else if(selected instanceof Building) {
+                MainFrame.getInstance().getTabFrame().removeAll();
+                for(DraftNode room : ((Building) selected).getChildren()) {
+                    Room r = (Room) room;
+                    MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, r.getTab());
+//                            MainFrame.getInstance().getTabFrame().setBackground(((Building)(node)).getColor());
+                }
 
             }
         }

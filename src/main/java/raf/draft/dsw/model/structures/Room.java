@@ -23,6 +23,7 @@ public class Room extends Leaf implements IPublisher {
         subscribe(tab);
         tab.setRoom(this);
         tab.setRoomName(this.getName());
+        notifyAdded();
     }
 
     public Room(String name, DraftNode parent) {
@@ -31,6 +32,7 @@ public class Room extends Leaf implements IPublisher {
         subscribe(tab);
         tab.setRoom(this);
         tab.setRoomName(this.getName());
+        notifyAdded();
     }
 
     @Override
@@ -60,6 +62,13 @@ public class Room extends Leaf implements IPublisher {
     public void notifyDeleted() {
         for (ISubscriber subscriber : subscribers) {
             subscriber.nodeDeleted();
+        }
+    }
+
+    @Override
+    public void notifyAdded() {
+        for (ISubscriber subscriber : subscribers) {
+            subscriber.nodeAdded();
         }
     }
 

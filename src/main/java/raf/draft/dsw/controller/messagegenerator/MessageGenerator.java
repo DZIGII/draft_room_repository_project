@@ -44,6 +44,11 @@ public class MessageGenerator implements IPublisher {
     public void notifyDeleted() {
     }
 
+    @Override
+    public void notifyAdded() {
+
+    }
+
     public List<ISubscriber> getSubscribers() {
         return subscribers;
     }

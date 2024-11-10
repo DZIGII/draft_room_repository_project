@@ -77,6 +77,12 @@ public class TabFrame extends JPanel implements ISubscriber {
         }
     }
 
+    @Override
+    public void nodeAdded() {
+        Icon icon = new TabFrame().loadIcon("/images/room.png");
+        MainFrame.getInstance().getTabFrame().addTab(roomName,icon, this);
+    }
+
     public String getTitle() {
         return title;
     }
