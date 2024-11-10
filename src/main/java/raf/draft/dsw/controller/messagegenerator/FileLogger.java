@@ -20,4 +20,9 @@ public class FileLogger extends Logger {
             System.out.println("An error occurred while writing log file");
         }
     }
+
+    @Override
+    public void nodeDeleted() {
+
+    }
 }

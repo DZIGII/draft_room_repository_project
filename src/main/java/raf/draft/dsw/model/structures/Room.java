@@ -56,6 +56,13 @@ public class Room extends Leaf implements IPublisher {
         subscribers.remove(tab);
     }
 
+    @Override
+    public void notifyDeleted() {
+        for (ISubscriber subscriber : subscribers) {
+            subscriber.nodeDeleted();
+        }
+    }
+
     public TabFrame getTab() {
         return tab;
     }
@@ -63,6 +70,8 @@ public class Room extends Leaf implements IPublisher {
     public void setTab(TabFrame tab) {
         this.tab = tab;
     }
+
+
 
     public List<ISubscriber> getSubscribers() {
         return subscribers;

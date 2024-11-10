@@ -19,6 +19,7 @@ public class DoubleClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
+            e.consume();
             Icon icon = new TabFrame().loadIcon("/images/room.png");
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 

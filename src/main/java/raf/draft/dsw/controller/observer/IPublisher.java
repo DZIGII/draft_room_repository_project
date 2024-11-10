@@ -8,4 +8,5 @@ public interface IPublisher {
     void notifySubscribers(Object notification);
     void subscribe(ISubscriber logger);
     void unsubscribe(ISubscriber logger);
+    void notifyDeleted();
 }

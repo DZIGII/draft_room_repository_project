@@ -1,10 +1,12 @@
 package raf.draft.dsw.model.nodes;
 
+import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.model.messages.Message;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class DraftNode {
     private String name;
@@ -63,10 +65,14 @@ public abstract class DraftNode {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof DraftNode && obj != null) {
+        if(obj instanceof DraftNode) {
             return this.getName().equals(((DraftNode)obj).getName());
         }
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
+    }
 }

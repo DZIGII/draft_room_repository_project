@@ -40,6 +40,10 @@ public class MessageGenerator implements IPublisher {
         subscribers.remove(logger);
     }
 
+    @Override
+    public void notifyDeleted() {
+    }
+
     public List<ISubscriber> getSubscribers() {
         return subscribers;
     }

@@ -67,6 +67,16 @@ public class TabFrame extends JPanel implements ISubscriber {
         }
     }
 
+    @Override
+    public void nodeDeleted() {
+        for (int i = 0; i < MainFrame.getInstance().getTabFrame().getTabCount(); i++) {
+            if (MainFrame.getInstance().getTabFrame().getTitleAt(i).equals(roomName)) {
+                MainFrame.getInstance().getTabFrame().remove(i);
+                break;
+            }
+        }
+    }
+
     public String getTitle() {
         return title;
     }

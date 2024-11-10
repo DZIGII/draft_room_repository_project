@@ -9,7 +9,7 @@ import raf.draft.dsw.model.repository.DraftRoomRepository;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
     //buduca polja za sve komponente view-a na glavnom prozoru
 
     private ActionManager actionManager;
@@ -19,18 +19,18 @@ public class MainFrame extends JFrame{
 
     private static MainFrame instance;
 
-    private MainFrame(){
+    private MainFrame() {
     }
 
-    public static MainFrame getInstance(){
-        if(instance == null){
+    public static MainFrame getInstance() {
+        if (instance == null) {
             instance = new MainFrame();
             instance.initialize();
         }
         return instance;
     }
 
-    private void initialize(){
+    private void initialize() {
         actionManager = new ActionManager();
         draftTree = new DraftTreeImplementation();
 
@@ -54,10 +54,10 @@ public class MainFrame extends JFrame{
         projectExplorer.addMouseListener(new DoubleClickListener());
         JPanel desktop = new JPanel();
 
-        JScrollPane scroll=new JScrollPane(projectExplorer);
-        scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-        getContentPane().add(split,BorderLayout.WEST);
+        JScrollPane scroll = new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200, 150));
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, desktop);
+        getContentPane().add(split, BorderLayout.WEST);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
@@ -106,16 +106,5 @@ public class MainFrame extends JFrame{
 //        tabPanel.add(tabFrame, BorderLayout.CENTER);
 //        tabPanel.revalidate();
 //        tabPanel.repaint();
-//    }
-
-
-//    Vidi za Implementiranje ISubsribera na MainFrame
-//implements ISubscriber
-
-
-
-//    @Override
-//    public void recive(Message message) {
-//        JOptionPane.showMessageDialog(null, message.toString(), "Notification", JOptionPane.INFORMATION_MESSAGE);
 //    }
 }
