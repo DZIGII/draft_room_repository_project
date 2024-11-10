@@ -1,21 +1,29 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.ActionManager;
+import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
 import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
 import raf.draft.dsw.model.DraftRoomExplorerImplementation;
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.DraftNodeComposite;
 import raf.draft.dsw.model.repository.DraftRoomRepository;
+import raf.draft.dsw.model.structures.Building;
+import raf.draft.dsw.model.structures.Project;
+import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     //buduca polja za sve komponente view-a na glavnom prozoru
 
     private ActionManager actionManager;
     private DraftTreeImplementation draftTree;
     private DraftRoomRepository draftRoomRepository;
     private JTabbedPane tabFrame;
+    private Label infoLabel = new Label("-------------");
 
     private static MainFrame instance;
 
@@ -46,8 +54,11 @@ public class MainFrame extends JFrame {
         MyMenuBar menu = new MyMenuBar();
         setJMenuBar(menu);
 
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         MyToolBar toolBar = new MyToolBar(actionManager);
-        add(toolBar, BorderLayout.NORTH);
+        topPanel.add(toolBar);
+        topPanel.add(infoLabel);
+        add(topPanel, BorderLayout.NORTH);
 
         draftRoomRepository = new DraftRoomExplorerImplementation();
         JTree projectExplorer = draftTree.generateTree(draftRoomRepository.getRoot());
@@ -63,6 +74,8 @@ public class MainFrame extends JFrame {
 
         tabFrame = new JTabbedPane();
         add(tabFrame, BorderLayout.CENTER);
+
+        //add(infoLabel, BorderLayout.EAST);
     }
 
     public ActionManager getActionManager() {
@@ -100,6 +113,26 @@ public class MainFrame extends JFrame {
     public static void setInstance(MainFrame instance) {
         MainFrame.instance = instance;
     }
+
+    @Override
+    public void recive(Object notification) {
+        if (notification instanceof String) {
+            infoLabel.setText((String) notification);
+        }
+
+    }
+
+    @Override
+    public void nodeDeleted() {
+        infoLabel.setText("Node deleted");
+    }
+
+    @Override
+    public void nodeAdded() {
+        infoLabel.setText("Node added");
+    }
+
+
 
     //    public void setTabFrame(JTabbedPane tabFrame) {
 //        tabPanel.removeAll();

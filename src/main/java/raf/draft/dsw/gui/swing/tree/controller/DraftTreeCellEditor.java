@@ -24,7 +24,7 @@ public class DraftTreeCellEditor extends DefaultTreeCellEditor implements Action
     public Component getTreeCellEditorComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row) {
         //super.getTreeCellEditorComponent(arg0,arg1,arg2,arg3,arg4,arg5);
         clickedOn = value;
-        edit=new JTextField(clickedOn.toString());
+        edit = new JTextField(clickedOn.toString());
         edit.addActionListener(this);
         return edit;
     }

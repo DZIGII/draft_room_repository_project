@@ -8,6 +8,7 @@ import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.Leaf;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +16,13 @@ import java.util.Objects;
 public class Room extends Leaf implements IPublisher {
 
     private TabFrame tab;
-    private List<ISubscriber>  subscribers=new ArrayList<>();
+    private List<ISubscriber> subscribers = new ArrayList<>();
+    private Color color;
 
     public Room(String name, DraftNode parent, TabFrame tab) {
         super(name, parent);
         this.tab = tab;
+        color = generateColor();
         subscribe(tab);
         tab.setRoom(this);
         tab.setRoomName(this.getName());
@@ -80,7 +83,13 @@ public class Room extends Leaf implements IPublisher {
         this.tab = tab;
     }
 
+    public Color generateColor() {
+        int red = (int) (Math.random() * 256);
+        int green = (int) (Math.random() * 256);
+        int blue = (int) (Math.random() * 256);
 
+        return new Color(red, green, blue);
+    }
 
     public List<ISubscriber> getSubscribers() {
         return subscribers;
@@ -88,5 +97,13 @@ public class Room extends Leaf implements IPublisher {
 
     public void setSubscribers(List<ISubscriber> subscribers) {
         this.subscribers = subscribers;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

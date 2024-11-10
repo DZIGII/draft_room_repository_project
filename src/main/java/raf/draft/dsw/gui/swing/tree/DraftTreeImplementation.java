@@ -1,5 +1,7 @@
 package raf.draft.dsw.gui.swing.tree;
 
+import raf.draft.dsw.controller.observer.IPublisher;
+import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
 import raf.draft.dsw.gui.swing.TabFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
@@ -15,6 +17,8 @@ import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DraftTreeImplementation implements DraftTree {
@@ -100,4 +104,5 @@ public class DraftTreeImplementation implements DraftTree {
     public void setRepository(DraftRepository repository) {
         this.repository = repository;
     }
+
 }

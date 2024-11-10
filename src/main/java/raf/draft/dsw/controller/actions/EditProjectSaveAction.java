@@ -15,6 +15,7 @@ public class EditProjectSaveAction extends AbstactRoomAction{
     public void actionPerformed(ActionEvent e) {
         DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
+
         if(selected instanceof Project)
         {
             ((Project) selected).setProjectName(MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewName().getText());
@@ -25,6 +26,10 @@ public class EditProjectSaveAction extends AbstactRoomAction{
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewName().setText("");
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewAuthor().setText("");
             MainFrame.getInstance().getActionManager().getEditProjectAction().getFrame().getNewPath().setText("");
+
+
+            Project project = (Project) selected;
+            project.select();
 
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
         }

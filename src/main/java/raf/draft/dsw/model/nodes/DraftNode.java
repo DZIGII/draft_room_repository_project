@@ -3,6 +3,7 @@ package raf.draft.dsw.model.nodes;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.model.structures.Project;
 
 import javax.swing.*;
 import java.util.ArrayList;

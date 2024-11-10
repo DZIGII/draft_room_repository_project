@@ -1,14 +1,19 @@
 package raf.draft.dsw.model.structures;
 
+import raf.draft.dsw.controller.observer.IPublisher;
+import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Project extends DraftNodeComposite {
+public class Project extends DraftNodeComposite implements IPublisher {
     private String projectName;
     private String creatorName;
     private String pathToProjectResources;
+
+    private List<ISubscriber> subscribers = new ArrayList<>();
 
     public Project(String name, DraftNode parent) {
         super(name, parent);
@@ -67,4 +72,43 @@ public class Project extends DraftNodeComposite {
                 ", pathToProjectResources='" + pathToProjectResources + '\'' +
                 '}';
     }
+
+    @Override
+    public void notifySubscribers(Object notification) {
+        for(ISubscriber s : subscribers) {
+            s.recive(notification);
+        }
+    }
+
+    @Override
+    public void subscribe(ISubscriber logger) {
+        if (!subscribers.contains(logger)) {
+            subscribers.add(logger);
+        }
+    }
+
+    @Override
+    public void unsubscribe(ISubscriber logger) {
+        subscribers.remove(logger);
+    }
+
+    @Override
+    public void notifyDeleted() {
+        for (ISubscriber s : subscribers) {
+            s.nodeDeleted();
+        }
+    }
+
+    @Override
+    public void notifyAdded() {
+        for (ISubscriber s : subscribers) {
+            s.nodeAdded();
+        }
+    }
+
+    public void select() {
+        String info =  "Project name: " + projectName + " / Author: " + creatorName;
+        notifySubscribers(info);
+    }
+
 }

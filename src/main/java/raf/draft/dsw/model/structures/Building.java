@@ -12,7 +12,7 @@ public class Building extends DraftNodeComposite {
 
     public Building(String name) {
         super(name);
-        color = gentateColor();
+        color = generateColor();
     }
 
     public Building(String name, DraftNode parent) {
@@ -27,7 +27,7 @@ public class Building extends DraftNodeComposite {
         super(name, parent, children);
     }
 
-    public Color gentateColor() {
+    public Color generateColor() {
         int red = (int) (Math.random() * 256);
         int green = (int) (Math.random() * 256);
         int blue = (int) (Math.random() * 256);

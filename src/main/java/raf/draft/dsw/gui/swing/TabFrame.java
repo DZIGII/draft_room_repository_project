@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing;
 
+import com.sun.tools.javac.Main;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.structures.Room;
@@ -80,6 +81,7 @@ public class TabFrame extends JPanel implements ISubscriber {
     @Override
     public void nodeAdded() {
         Icon icon = new TabFrame().loadIcon("/images/room.png");
+        //MainFrame.getInstance().getTabFrame().removeAll();
         MainFrame.getInstance().getTabFrame().addTab(roomName,icon, this);
     }
 
