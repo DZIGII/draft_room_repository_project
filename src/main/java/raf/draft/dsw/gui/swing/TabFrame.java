@@ -104,7 +104,7 @@ public class TabFrame extends JPanel implements ISubscriber {
             @Override
             public void run() {
                 MainFrame.getInstance().getTabFrame().removeAll();
-                int cnt =0;
+                int cnt = 0;
 
                 if (project == null) {
                     return;
