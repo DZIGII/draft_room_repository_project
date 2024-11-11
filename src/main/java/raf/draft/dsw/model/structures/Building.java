@@ -17,6 +17,7 @@ public class Building extends DraftNodeComposite {
 
     public Building(String name, DraftNode parent) {
         super(name, parent);
+        color = generateColor();
     }
 
     public Building(String name, ArrayList<DraftNode> children) {

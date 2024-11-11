@@ -27,6 +27,7 @@ public class Room extends Leaf implements IPublisher {
         tab.setRoom(this);
         tab.setRoomName(this.getName());
         notifyAdded();
+        color = generateColor();
     }
 
     public Room(String name, DraftNode parent) {
@@ -36,6 +37,7 @@ public class Room extends Leaf implements IPublisher {
         tab.setRoom(this);
         tab.setRoomName(this.getName());
         notifyAdded();
+        color = generateColor();
     }
 
     @Override

@@ -99,6 +99,7 @@ public class TabFrame extends JPanel implements ISubscriber {
             @Override
             public void run() {
                 MainFrame.getInstance().getTabFrame().removeAll();
+                int cnt =0;
 
                 if (project == null) {
                     return;
@@ -112,10 +113,14 @@ public class TabFrame extends JPanel implements ISubscriber {
                         for (DraftNode roomNode : building.getChildren()) {
                             if (roomNode instanceof Room) {
                                 MainFrame.getInstance().getTabFrame().addTab(roomNode.getName(), icon, ((Room) roomNode).getTab());
+                                MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
                             }
+                            cnt++;
                         }
                     } else if (child instanceof Room) {
                         MainFrame.getInstance().getTabFrame().addTab(child.getName(), icon, ((Room) child).getTab());
+                        MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, ((Room) child).getColor());
+                        cnt++;
                     }
                 }
 
