@@ -27,8 +27,17 @@ public class DraftTreeSelectionListener implements TreeSelectionListener {
             project.select();
         }
         else if (treeItemSelected.getDraftNode() instanceof Room) {
-            Project project = (Project) treeItemSelected.getDraftNode().getParent().getParent();
-            project.select();
+            if(treeItemSelected.getDraftNode().getParent() instanceof Project)
+            {
+                Project project = (Project) treeItemSelected.getDraftNode().getParent();
+                project.select();
+            }
+            else if(treeItemSelected.getDraftNode().getParent() instanceof Building)
+            {
+                Project project = (Project) treeItemSelected.getDraftNode().getParent().getParent();
+                project.select();
+            }
+
         }
     }
 }
