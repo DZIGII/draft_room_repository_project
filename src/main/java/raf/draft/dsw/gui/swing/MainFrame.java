@@ -124,7 +124,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     @Override
     public void nodeDeleted() {
-        infoLabel.setText("Node deleted");
+        infoLabel.setText("-------------");
     }
 
     @Override

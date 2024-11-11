@@ -9,6 +9,7 @@ import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.messages.MessageType;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
+import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.ProjectExplorer;
 import raf.draft.dsw.model.structures.Room;
 
@@ -35,6 +36,7 @@ public class DeleteNodeAction extends AbstactRoomAction{
         if(MainFrame.getInstance().getDraftTree().getSelectedNode() != null)
         {
             DraftTreeItem selected = MainFrame.getInstance().getDraftTree().getSelectedNode();
+
             if(selected.getDraftNode() instanceof ProjectExplorer){
                 Message message=new Message("ProjectExplorer cant be deleted!", "ERROR");
                 JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -50,6 +52,10 @@ public class DeleteNodeAction extends AbstactRoomAction{
                     System.out.println("Removed node " + selected.getDraftNode() + " from parent " + parent);
                 } else {
                     System.out.println("Node " + selected.getDraftNode() + " not found in parent's children list.");
+                }
+
+                if(selected.getDraftNode() instanceof Project){
+                    MainFrame.getInstance().nodeDeleted();
                 }
 
                 MainFrame.getInstance().getDraftTree().getTreeModel().removeNodeFromParent(selected);
