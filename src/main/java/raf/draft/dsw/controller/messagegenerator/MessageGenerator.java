@@ -24,9 +24,7 @@ public class MessageGenerator implements IPublisher {
     @Override
     public void notifySubscribers(Object message) {
         for (ISubscriber subscriber : subscribers) {
-            if(subscriber instanceof Logger) {
-                ((Logger)subscriber).log(message.toString());
-            }
+            (subscriber).update((Message) message);
         }
     }
 

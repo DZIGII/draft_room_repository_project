@@ -38,8 +38,7 @@ public class DeleteNodeAction extends AbstactRoomAction{
             DraftTreeItem selected = MainFrame.getInstance().getDraftTree().getSelectedNode();
 
             if(selected.getDraftNode() instanceof ProjectExplorer){
-                Message message=new Message("ProjectExplorer cant be deleted!", "ERROR");
-                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+                MainFrame.getInstance().getMessageGenerator().generateMessage("ProjectExplorer cant be deleted!", "ERROR");
             }else if (selected != null && selected.getParent() != null) {
                 notifyRoomDeletionRecursively(selected.getDraftNode());
                 if (selected.getDraftNode() instanceof DraftNodeComposite) {
@@ -63,8 +62,7 @@ public class DeleteNodeAction extends AbstactRoomAction{
             }
         }
         else{
-            Message message=new Message("Please select node that you want to delete!", "WARNING");
-            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("Please select node that you want to delete!", "ERROR");
         }
     }
 

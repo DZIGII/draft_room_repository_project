@@ -9,7 +9,7 @@ public class ConsoleLogger extends Logger {
 
     @Override
     public void log(String message) {
-        System.out.println(message);
+
     }
 
     @Override
@@ -20,5 +20,10 @@ public class ConsoleLogger extends Logger {
     @Override
     public void nodeAdded() {
 
+    }
+
+    @Override
+    public void update(Message message) {
+        System.out.println(message);
     }
 }

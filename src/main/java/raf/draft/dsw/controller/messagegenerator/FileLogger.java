@@ -12,9 +12,19 @@ public class FileLogger extends Logger {
 
 
     @Override
-    public void log(String message) {
+    public void nodeDeleted() {
+
+    }
+
+    @Override
+    public void nodeAdded() {
+
+    }
+
+    @Override
+    public void update(Message message) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
-            bw.write(message);
+            bw.write(message.getContent());
             bw.newLine();
         } catch (IOException e) {
             System.out.println("An error occurred while writing log file");
@@ -22,12 +32,7 @@ public class FileLogger extends Logger {
     }
 
     @Override
-    public void nodeDeleted() {
-
-    }
-
-    @Override
-    public void nodeAdded() {
+    public void log(String message) {
 
     }
 }

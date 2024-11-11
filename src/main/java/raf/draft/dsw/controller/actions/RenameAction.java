@@ -33,8 +33,7 @@ public class RenameAction extends AbstactRoomAction{
             frame = new RenameNodeFrame();
         }
         else{
-            Message message=new Message("Please select node that you want to rename!", "WARNING");
-            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("Please select node that you want to rename!", "WARNING");
         }
     }
 

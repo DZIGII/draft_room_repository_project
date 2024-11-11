@@ -20,10 +20,5 @@ public class ApplicationFramework {
     public void initialize(){
         MainFrame mainFrame = MainFrame.getInstance();
         mainFrame.setVisible(true);
-
-//        MessageGenerator mg = new MessageGenerator();
-//        mg.subscribe(mainFrame);
-//
-//        mg.generateMessage("ProjectExplorer ne može biti obrisan", "GREŠKA");
     }
 }

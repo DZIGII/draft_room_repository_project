@@ -34,13 +34,11 @@ public class EditProjectAction extends AbstactRoomAction {
                 frame = new EditProjectFrame();
             }
             else {
-                Message message=new Message("You can edit only project", "ERROR");
-                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+                MainFrame.getInstance().getMessageGenerator().generateMessage("You can edit only project", "ERROR");
             }
         }
         else{
-            Message message=new Message("Please select node that you want to edit!", "WARNING");
-            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("Please select node that you want to edit!", "WARNING");
         }
     }
 
