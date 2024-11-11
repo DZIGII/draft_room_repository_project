@@ -3,6 +3,9 @@ package raf.draft.dsw.gui.swing;
 import com.sun.tools.javac.Main;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.structures.Building;
+import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
@@ -80,9 +83,44 @@ public class TabFrame extends JPanel implements ISubscriber {
 
     @Override
     public void nodeAdded() {
-        Icon icon = new TabFrame().loadIcon("/images/room.png");
-        //MainFrame.getInstance().getTabFrame().removeAll();
-        MainFrame.getInstance().getTabFrame().addTab(roomName,icon, this);
+        DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
+        if (selected instanceof Project) {
+            updateTabsForProject((Project) selected);
+        } else if (selected instanceof Building) {
+            updateTabsForProject((Project) selected.getParent());
+        }
+    }
+
+    public void updateTabsForProject(Project project) {
+
+        //garantuje da će se kod izvršiti u pravom trenutku i na pravom mestu — u EDT-u.
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MainFrame.getInstance().getTabFrame().removeAll();
+
+                if (project == null) {
+                    return;
+                }
+
+                Icon icon = loadIcon("/images/room.png");
+
+                for (DraftNode child : project.getChildren()) {
+                    if (child instanceof Building) {
+                        Building building = (Building) child;
+                        for (DraftNode roomNode : building.getChildren()) {
+                            if (roomNode instanceof Room) {
+                                MainFrame.getInstance().getTabFrame().addTab(roomNode.getName(), icon, ((Room) roomNode).getTab());
+                            }
+                        }
+                    } else if (child instanceof Room) {
+                        MainFrame.getInstance().getTabFrame().addTab(child.getName(), icon, ((Room) child).getTab());
+                    }
+                }
+
+            }
+        });
     }
 
     public String getTitle() {
