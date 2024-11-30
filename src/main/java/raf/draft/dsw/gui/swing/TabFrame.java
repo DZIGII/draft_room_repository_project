@@ -91,6 +91,11 @@ public class TabFrame extends JPanel implements ISubscriber {
         }
     }
 
+    @Override
+    public void update(Message message) {
+
+    }
+
     public void updateTabsForProject(Project project) {
 
         //garantuje da će se kod izvršiti u pravom trenutku i na pravom mestu — u EDT-u.

@@ -6,18 +6,21 @@ import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.TabFrame;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.DraftNodeComposite;
 import raf.draft.dsw.model.nodes.Leaf;
 
 import java.awt.*;
+import java.awt.geom.Dimension2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Room extends Leaf implements IPublisher {
+public class Room extends DraftNodeComposite implements IPublisher {
 
     private TabFrame tab;
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Color color;
+    private Dimension2D dimension;
 
     public Room(String name, DraftNode parent, TabFrame tab) {
         super(name, parent);

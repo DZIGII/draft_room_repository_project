@@ -6,4 +6,5 @@ public interface ISubscriber {
     void recive(Object notification);
     void nodeDeleted();
     void nodeAdded();
+    void update(Message message);
 }

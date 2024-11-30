@@ -28,16 +28,14 @@ public class NewProjectAction extends AbstactRoomAction{
             DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
             if(selected.getDraftNode() instanceof Room)
             {
-                Message message = new Message("Room does not have childrens", "ERROR");
-                JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+                MainFrame.getInstance().getMessageGenerator().generateMessage("Room does not have childrens", "ERROR");
             }
             else {
                 MainFrame.getInstance().getDraftTree().addChild(selected);
             }
         }
         else{
-            Message message = new Message("Please select project explorer to add his first child!", "WARNING");
-            JOptionPane.showMessageDialog(null,message,"WARNING", JOptionPane.WARNING_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("Please select project explorer to add his first child!", "WARNING");
         }
 
     }

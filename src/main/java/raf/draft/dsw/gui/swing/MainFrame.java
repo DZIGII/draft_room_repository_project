@@ -1,10 +1,15 @@
 package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.ActionManager;
+import raf.draft.dsw.controller.messagegenerator.ConsoleLogger;
+import raf.draft.dsw.controller.messagegenerator.FileLogger;
+import raf.draft.dsw.controller.messagegenerator.LoggerFactory;
+import raf.draft.dsw.controller.messagegenerator.MessageGenerator;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
 import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
 import raf.draft.dsw.model.DraftRoomExplorerImplementation;
+import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
 import raf.draft.dsw.model.repository.DraftRoomRepository;
@@ -14,6 +19,7 @@ import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Console;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame implements ISubscriber {
@@ -24,6 +30,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private DraftRoomRepository draftRoomRepository;
     private JTabbedPane tabFrame;
     private Label infoLabel = new Label("-------------");
+    private MessageGenerator messageGenerator;
+    private LoggerFactory loggerFactory;
 
     private static MainFrame instance;
 
@@ -75,6 +83,15 @@ public class MainFrame extends JFrame implements ISubscriber {
         tabFrame = new JTabbedPane();
         add(tabFrame, BorderLayout.CENTER);
 
+        messageGenerator = new MessageGenerator();
+        loggerFactory = new LoggerFactory();
+        ConsoleLogger cl = (ConsoleLogger) loggerFactory.createLogger("CONSOLE");
+        FileLogger fl = (FileLogger)loggerFactory.createLogger("FILE");
+
+        messageGenerator.subscribe(this);
+        messageGenerator.subscribe(cl);
+        messageGenerator.subscribe(fl);
+
         //add(infoLabel, BorderLayout.EAST);
     }
 
@@ -102,6 +119,14 @@ public class MainFrame extends JFrame implements ISubscriber {
         this.draftRoomRepository = draftRoomRepository;
     }
 
+    public MessageGenerator getMessageGenerator() {
+        return messageGenerator;
+    }
+
+    public void setMessageGenerator(MessageGenerator messageGenerator) {
+        this.messageGenerator = messageGenerator;
+    }
+
     public JTabbedPane getTabFrame() {
         return tabFrame;
     }
@@ -114,13 +139,22 @@ public class MainFrame extends JFrame implements ISubscriber {
         MainFrame.instance = instance;
     }
 
+    public LoggerFactory getLoggerFactory() {
+        return loggerFactory;
+    }
+
+    public void setLoggerFactory(LoggerFactory loggerFactory) {
+        this.loggerFactory = loggerFactory;
+    }
+
     @Override
     public void recive(Object notification) {
         if (notification instanceof String) {
             infoLabel.setText((String) notification);
         }
-
     }
+
+
 
     @Override
     public void nodeDeleted() {
@@ -132,12 +166,16 @@ public class MainFrame extends JFrame implements ISubscriber {
         infoLabel.setText("Node added");
     }
 
-
-
-    //    public void setTabFrame(JTabbedPane tabFrame) {
-//        tabPanel.removeAll();
-//        tabPanel.add(tabFrame, BorderLayout.CENTER);
-//        tabPanel.revalidate();
-//        tabPanel.repaint();
-//    }
+    @Override
+    public void update(Message message) {
+        if(message.getMessageType().equalsIgnoreCase("ERROR")) {
+            JOptionPane.showMessageDialog(this, message.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(message.getMessageType().equalsIgnoreCase("WARNING")){
+            JOptionPane.showMessageDialog(this, message.toString(), "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(message.getMessageType().equalsIgnoreCase("INFORMATION")) {
+            JOptionPane.showMessageDialog(this, message.toString(), "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 }

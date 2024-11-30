@@ -1,19 +1,25 @@
-package raf.draft.dsw.model.elements;
+package raf.draft.dsw.model.structures;
+
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.Leaf;
 
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
-public abstract class RoomElement implements Prototype {
+public abstract class RoomElement extends Leaf implements Prototype {
 
     private Point2D location;
     private Dimension2D dimension;
-    private double rotation;
+    private int rotateRatio;
 
-    public RoomElement(Point2D location, Dimension2D dimension, double rotation) {
-        this.location = location;
-        this.dimension = dimension;
-        this.rotation = rotation;
+    public RoomElement(String name) {
+        super(name);
     }
+
+    public RoomElement(String name, DraftNode parent) {
+        super(name, parent);
+    }
+
 
     public Point2D getLocation() {
         return location;
@@ -31,11 +37,13 @@ public abstract class RoomElement implements Prototype {
         this.dimension = dimension;
     }
 
-    public double getRotation() {
-        return rotation;
+    public int getRotateRatio() {
+        return rotateRatio;
     }
 
-    public void setRotation(double rotation) {
-        this.rotation = rotation;
+    public void setRotateRatio(int rotateRatio) {
+        this.rotateRatio = rotateRatio;
     }
+
+    public abstract Prototype clone();
 }

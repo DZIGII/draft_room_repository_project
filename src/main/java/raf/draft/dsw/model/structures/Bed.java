@@ -1,21 +1,30 @@
-package raf.draft.dsw.model.elements;
+package raf.draft.dsw.model.structures;
 
-import raf.draft.dsw.model.structures.RoomElement;
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.nodes.Leaf;
 
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
 public class Bed extends RoomElement {
-    public Bed(Point2D location, Dimension2D dimension, double rotation) {
-        super(location, dimension, rotation);
+
+
+    public Bed(String name) {
+        super(name);
+    }
+
+    public Bed(String name, DraftNode parent) {
+        super(name, parent);
     }
 
     @Override
     public Prototype clone() {
-        return new Bed(
-                (Point2D) getLocation().clone(),
-                (Dimension2D) getDimension().clone(),
-                getRotation()
-        );
+        Bed clonedBed = new Bed(this.getName(), this.getParent());
+
+        clonedBed.setLocation((Point2D) this.getLocation().clone());
+        clonedBed.setDimension((Dimension2D) this.getDimension().clone());
+        clonedBed.setRotateRatio(this.getRotateRatio());
+
+        return clonedBed;
     }
 }

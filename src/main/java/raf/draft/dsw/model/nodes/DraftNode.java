@@ -33,12 +33,10 @@ public abstract class DraftNode {
             name = newName;
 
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
-            Message message=new Message("You have successfully renamed project!", "INFORMATION");
-            JOptionPane.showMessageDialog(null,message,"INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("You have successfully renamed project!", "INFORMATION");
         }
         else{
-            Message message=new Message("Name already exists!", "ERROR");
-            JOptionPane.showMessageDialog(null,message,"ERROR", JOptionPane.ERROR_MESSAGE);
+            MainFrame.getInstance().getMessageGenerator().generateMessage("Name already exists!", "ERROR");
         }
     }
 
