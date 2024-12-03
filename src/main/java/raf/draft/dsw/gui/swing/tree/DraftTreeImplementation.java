@@ -1,25 +1,15 @@
 package raf.draft.dsw.gui.swing.tree;
 
-import raf.draft.dsw.controller.observer.IPublisher;
-import raf.draft.dsw.controller.observer.ISubscriber;
-import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
-import raf.draft.dsw.gui.swing.TabFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.gui.swing.tree.view.DraftTreeView;
 import raf.draft.dsw.model.factories.DraftNodeFactory;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
 import raf.draft.dsw.model.repository.DraftRepository;
-import raf.draft.dsw.model.structures.Building;
-import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.ProjectExplorer;
-import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class DraftTreeImplementation implements DraftTree {
     private DraftTreeView treeView;

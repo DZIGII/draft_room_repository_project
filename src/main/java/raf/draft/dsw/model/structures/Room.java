@@ -1,28 +1,25 @@
 package raf.draft.dsw.model.structures;
 
-import raf.draft.dsw.controller.messagegenerator.Logger;
 import raf.draft.dsw.controller.observer.IPublisher;
 import raf.draft.dsw.controller.observer.ISubscriber;
-import raf.draft.dsw.gui.swing.TabFrame;
-import raf.draft.dsw.model.messages.Message;
+import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
-import raf.draft.dsw.model.nodes.Leaf;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Dimension2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Room extends DraftNodeComposite implements IPublisher {
 
-    private TabFrame tab;
+    private RoomView tab;
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Color color;
     private Dimension2D dimension;
 
-    public Room(String name, DraftNode parent, TabFrame tab) {
+    public Room(String name, DraftNode parent, RoomView tab) {
         super(name, parent);
         this.tab = tab;
         color = generateColor();
@@ -35,10 +32,8 @@ public class Room extends DraftNodeComposite implements IPublisher {
 
     public Room(String name, DraftNode parent) {
         super(name,parent);
-        this.tab = new TabFrame();
+        this.tab = new RoomView(name, this);
         subscribe(tab);
-        tab.setRoom(this);
-        tab.setRoomName(this.getName());
         notifyAdded();
         color = generateColor();
     }
@@ -80,11 +75,11 @@ public class Room extends DraftNodeComposite implements IPublisher {
         }
     }
 
-    public TabFrame getTab() {
+    public RoomView getTab() {
         return tab;
     }
 
-    public void setTab(TabFrame tab) {
+    public void setTab(RoomView tab) {
         this.tab = tab;
     }
 

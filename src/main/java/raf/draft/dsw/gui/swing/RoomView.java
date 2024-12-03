@@ -1,6 +1,5 @@
 package raf.draft.dsw.gui.swing;
 
-import com.sun.tools.javac.Main;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
@@ -10,26 +9,43 @@ import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.net.URL;
 
-public class TabFrame extends JPanel implements ISubscriber {
+public class RoomView extends JPanel implements ISubscriber {
 
-    public String title;
     public Room room;
     public String roomName;
 
-    public TabFrame(String title) {
+    public RoomView(String roomName, Room room) {
+        this.roomName = roomName;
+        this.room = room;
+        initialize();
         show();
     }
 
-    public TabFrame() {
-        show();
+    public RoomView() {
+
+    }
+
+    public void initialize() {
+        roomName = new String(room.getName());
     }
 
     public void show() {
         setLayout(new BorderLayout());
-        add(makeTextPanel("Content for " + title), BorderLayout.CENTER);
+        add(createContentPanel(), BorderLayout.CENTER);
+    }
+
+    private JPanel createContentPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JLabel label = new JLabel("Content for: " + (roomName != null ? roomName : "Unnamed Room"));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+
+        panel.add(label, BorderLayout.CENTER);
+        return panel;
     }
 
     public Icon loadIcon(String path) {
@@ -95,8 +111,8 @@ public class TabFrame extends JPanel implements ISubscriber {
     public void update(Message message) {
 
     }
-
     public void updateTabsForProject(Project project) {
+
 
         //garantuje da će se kod izvršiti u pravom trenutku i na pravom mestu — u EDT-u.
 
@@ -131,14 +147,6 @@ public class TabFrame extends JPanel implements ISubscriber {
 
             }
         });
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Room getRoom() {

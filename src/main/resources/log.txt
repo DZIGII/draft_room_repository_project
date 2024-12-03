@@ -1,1 +1,3 @@
 ProjectExplorer cant be deleted!
+Please select project explorer to add his first child!
+Please select project explorer to add his first child!

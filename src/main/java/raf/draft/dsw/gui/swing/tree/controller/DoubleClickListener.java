@@ -1,10 +1,9 @@
 package raf.draft.dsw.gui.swing.tree.controller;
 
 import raf.draft.dsw.gui.swing.MainFrame;
-import raf.draft.dsw.gui.swing.TabFrame;
+import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.DraftNodeComposite;
-import raf.draft.dsw.model.nodes.Leaf;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.Room;
@@ -20,7 +19,7 @@ public class DoubleClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int cnt = 0;
         if (e.getClickCount() == 2) {
-            Icon icon = new TabFrame().loadIcon("/images/room.png");
+            Icon icon = new RoomView().loadIcon("/images/room.png");
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
             if(selected instanceof Project) {
@@ -37,14 +36,18 @@ public class DoubleClickListener implements MouseListener {
                         Building building = (Building) node;
                         for(DraftNode room : ((Building) node).getChildren()) {
                             Room r = (Room) room;
-                            MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, r.getTab());
+                            RoomView roomView = ((Room) room).getTab();
+                            roomView.setBackground(((Room) room).getColor());
+                            MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, roomView);
                             MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
                             cnt++;
                         }
                     }
                     if(node instanceof Room) {
                         Room room = (Room) node;
-                        MainFrame.getInstance().getTabFrame().addTab(node.getName(), icon, ((Room) node).getTab());
+                        RoomView roomView = new RoomView(node.getName(), (Room) node);
+                        roomView.setBackground(((Room) room).getColor());
+                        MainFrame.getInstance().getTabFrame().addTab(node.getName(), icon, roomView);
                         MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, room.getColor());
                         cnt++;
                     }
@@ -56,8 +59,10 @@ public class DoubleClickListener implements MouseListener {
             else if(selected instanceof Room) {
                 MainFrame.getInstance().getTabFrame().removeAll();
                 Room room = (Room) selected;
+                RoomView roomView = new RoomView(selected.getName(), (Room) selected);
+                roomView.setBackground(room.getColor());
                 MainFrame.getInstance().getTabFrame().removeAll();
-                MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, room.getTab());
+                MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, roomView);
                 MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, room.getColor());
 
                 if(selected.getParent() instanceof Building) {
@@ -77,7 +82,9 @@ public class DoubleClickListener implements MouseListener {
                 parent.select();
                 for(DraftNode room : ((Building) selected).getChildren()) {
                     Room r = (Room) room;
-                    MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, r.getTab());
+                    RoomView roomView = new RoomView(room.getName(), (Room) room);
+                    roomView.setBackground(((Room) room).getColor());
+                    MainFrame.getInstance().getTabFrame().addTab(room.getName(), icon, roomView);
                     MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, ((Building) selected).getColor());
                     cnt++;
                 }
