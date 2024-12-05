@@ -1,22 +1,30 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.controller.SetRoomSize;
+import raf.draft.dsw.model.structures.Room;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class RoomDimensionsFrame extends JFrame{
+public class RoomDimensionsFrame extends JFrame {
 
-    JLabel succses = new JLabel("");
-    JLabel width = new JLabel();
-    JLabel height = new JLabel();
+    private Room room;
 
-    JTextField widthField = new JTextField();
-    JTextField heightField = new JTextField();
+    private JLabel succses = new JLabel("");
+    private JLabel width = new JLabel();
+    private JLabel height = new JLabel();
 
-    JButton saveBtn = new JButton("Set change");
-    JButton exitBtn = new JButton("Exit");
+    private JTextField widthField = new JTextField();
+    private JTextField heightField = new JTextField();
 
-    public RoomDimensionsFrame() throws HeadlessException {
+    private JButton saveBtn = new JButton("Set change");
+    private JButton exitBtn = new JButton("Exit");
+
+
+
+    public RoomDimensionsFrame(Room room) throws HeadlessException {
+        this.room = room;
         initialize();
         showel();
         controller();
@@ -75,7 +83,8 @@ public class RoomDimensionsFrame extends JFrame{
     }
 
     void controller() {
-        exitBtn.addActionListener(MainFrame.getInstance().getActionManager().getEditProjectExitAction());
+        exitBtn.addActionListener(e -> dispose());
+        saveBtn.addMouseListener(new SetRoomSize(room, widthField, heightField));
     }
 
     public JTextField getWidthField() {

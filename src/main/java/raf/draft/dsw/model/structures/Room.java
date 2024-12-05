@@ -18,14 +18,16 @@ public class Room extends DraftNodeComposite implements IPublisher {
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Color color;
     private Dimension2D dimension;
+    private int width;
+    private int height;
 
     public Room(String name, DraftNode parent, RoomView tab) {
         super(name, parent);
         this.tab = tab;
         color = generateColor();
         subscribe(tab);
-        tab.setRoom(this);
-        tab.setRoomName(this.getName());
+//        tab.setRoom(this);
+//        tab.setRoomName(this.getName());
         notifyAdded();
         color = generateColor();
     }
@@ -105,5 +107,29 @@ public class Room extends DraftNodeComposite implements IPublisher {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Dimension2D getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Dimension2D dimension) {
+        this.dimension = dimension;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

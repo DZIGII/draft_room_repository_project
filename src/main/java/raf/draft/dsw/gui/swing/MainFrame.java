@@ -19,6 +19,8 @@ import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.Console;
 import java.util.ArrayList;
 
@@ -80,7 +82,13 @@ public class MainFrame extends JFrame implements ISubscriber {
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
 
+        JPanel tabWrapper = new JPanel();
+        tabWrapper.setLayout(new BorderLayout());
+
         tabFrame = new JTabbedPane();
+
+        tabFrame.setPreferredSize(new Dimension(500, 500));
+        tabWrapper.add(tabFrame, BorderLayout.CENTER);
         add(tabFrame, BorderLayout.CENTER);
 
         messageGenerator = new MessageGenerator();

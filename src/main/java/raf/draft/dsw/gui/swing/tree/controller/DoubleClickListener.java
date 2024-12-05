@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class DoubleClickListener implements MouseListener {
@@ -19,7 +20,7 @@ public class DoubleClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int cnt = 0;
         if (e.getClickCount() == 2) {
-            Icon icon = new RoomView().loadIcon("/images/room.png");
+            Icon icon = loadIcon("/images/room.png");
             DraftNode selected = MainFrame.getInstance().getDraftTree().getSelectedNode().getDraftNode();
 
             if(selected instanceof Project) {
@@ -112,4 +113,20 @@ public class DoubleClickListener implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public Icon loadIcon(String path) {
+        Icon icon = null;
+        URL ImageURL = getClass().getResource(path);
+        if(ImageURL != null)
+        {
+            Image img = new ImageIcon(ImageURL).getImage();
+            Image newImg = img.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            icon = new ImageIcon(newImg);
+        }
+        else
+        {
+            System.err.println("File not found");
+        }
+        return icon;
+    };
 }

@@ -1,3 +1,10 @@
 ProjectExplorer cant be deleted!
 Please select project explorer to add his first child!
 Please select project explorer to add his first child!
+Please select project explorer to add his first child!
+You have successfully renamed project!
+You have successfully renamed project!
+Succsess set width and height
+Width and height must contains only digits
+Width and height must contains only digits
+Succsess set width and height

@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.controller.actions.AddDimensionAction;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
@@ -9,29 +10,30 @@ import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
-public class RoomView extends JPanel implements ISubscriber {
+public class RoomView extends JPanel implements ISubscriber, MouseListener {
 
-    public Room room;
-    public String roomName;
+    private Room room;
+    private String roomName;
+    private JLabel jLabel;
+
 
     public RoomView(String roomName, Room room) {
         this.roomName = roomName;
         this.room = room;
+        this.addMouseListener(new AddDimensionAction(room));
         initialize();
-        show();
-    }
-
-    public RoomView() {
-
+        showel();
     }
 
     public void initialize() {
-        roomName = new String(room.getName());
+        jLabel = new JLabel(roomName);
     }
 
-    public void show() {
+    public void showel() {
         setLayout(new BorderLayout());
         add(createContentPanel(), BorderLayout.CENTER);
     }
@@ -134,7 +136,7 @@ public class RoomView extends JPanel implements ISubscriber {
                         for (DraftNode roomNode : building.getChildren()) {
                             if (roomNode instanceof Room) {
                                 MainFrame.getInstance().getTabFrame().addTab(roomNode.getName(), icon, ((Room) roomNode).getTab());
-                                MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
+                                //MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
                             }
                             cnt++;
                         }
@@ -148,6 +150,27 @@ public class RoomView extends JPanel implements ISubscriber {
             }
         });
     }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        System.out.println("Test");
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("Test");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        System.out.println("Test");
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        System.out.println("Test");
+    }
+
 
     public Room getRoom() {
         return room;
@@ -163,5 +186,10 @@ public class RoomView extends JPanel implements ISubscriber {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
     }
 }

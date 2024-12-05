@@ -15,6 +15,7 @@ public class ActionManager {
     private EditProjectSaveAction editProjectSaveAction;
     private RenameExitAction renameExitAction;
 
+
     public ActionManager() {
         initialiseActions();
     }
