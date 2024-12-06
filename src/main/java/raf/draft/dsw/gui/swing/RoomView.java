@@ -15,14 +15,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
 
-public class RoomView extends JPanel implements ISubscriber, MouseListener {
+public class RoomView extends JPanel implements ISubscriber {
 
     private Room room;
     private String roomName;
     private JLabel jLabel;
 
-    private StateManager stateManager;
-
+    private StateManager stateManager = new StateManager();
 
     public RoomView(String roomName, Room room) {
         this.roomName = roomName;
@@ -31,7 +30,7 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainFrame.getInstance().getStateManager().getCurrentState().log();
+                stateManager.getCurrentState().log();
             }
 
             @Override
@@ -165,7 +164,7 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
                         for (DraftNode roomNode : building.getChildren()) {
                             if (roomNode instanceof Room) {
                                 MainFrame.getInstance().getTabFrame().addTab(roomNode.getName(), icon, ((Room) roomNode).getTab());
-                                //MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
+                                MainFrame.getInstance().getTabFrame().setBackgroundAt(cnt, building.getColor());
                             }
                             cnt++;
                         }
@@ -181,28 +180,22 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D graphics = (Graphics2D) g;
 
-    }
+        Double panelRatio = (double)this.getWidth()/ (double) this.getHeight();
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        System.out.println("Test");
-    }
+        Double roomWidthHightRatio = (double) (this.room.getWidth() / this.room.getHeight());
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("Test");
-    }
+        if(panelRatio > roomWidthHightRatio) {
+            graphics.drawRect((int) (this.getWidth()*5/100 + this.getWidth()*9/10*((panelRatio-roomWidthHightRatio)/2/panelRatio)), this.getHeight()*5/100, (int) (this.getWidth()*9/10*roomWidthHightRatio/panelRatio), this.getHeight()*90/100);
+        }else {
+            graphics.drawRect(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomWidthHightRatio-panelRatio)/2/roomWidthHightRatio)), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomWidthHightRatio));
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        System.out.println("Test");
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        System.out.println("Test");
+        graphics.setColor(Color.RED);
+        //graphics.fillRect(110, 110, 80, 80);
     }
 
     public void startAddElemetState() {

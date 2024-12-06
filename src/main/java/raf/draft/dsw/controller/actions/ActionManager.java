@@ -15,6 +15,17 @@ public class ActionManager {
     private EditProjectSaveAction editProjectSaveAction;
     private RenameExitAction renameExitAction;
 
+    private AddElementAction addElementAction;
+    private  CopyPasteAction copyPasteAction;
+    private  DeleteElementAction deleteElementAction;
+    private EditAction editAction;
+    private EditRoomAction editRoomAction;
+    private MoveAction moveAction;
+    private ResizeAction resizeAction;
+    private RotateAction rotateAction;
+    private SelectAction selectAction;
+    private ZoomAction zoomAction;
+
 
     public ActionManager() {
         initialiseActions();
@@ -33,6 +44,17 @@ public class ActionManager {
         editProjectAction = new EditProjectAction();
         editProjectExitAction = new EditProjectExitAction();
         editProjectSaveAction = new EditProjectSaveAction();
+
+        addElementAction = new AddElementAction();
+        copyPasteAction = new CopyPasteAction();
+        deleteElementAction = new DeleteElementAction();
+        editAction = new EditAction();
+        editRoomAction = new EditRoomAction();
+        moveAction = new MoveAction();
+        resizeAction = new ResizeAction();
+        rotateAction = new RotateAction();
+        selectAction = new SelectAction();
+        zoomAction = new ZoomAction();
     }
 
     public ExitAction getExitAction() {
@@ -129,5 +151,85 @@ public class ActionManager {
 
     public void setRenameExitAction(RenameExitAction renameExitAction) {
         this.renameExitAction = renameExitAction;
+    }
+
+    public AddElementAction getAddElementAction() {
+        return addElementAction;
+    }
+
+    public void setAddElementAction(AddElementAction addElementAction) {
+        this.addElementAction = addElementAction;
+    }
+
+    public CopyPasteAction getCopyPasteAction() {
+        return copyPasteAction;
+    }
+
+    public void setCopyPasteAction(CopyPasteAction copyPasteAction) {
+        this.copyPasteAction = copyPasteAction;
+    }
+
+    public DeleteElementAction getDeleteElementAction() {
+        return deleteElementAction;
+    }
+
+    public void setDeleteElementAction(DeleteElementAction deleteElementAction) {
+        this.deleteElementAction = deleteElementAction;
+    }
+
+    public EditAction getEditAction() {
+        return editAction;
+    }
+
+    public void setEditAction(EditAction editAction) {
+        this.editAction = editAction;
+    }
+
+    public EditRoomAction getEditRoomAction() {
+        return editRoomAction;
+    }
+
+    public void setEditRoomAction(EditRoomAction editRoomAction) {
+        this.editRoomAction = editRoomAction;
+    }
+
+    public MoveAction getMoveAction() {
+        return moveAction;
+    }
+
+    public void setMoveAction(MoveAction moveAction) {
+        this.moveAction = moveAction;
+    }
+
+    public ResizeAction getResizeAction() {
+        return resizeAction;
+    }
+
+    public void setResizeAction(ResizeAction resizeAction) {
+        this.resizeAction = resizeAction;
+    }
+
+    public RotateAction getRotateAction() {
+        return rotateAction;
+    }
+
+    public void setRotateAction(RotateAction rotateAction) {
+        this.rotateAction = rotateAction;
+    }
+
+    public SelectAction getSelectAction() {
+        return selectAction;
+    }
+
+    public void setSelectAction(SelectAction selectAction) {
+        this.selectAction = selectAction;
+    }
+
+    public ZoomAction getZoomAction() {
+        return zoomAction;
+    }
+
+    public void setZoomAction(ZoomAction zoomAction) {
+        this.zoomAction = zoomAction;
     }
 }

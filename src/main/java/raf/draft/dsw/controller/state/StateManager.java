@@ -32,6 +32,7 @@ public class StateManager {
         roteteState = new RotateState();
         selectState = new SelectState();
         zoomState = new ZoomState();
+        currentState = selectState;
     }
 
     public State getCurrentState() {
@@ -51,7 +52,7 @@ public class StateManager {
     }
 
     public void setEditRoomState() {
-        currentState = (State) editState;
+        currentState = (State) editRoomState;
     }
 
     public void setEditState() {
@@ -78,43 +79,4 @@ public class StateManager {
         currentState = (State) zoomState;
     }
 
-    public AddElementState getAddElementState() {
-        return addElementState;
-    }
-
-    public CopyPasteState getCopyPasteState() {
-        return copyPasteState;
-    }
-
-    public DeleteState getDeleteState() {
-        return deleteState;
-    }
-
-    public EditRoomState getEditRoomState() {
-        return editRoomState;
-    }
-
-    public EditState getEditState() {
-        return editState;
-    }
-
-    public MoveState getMoveState() {
-        return moveState;
-    }
-
-    public ResizeState getResizeState() {
-        return resizeState;
-    }
-
-    public RotateState getRoteteState() {
-        return roteteState;
-    }
-
-    public SelectState getSelectState() {
-        return selectState;
-    }
-
-    public ZoomState getZoomState() {
-        return zoomState;
-    }
 }

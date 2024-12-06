@@ -17,9 +17,10 @@ public class Room extends DraftNodeComposite implements IPublisher {
     private RoomView tab;
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Color color;
-    private Dimension2D dimension;
+    private Dimension dimension = new Dimension();
     private int width;
     private int height;
+
 
     public Room(String name, DraftNode parent, RoomView tab) {
         super(name, parent);
@@ -113,7 +114,7 @@ public class Room extends DraftNodeComposite implements IPublisher {
         return dimension;
     }
 
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(Dimension dimension) {
         this.dimension = dimension;
     }
 

@@ -1,6 +1,7 @@
 package raf.draft.dsw.controller;
 
 import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
@@ -29,6 +30,10 @@ public class SetRoomSize implements MouseListener {
         else {
             room.setWidth(Integer.parseInt(width.getText()));
             room.setHeight(Integer.parseInt(height.getText()));
+            RoomView selectedComponent = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
+            selectedComponent.removeAll();
+            selectedComponent.revalidate();
+            selectedComponent.repaint();
             width.setText("");
             height.setText("");
             MainFrame.getInstance().getMessageGenerator().generateMessage("Succsess set width and height", "INFORMATION");

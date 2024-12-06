@@ -6,24 +6,17 @@ import raf.draft.dsw.controller.messagegenerator.FileLogger;
 import raf.draft.dsw.controller.messagegenerator.LoggerFactory;
 import raf.draft.dsw.controller.messagegenerator.MessageGenerator;
 import raf.draft.dsw.controller.observer.ISubscriber;
-import raf.draft.dsw.controller.state.StateManager;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
 import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
 import raf.draft.dsw.model.DraftRoomExplorerImplementation;
 import raf.draft.dsw.model.messages.Message;
-import raf.draft.dsw.model.nodes.DraftNode;
-import raf.draft.dsw.model.nodes.DraftNodeComposite;
+
 import raf.draft.dsw.model.repository.DraftRoomRepository;
-import raf.draft.dsw.model.structures.Building;
-import raf.draft.dsw.model.structures.Project;
-import raf.draft.dsw.model.structures.Room;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Console;
-import java.util.ArrayList;
+
 
 public class MainFrame extends JFrame implements ISubscriber {
     //buduca polja za sve komponente view-a na glavnom prozoru
@@ -35,7 +28,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private Label infoLabel = new Label("-------------");
     private MessageGenerator messageGenerator;
     private LoggerFactory loggerFactory;
-    private StateManager stateManager;
     private StateToolBar stateToolBar;
     private static MainFrame instance;
 
@@ -52,9 +44,8 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private void initialize() {
         actionManager = new ActionManager();
-        stateManager = new StateManager();
         draftTree = new DraftTreeImplementation();
-        stateToolBar = new StateToolBar(stateManager);
+        stateToolBar = new StateToolBar(actionManager);
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -150,14 +141,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public static void setInstance(MainFrame instance) {
         MainFrame.instance = instance;
-    }
-
-    public StateManager getStateManager() {
-        return stateManager;
-    }
-
-    public void setStateManager(StateManager stateManager) {
-        this.stateManager = stateManager;
     }
 
     public Label getInfoLabel() {

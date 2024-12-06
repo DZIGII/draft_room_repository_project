@@ -1,22 +1,22 @@
 package raf.draft.dsw.gui.swing;
 
-import raf.draft.dsw.controller.state.StateManager;
+import raf.draft.dsw.controller.actions.ActionManager;
 
 import javax.swing.*;
 
 public class StateToolBar extends JToolBar {
-    public StateToolBar(StateManager sm) {
+    public StateToolBar(ActionManager am) {
         super(VERTICAL);
 
-        add(sm.getEditRoomState());
-        add(sm.getAddElementState());
-        add(sm.getSelectState());
-        add(sm.getResizeState());
-        add(sm.getCopyPasteState());
-        add(sm.getMoveState());
-        add(sm.getZoomState());
-        add(sm.getEditState());
-        add(sm.getDeleteState());
+        add(am.getEditRoomAction());
+        add(am.getAddElementAction());
+        add(am.getSelectAction());
+        add(am.getResizeAction());
+        add(am.getCopyPasteAction());
+        add(am.getMoveAction());
+        add(am.getZoomAction());
+        add(am.getEditAction());
+        add(am.getDeleteElementAction());
 
     }
 }
