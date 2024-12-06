@@ -2,6 +2,7 @@ package raf.draft.dsw.gui.swing;
 
 import raf.draft.dsw.controller.actions.AddDimensionAction;
 import raf.draft.dsw.controller.observer.ISubscriber;
+import raf.draft.dsw.controller.state.StateManager;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Building;
@@ -20,11 +21,39 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
     private String roomName;
     private JLabel jLabel;
 
+    private StateManager stateManager;
+
 
     public RoomView(String roomName, Room room) {
         this.roomName = roomName;
         this.room = room;
         this.addMouseListener(new AddDimensionAction(room));
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MainFrame.getInstance().getStateManager().getCurrentState().log();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         initialize();
         showel();
     }
@@ -152,6 +181,11 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
     }
 
     @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
     public void mousePressed(MouseEvent e) {
         System.out.println("Test");
     }
@@ -171,6 +205,45 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
         System.out.println("Test");
     }
 
+    public void startAddElemetState() {
+        this.stateManager.setAddElementState();
+    }
+
+    public void startCopyPasteState() {
+        this.stateManager.setCopyPasteState();
+    }
+
+    public void startDeleteState() {
+        this.stateManager.setDeleteState();
+    }
+
+    public void startEditRoomState() {
+        this.stateManager.setEditRoomState();
+    }
+
+    public void startEditState() {
+        this.stateManager.setEditState();
+    }
+
+    public void startMoveState() {
+        this.stateManager.setMoveState();
+    }
+
+    public void startResizeState() {
+        this.stateManager.setResizeState();
+    }
+
+    public void startRotateState() {
+        this.stateManager.setRoteteState();
+    }
+
+    public void startSelectState() {
+        this.stateManager.setSelectState();
+    }
+
+    public void startZoomState() {
+        this.stateManager.setZoomState();
+    }
 
     public Room getRoom() {
         return room;
@@ -188,8 +261,5 @@ public class RoomView extends JPanel implements ISubscriber, MouseListener {
         this.roomName = roomName;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
 
-    }
 }

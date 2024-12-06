@@ -6,6 +6,7 @@ import raf.draft.dsw.controller.messagegenerator.FileLogger;
 import raf.draft.dsw.controller.messagegenerator.LoggerFactory;
 import raf.draft.dsw.controller.messagegenerator.MessageGenerator;
 import raf.draft.dsw.controller.observer.ISubscriber;
+import raf.draft.dsw.controller.state.StateManager;
 import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
 import raf.draft.dsw.gui.swing.tree.controller.DoubleClickListener;
 import raf.draft.dsw.model.DraftRoomExplorerImplementation;
@@ -34,7 +35,8 @@ public class MainFrame extends JFrame implements ISubscriber {
     private Label infoLabel = new Label("-------------");
     private MessageGenerator messageGenerator;
     private LoggerFactory loggerFactory;
-
+    private StateManager stateManager;
+    private StateToolBar stateToolBar;
     private static MainFrame instance;
 
     private MainFrame() {
@@ -50,7 +52,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     private void initialize() {
         actionManager = new ActionManager();
+        stateManager = new StateManager();
         draftTree = new DraftTreeImplementation();
+        stateToolBar = new StateToolBar(stateManager);
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -90,6 +94,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         tabFrame.setPreferredSize(new Dimension(500, 500));
         tabWrapper.add(tabFrame, BorderLayout.CENTER);
         add(tabFrame, BorderLayout.CENTER);
+        add(stateToolBar, BorderLayout.EAST);
 
         messageGenerator = new MessageGenerator();
         loggerFactory = new LoggerFactory();
@@ -145,6 +150,30 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public static void setInstance(MainFrame instance) {
         MainFrame.instance = instance;
+    }
+
+    public StateManager getStateManager() {
+        return stateManager;
+    }
+
+    public void setStateManager(StateManager stateManager) {
+        this.stateManager = stateManager;
+    }
+
+    public Label getInfoLabel() {
+        return infoLabel;
+    }
+
+    public void setInfoLabel(Label infoLabel) {
+        this.infoLabel = infoLabel;
+    }
+
+    public StateToolBar getStateToolBar() {
+        return stateToolBar;
+    }
+
+    public void setStateToolBar(StateToolBar stateToolBar) {
+        this.stateToolBar = stateToolBar;
     }
 
     public LoggerFactory getLoggerFactory() {
