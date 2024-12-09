@@ -9,5 +9,10 @@ public class CopyPasteState implements State {
         System.out.println("Copy Paste State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 
 }

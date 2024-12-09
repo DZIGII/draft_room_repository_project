@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class ChooseDraftNodeFrame extends JDialog{
+public class ChooseDraftNodeFrame extends JDialog {
     private ImageIcon buildingIcon;
     private ImageIcon roomIcon;
 

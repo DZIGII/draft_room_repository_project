@@ -9,4 +9,9 @@ public class ZoomState implements State {
         System.out.println("Zoom State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

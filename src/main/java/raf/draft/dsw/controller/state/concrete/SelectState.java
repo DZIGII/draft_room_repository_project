@@ -9,4 +9,9 @@ public class SelectState implements State {
         System.out.println("Select state");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

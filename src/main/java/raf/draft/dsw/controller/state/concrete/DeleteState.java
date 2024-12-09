@@ -10,4 +10,9 @@ public class DeleteState implements State {
         System.out.println("Delete State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

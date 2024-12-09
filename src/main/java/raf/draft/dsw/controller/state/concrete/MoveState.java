@@ -9,4 +9,9 @@ public class MoveState implements State {
         System.out.println("Move State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

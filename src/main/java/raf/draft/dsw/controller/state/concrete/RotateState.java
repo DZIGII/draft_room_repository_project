@@ -9,4 +9,9 @@ public class RotateState implements State {
         System.out.println("Rotete state");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

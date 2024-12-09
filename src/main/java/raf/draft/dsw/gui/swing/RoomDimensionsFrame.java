@@ -84,7 +84,7 @@ public class RoomDimensionsFrame extends JFrame {
 
     void controller() {
         exitBtn.addActionListener(e -> dispose());
-        saveBtn.addMouseListener(new SetRoomSize(room, widthField, heightField));
+        saveBtn.addMouseListener(new SetRoomSize(room, widthField, heightField, this));
     }
 
     public JTextField getWidthField() {

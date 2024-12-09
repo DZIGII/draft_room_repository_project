@@ -9,4 +9,9 @@ public class EditState implements State {
         System.out.println("Edit State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

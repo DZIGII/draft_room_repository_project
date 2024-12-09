@@ -4,4 +4,7 @@ public interface State {
 
     void log();
 
+    void printBed();
+
+
 }

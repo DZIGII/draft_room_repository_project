@@ -10,4 +10,9 @@ public class EditRoomState implements State {
         System.out.println("Edit Room State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

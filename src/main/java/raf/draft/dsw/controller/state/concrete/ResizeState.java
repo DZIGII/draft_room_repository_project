@@ -9,4 +9,9 @@ public class ResizeState implements State {
         System.out.println("Resize State");
     }
 
+    @Override
+    public void printBed() {
+
+    }
+
 }

@@ -8,24 +8,29 @@ import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.Room;
+import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoomView extends JPanel implements ISubscriber {
 
     private Room room;
     private String roomName;
     private JLabel jLabel;
+    private List<Painter> painters;
 
     private StateManager stateManager = new StateManager();
 
     public RoomView(String roomName, Room room) {
         this.roomName = roomName;
         this.room = room;
+        this.painters = new ArrayList<>();
         this.addMouseListener(new AddDimensionAction(room));
         this.addMouseListener(new MouseListener() {
             @Override
@@ -94,14 +99,6 @@ public class RoomView extends JPanel implements ISubscriber {
         return icon;
     };
 
-    public JComponent makeTextPanel(String text) {
-        JPanel panel = new JPanel(false);
-        JLabel filler = new JLabel(text);
-        filler.setHorizontalAlignment(JLabel.CENTER);
-        panel.setLayout(new GridLayout(1, 1));
-        panel.add(filler);
-        return panel;
-    }
 
     @Override
     public void recive(Object notification) {
@@ -141,6 +138,7 @@ public class RoomView extends JPanel implements ISubscriber {
     public void update(Message message) {
 
     }
+
     public void updateTabsForProject(Project project) {
 
 
@@ -185,17 +183,23 @@ public class RoomView extends JPanel implements ISubscriber {
         Graphics2D graphics = (Graphics2D) g;
 
         Double panelRatio = (double)this.getWidth()/ (double) this.getHeight();
+        Double roomWidthHightRatio = ((double) this.room.getWidth() / (double) this.room.getHeight());
 
-        Double roomWidthHightRatio = (double) (this.room.getWidth() / this.room.getHeight());
 
         if(panelRatio > roomWidthHightRatio) {
             graphics.drawRect((int) (this.getWidth()*5/100 + this.getWidth()*9/10*((panelRatio-roomWidthHightRatio)/2/panelRatio)), this.getHeight()*5/100, (int) (this.getWidth()*9/10*roomWidthHightRatio/panelRatio), this.getHeight()*90/100);
+
         }else {
             graphics.drawRect(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomWidthHightRatio-panelRatio)/2/roomWidthHightRatio)), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomWidthHightRatio));
         }
 
-        graphics.setColor(Color.RED);
-        //graphics.fillRect(110, 110, 80, 80);
+
+
+
+    }
+
+    public void addElement(RoomElement roomElement) {
+
     }
 
     public void startAddElemetState() {
@@ -236,6 +240,10 @@ public class RoomView extends JPanel implements ISubscriber {
 
     public void startZoomState() {
         this.stateManager.setZoomState();
+    }
+
+    public void paintBed() {
+
     }
 
     public Room getRoom() {

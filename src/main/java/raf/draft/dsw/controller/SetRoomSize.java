@@ -1,24 +1,26 @@
 package raf.draft.dsw.controller;
 
 import raf.draft.dsw.gui.swing.MainFrame;
+import raf.draft.dsw.gui.swing.RoomDimensionsFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.model.structures.Room;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.Dimension2D;
 
 public class SetRoomSize implements MouseListener {
 
     private Room room;
     private JTextField width;
     private JTextField height;
+    private RoomDimensionsFrame roomDimensionsFrame;
 
-    public SetRoomSize(Room room, JTextField width, JTextField height) {
+    public SetRoomSize(Room room, JTextField width, JTextField height, RoomDimensionsFrame roomDimensionsFrame) {
         this.room = room;
         this.width = width;
         this.height = height;
+        this.roomDimensionsFrame = roomDimensionsFrame;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class SetRoomSize implements MouseListener {
             selectedComponent.repaint();
             width.setText("");
             height.setText("");
+            roomDimensionsFrame.dispose();
             MainFrame.getInstance().getMessageGenerator().generateMessage("Succsess set width and height", "INFORMATION");
         }
     }
