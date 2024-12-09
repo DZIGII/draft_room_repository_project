@@ -8,7 +8,6 @@ import java.awt.geom.Point2D;
 
 public class Bed extends RoomElement {
 
-
     public Bed(String name) {
         super(name);
     }
@@ -17,6 +16,9 @@ public class Bed extends RoomElement {
         super(name, parent);
     }
 
+    public Bed(String name, Point2D location, Dimension2D dimension) {
+        super(name, location, dimension);
+    }
 
     @Override
     public Prototype clone() {

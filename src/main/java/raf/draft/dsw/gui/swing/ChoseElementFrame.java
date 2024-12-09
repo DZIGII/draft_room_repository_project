@@ -1,5 +1,11 @@
 package raf.draft.dsw.gui.swing;
 
+import com.sun.tools.javac.Main;
+import raf.draft.dsw.model.structures.Prototype;
+import raf.draft.dsw.model.structures.Room;
+import raf.draft.dsw.model.structures.roomElements.Bed;
+import raf.draft.dsw.model.structures.roomElements.RoomElement;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -83,33 +89,13 @@ public class ChoseElementFrame extends JDialog {
     }
 
     private void controller() {
-        doorBtn.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                RoomView rv = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
-                rv.paintBed();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+        RoomView roomView = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
+        bedBtn.addActionListener(e -> {
+            roomView.startAddElemetState();
+            this.dispose();
         });
+
+
     }
 
     public ImageIcon loadIcon(String path) {

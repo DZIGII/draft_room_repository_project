@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.controller.HandleEvent;
 import raf.draft.dsw.controller.actions.AddDimensionAction;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.controller.state.StateManager;
@@ -8,12 +9,15 @@ import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.Room;
+import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Dimension2D;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,32 +36,7 @@ public class RoomView extends JPanel implements ISubscriber {
         this.room = room;
         this.painters = new ArrayList<>();
         this.addMouseListener(new AddDimensionAction(room));
-        this.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                stateManager.getCurrentState().log();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
+        this.addMouseListener(new HandleEvent(stateManager, this));
         initialize();
         showel();
     }
@@ -193,13 +172,18 @@ public class RoomView extends JPanel implements ISubscriber {
             graphics.drawRect(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomWidthHightRatio-panelRatio)/2/roomWidthHightRatio)), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomWidthHightRatio));
         }
 
-
+        for (Painter painter : painters) {
+            Dimension2D d = new Dimension();
+            d.setSize(20, 20);
+            painter.paint(graphics, new Bed("test", this.getMousePosition(), d), 20, 20);
+        }
 
 
     }
 
-    public void addElement(RoomElement roomElement) {
-
+    public void addElement(Painter painter) {
+        painters.add(painter);
+        repaint();
     }
 
     public void startAddElemetState() {
