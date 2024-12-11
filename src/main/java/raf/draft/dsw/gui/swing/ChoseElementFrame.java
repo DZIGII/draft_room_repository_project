@@ -98,6 +98,10 @@ public class ChoseElementFrame extends JDialog {
             roomView.startAddDoorState();
             this.dispose();
         });
+        tableBtn.addActionListener(e -> {
+            roomView.startAddDoorState();
+            this.dispose();
+        });
 
 
     }

@@ -16,22 +16,27 @@ public class DoorPainter implements ElementPainter{
 
     @Override
     public void paint(Graphics2D g, RoomElement roomElement) {
-        GeneralPath doorPath = new GeneralPath();
+        GeneralPath doorShape = new GeneralPath();
 
         double x = door.getLocation().getX();
         double y = door.getLocation().getY();
         double widthEl = door.getDimension().getWidth();
         double heightEl = door.getDimension().getHeight();
 
-        doorPath.moveTo(x, y);
-        doorPath.lineTo(x + widthEl * 0.5, y - heightEl);
-        doorPath.lineTo(x + widthEl, y);
-        doorPath.closePath();
+        doorShape.moveTo(x, y + heightEl);
+        doorShape.quadTo(x, y, x + widthEl * 0.6, y);
 
-        g.setColor(Color.DARK_GRAY);
-        g.fill(doorPath);
-        g.setColor(Color.BLACK);
-        g.draw(doorPath);
+        doorShape.lineTo(x + widthEl, y);
+
+        doorShape.lineTo(x + widthEl, y + heightEl);
+
+        doorShape.closePath();
+
+        g.setColor(new Color(173, 216, 230));
+        g.fill(doorShape);
+
+        g.setColor(Color.BLUE);
+        g.draw(doorShape);
     }
 
     @Override

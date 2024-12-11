@@ -8,7 +8,7 @@ public interface State {
 
     void log();
 
-    void printBed(Point2D clickPoint, RoomView roomView);
+    void paintElement(Point2D clickPoint, RoomView roomView);
 
 
 }

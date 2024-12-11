@@ -174,7 +174,6 @@ public class RoomView extends JPanel implements ISubscriber {
         }
 
         for (ElementPainter painter : painters) {
-
             painter.paint(graphics, null);
         }
 

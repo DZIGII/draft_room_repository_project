@@ -6,6 +6,7 @@ import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.BedPainter;
 import raf.draft.dsw.model.structures.roomElements.Bed;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Dimension2D;
@@ -18,20 +19,39 @@ public class AddBedState implements State {
     }
 
     @Override
-    public void printBed(Point2D clickPoint, RoomView roomView) {
+    public void paintElement(Point2D clickPoint, RoomView roomView) {
+        JPanel panel = new JPanel(new GridLayout(2, 2));
+        JLabel widthLabel = new JLabel("Width:");
+        JTextField widthField = new JTextField();
+        JLabel heightLabel = new JLabel("Height:");
+        JTextField heightField = new JTextField();
 
-        //ElementDimensionFrame elementDimensionFrame = new ElementDimensionFrame();
-        //elementDimensionFrame.setVisible(true);
+        panel.add(widthLabel);
+        panel.add(widthField);
+        panel.add(heightLabel);
+        panel.add(heightField);
 
-        Dimension2D d = new Dimension();
-        Bed bed = new Bed("Bed", clickPoint, d);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Enter dimensions of bed", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-        bed.setLocation(clickPoint);
-        bed.setDimension(20, 20);
-        BedPainter bedPainter = new BedPainter(bed);
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                double width = Double.parseDouble(widthField.getText());
+                double height = Double.parseDouble(heightField.getText());
 
-        roomView.addElement(bedPainter);
-        roomView.repaint();
+                Dimension2D dimension = new Dimension();
+                dimension.setSize(width, height);
+
+                Bed bed = new Bed("Bed", clickPoint, dimension);
+                bed.setLocation(clickPoint);
+                bed.setDimension(width, height);
+
+                BedPainter bedPainter = new BedPainter(bed);
+                roomView.addElement(bedPainter);
+                roomView.repaint();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Molimo unesite validne brojeve za dimenzije!", "Greška", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     public void misKliknut(RoomView roomView, MouseEvent e) {

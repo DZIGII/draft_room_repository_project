@@ -13,7 +13,7 @@ public class ResizeState implements State {
     }
 
     @Override
-    public void printBed(Point2D clickPoint, RoomView roomView) {
+    public void paintElement(Point2D clickPoint, RoomView roomView) {
 
     }
 

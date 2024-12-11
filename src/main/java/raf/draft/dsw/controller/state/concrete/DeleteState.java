@@ -14,7 +14,7 @@ public class DeleteState implements State {
     }
 
     @Override
-    public void printBed(Point2D clickPoint, RoomView roomView) {
+    public void paintElement(Point2D clickPoint, RoomView roomView) {
 
     }
 
