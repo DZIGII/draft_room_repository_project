@@ -17,6 +17,9 @@ public class StateManager {
     private SelectState selectState;
     private ZoomState zoomState;
 
+    private AddBedState addBedState;
+    private AddDoorState addDoorState;
+
     public StateManager() {
         initStates();
     }
@@ -32,6 +35,8 @@ public class StateManager {
         roteteState = new RotateState();
         selectState = new SelectState();
         zoomState = new ZoomState();
+        addBedState = new AddBedState();
+        addDoorState = new AddDoorState();
         currentState = selectState;
     }
 
@@ -77,6 +82,14 @@ public class StateManager {
 
     public void setZoomState() {
         currentState = (State) zoomState;
+    }
+
+    public void setAddBedState() {
+        currentState = addBedState;
+    }
+
+    public void setAddDoorState() {
+        currentState = addDoorState;
     }
 
 }

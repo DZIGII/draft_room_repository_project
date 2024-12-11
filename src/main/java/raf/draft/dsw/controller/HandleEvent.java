@@ -2,10 +2,13 @@ package raf.draft.dsw.controller;
 
 import raf.draft.dsw.controller.state.State;
 import raf.draft.dsw.controller.state.StateManager;
+import raf.draft.dsw.controller.state.concrete.AddBedState;
+import raf.draft.dsw.controller.state.concrete.AddDoorState;
 import raf.draft.dsw.controller.state.concrete.AddElementState;
 import raf.draft.dsw.gui.swing.ElementDimensionFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,11 +24,17 @@ public class HandleEvent implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        stateManager.getCurrentState().log();
-        if (stateManager.getCurrentState() instanceof AddElementState) {
-            AddElementState addElementState = (AddElementState) stateManager.getCurrentState();
-            addElementState.printBed(e.getPoint(), "Bed");
+        if (stateManager.getCurrentState() instanceof AddBedState) {
+            AddBedState addBedState = (AddBedState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addBedState.printBed(point, roomView);
         }
+        if (stateManager.getCurrentState() instanceof AddDoorState) {
+            AddDoorState addDoorState = (AddDoorState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addDoorState.printDoor(point, roomView);
+        }
+
     }
 
     @Override

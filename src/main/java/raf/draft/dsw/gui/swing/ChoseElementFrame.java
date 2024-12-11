@@ -89,9 +89,13 @@ public class ChoseElementFrame extends JDialog {
     }
 
     private void controller() {
-        RoomView roomView = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
+        RoomView roomView = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent(); // trenutno aktivan tab
         bedBtn.addActionListener(e -> {
-            roomView.startAddElemetState();
+            roomView.startAddBedState();
+            this.dispose();
+        });
+        doorBtn.addActionListener(e -> {
+            roomView.startAddDoorState();
             this.dispose();
         });
 

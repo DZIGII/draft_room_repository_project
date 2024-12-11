@@ -1,12 +1,13 @@
 package raf.draft.dsw.gui.swing.painter;
 
 import raf.draft.dsw.model.structures.roomElements.Bed;
+import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 
-public class BedPainter implements Painter {
+public class BedPainter implements ElementPainter {
 
     public Bed bed;
 
@@ -16,7 +17,7 @@ public class BedPainter implements Painter {
 
 
     @Override
-    public void paint(Graphics2D g, Object object, int width, int height) {
+    public void paint(Graphics2D g, RoomElement roomElement) {
         GeneralPath bedShape = new GeneralPath();
 
         double x = bed.getLocation().getX();
@@ -51,8 +52,13 @@ public class BedPainter implements Painter {
         g.fill(pillow);
         g.setColor(Color.BLACK);
         g.draw(pillow);
-
     }
+
+    @Override
+    public boolean elementAt(RoomElement roomElement, Point pos) {
+        return false;
+    }
+
 
     public Bed getBed() {
         return bed;

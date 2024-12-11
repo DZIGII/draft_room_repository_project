@@ -20,19 +20,7 @@ public class AddElementState implements State {
     }
 
     @Override
-    public void printBed(Point2D clickPoint, String elementType) {
-        if ("Bed".equals(elementType)) {
-            Dimension2D d = new Dimension();
-            Bed bed = new Bed("Bed", clickPoint, d);
-
-            bed.setLocation(clickPoint);
-            bed.setDimension(50, 100);
-            BedPainter bedPainter = new BedPainter(bed);
-
-            RoomView roomView = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
-            roomView.addElement(bedPainter);
-            roomView.repaint();
-        }
+    public void printBed(Point2D clickPoint, RoomView roomView) {
 
     }
 
