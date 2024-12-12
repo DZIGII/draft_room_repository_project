@@ -16,6 +16,10 @@ public class Table extends RoomElement {
         super(name, parent);
     }
 
+    public Table(String name, Point2D location, Dimension2D dimension) {
+        super(name, location, dimension);
+    }
+
     @Override
     public Prototype clone() {
         Table clonedTable = new Table(this.getName(), this.getParent());

@@ -19,9 +19,9 @@ public class ChoseElementFrame extends JDialog {
     private ImageIcon table;
     private ImageIcon closet;
     private ImageIcon bathTube;
-    private ImageIcon whasingMachine;
+    private ImageIcon washingMachine;
     private ImageIcon boiler;
-    private ImageIcon wc;
+    private ImageIcon toilet;
     private ImageIcon sink;
 
     private JButton doorBtn;
@@ -29,9 +29,9 @@ public class ChoseElementFrame extends JDialog {
     private JButton tableBtn;
     private JButton closetBtn;
     private JButton bathBtn;
-    private JButton whasingMachineBtn;
+    private JButton washingMachineBtn;
     private JButton boilerBtn;
-    private JButton wcBtn;
+    private JButton toiletBtn;
     private JButton sinkBtn;
 
     public ChoseElementFrame() {
@@ -57,9 +57,9 @@ public class ChoseElementFrame extends JDialog {
         table = loadIcon("/images/table.png");
         closet = loadIcon("/images/closet.png");
         bathTube = loadIcon("/images/bath.png");
-        whasingMachine = loadIcon("/images/washing-machine.png");
+        washingMachine = loadIcon("/images/washing-machine.png");
         boiler = loadIcon("/images/boiler.png");
-        wc = loadIcon("/images/toilet.png");
+        toilet = loadIcon("/images/toilet.png");
         sink = loadIcon("/images/sink.png");
 
         doorBtn = new JButton(door);
@@ -67,9 +67,9 @@ public class ChoseElementFrame extends JDialog {
         tableBtn = new JButton(table);
         closetBtn = new JButton(closet);
         bathBtn = new JButton(bathTube);
-        whasingMachineBtn = new JButton(whasingMachine);
+        washingMachineBtn = new JButton(washingMachine);
         boilerBtn = new JButton(boiler);
-        wcBtn = new JButton(wc);
+        toiletBtn = new JButton(toilet);
         sinkBtn = new JButton(sink);
     }
 
@@ -81,9 +81,9 @@ public class ChoseElementFrame extends JDialog {
         jp.add(tableBtn, BorderLayout.CENTER);
         jp.add(closetBtn, BorderLayout.CENTER);
         jp.add(bathBtn, BorderLayout.CENTER);
-        jp.add(whasingMachineBtn, BorderLayout.CENTER);
+        jp.add(washingMachineBtn, BorderLayout.CENTER);
         jp.add(boilerBtn, BorderLayout.CENTER);
-        jp.add(wcBtn, BorderLayout.CENTER);
+        jp.add(toiletBtn, BorderLayout.CENTER);
         jp.add(sinkBtn, BorderLayout.CENTER);
         this.add(jp);
     }
@@ -99,7 +99,31 @@ public class ChoseElementFrame extends JDialog {
             this.dispose();
         });
         tableBtn.addActionListener(e -> {
-            roomView.startAddDoorState();
+            roomView.startAddTableState();
+            this.dispose();
+        });
+        closetBtn.addActionListener(e -> {
+            roomView.startAddClosetState();
+            this.dispose();
+        });
+        bathBtn.addActionListener(e -> {
+            roomView.startAddBathtubState();
+            this.dispose();
+        });
+        washingMachineBtn.addActionListener(e -> {
+            roomView.startAddWashingMachineState();
+            this.dispose();
+        });
+        boilerBtn.addActionListener(e -> {
+            roomView.startAddBoilerState();
+            this.dispose();
+        });
+        toiletBtn.addActionListener(e -> {
+            roomView.startAddToiletState();
+            this.dispose();
+        });
+        sinkBtn.addActionListener(e -> {
+            roomView.startAddSinkState();
             this.dispose();
         });
 
