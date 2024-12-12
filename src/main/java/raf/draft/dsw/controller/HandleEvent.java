@@ -4,6 +4,7 @@ import raf.draft.dsw.controller.state.StateManager;
 import raf.draft.dsw.controller.state.concrete.AddBedState;
 import raf.draft.dsw.controller.state.concrete.AddDoorState;
 import raf.draft.dsw.controller.state.concrete.SelectState;
+import raf.draft.dsw.controller.state.concrete.*;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.ElementPainter;
 
@@ -42,6 +43,48 @@ public class HandleEvent implements MouseListener {
         }
 //        if (stateManager.getCurrentState() instanceof vfdsfa)
 
+        if(stateManager.getCurrentState() instanceof AddBathtubState)
+        {
+            AddBathtubState addBathtubState = (AddBathtubState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addBathtubState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddTableState)
+        {
+            AddTableState addTableState = (AddTableState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addTableState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddClosetState)
+        {
+            AddClosetState addClosetState = (AddClosetState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addClosetState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddWashingMachineState)
+        {
+            AddWashingMachineState addWashingMachineState = (AddWashingMachineState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addWashingMachineState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddBoilerState)
+        {
+            AddBoilerState addBoilerState = (AddBoilerState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addBoilerState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddToiletState)
+        {
+            AddToiletState addToiletState = (AddToiletState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addToiletState.paintElement(point, roomView);
+        }
+        if(stateManager.getCurrentState() instanceof AddSinkState)
+        {
+            AddSinkState addSinkState = (AddSinkState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            addSinkState.paintElement(point, roomView);
+        }
     }
 
     @Override

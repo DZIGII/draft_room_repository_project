@@ -6,17 +6,16 @@ import raf.draft.dsw.model.structures.Prototype;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
-public class Closet extends RoomElement {
-
-    public Closet(String name) {
+public class Toilet extends RoomElement {
+    public Toilet(String name) {
         super(name);
     }
 
-    public Closet(String name, DraftNode parent) {
+    public Toilet(String name, DraftNode parent) {
         super(name, parent);
     }
 
-    public Closet(String name, Point2D location, Dimension2D dimension) {
+    public Toilet(String name, Point2D location, Dimension2D dimension) {
         super(name, location, dimension);
     }
 
