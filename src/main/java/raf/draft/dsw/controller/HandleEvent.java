@@ -3,7 +3,9 @@ package raf.draft.dsw.controller;
 import raf.draft.dsw.controller.state.StateManager;
 import raf.draft.dsw.controller.state.concrete.AddBedState;
 import raf.draft.dsw.controller.state.concrete.AddDoorState;
+import raf.draft.dsw.controller.state.concrete.SelectState;
 import raf.draft.dsw.gui.swing.RoomView;
+import raf.draft.dsw.gui.swing.painter.ElementPainter;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -31,6 +33,14 @@ public class HandleEvent implements MouseListener {
             Point point = e.getPoint();
             addDoorState.paintElement(point, roomView);
         }
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+
+        }
+        for (ElementPainter elementPainter : roomView.getPainters()) {
+            elementPainter.elementAt(null, e.getPoint());
+        }
+//        if (stateManager.getCurrentState() instanceof vfdsfa)
 
     }
 
