@@ -19,6 +19,13 @@ public class StateManager {
 
     private AddBedState addBedState;
     private AddDoorState addDoorState;
+    private AddTableState addTableState;
+    private AddClosetState addClosetState;
+    private AddBathtubState addBathtubState;
+    private AddWashingMachineState addWashingMachineState;
+    private AddBoilerState addBoilerState;
+    private AddToiletState addToiletState;
+    private AddSinkState addSinkState;
 
     public StateManager() {
         initStates();
@@ -37,6 +44,13 @@ public class StateManager {
         zoomState = new ZoomState();
         addBedState = new AddBedState();
         addDoorState = new AddDoorState();
+        addTableState = new AddTableState();
+        addClosetState = new AddClosetState();
+        addBathtubState = new AddBathtubState();
+        addWashingMachineState = new AddWashingMachineState();
+        addBoilerState = new AddBoilerState();
+        addToiletState = new AddToiletState();
+        addSinkState = new AddSinkState();
         currentState = selectState;
     }
 
@@ -90,6 +104,34 @@ public class StateManager {
 
     public void setAddDoorState() {
         currentState = addDoorState;
+    }
+
+    public void setAddTableState() {
+        currentState = addTableState;
+    }
+
+    public void setAddClosetState() {
+        currentState = addClosetState;
+    }
+
+    public void setAddBathtubState() {
+        currentState = addBathtubState;
+    }
+
+    public void setAddWashingMachineState() {
+        currentState = addWashingMachineState;
+    }
+
+    public void setAddBoilerState() {
+        currentState = addBoilerState;
+    }
+
+    public void setAddToiletState(){
+        currentState = addToiletState;
+    }
+
+    public void setAddSinkState() {
+        currentState = addSinkState;
     }
 
 }

@@ -2,17 +2,17 @@ package raf.draft.dsw.controller.state.concrete;
 
 import raf.draft.dsw.controller.state.State;
 import raf.draft.dsw.gui.swing.RoomView;
-import raf.draft.dsw.gui.swing.painter.BedPainter;
-import raf.draft.dsw.gui.swing.painter.DoorPainter;
-import raf.draft.dsw.model.structures.roomElements.Bed;
-import raf.draft.dsw.model.structures.roomElements.Door;
+import raf.draft.dsw.gui.swing.painter.SinkPainter;
+import raf.draft.dsw.gui.swing.painter.TablePainter;
+import raf.draft.dsw.model.structures.roomElements.Sink;
+import raf.draft.dsw.model.structures.roomElements.Table;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
-public class AddDoorState implements State {
+public class AddTableState implements State {
     @Override
     public void log() {
 
@@ -41,28 +41,16 @@ public class AddDoorState implements State {
                 Dimension2D dimension = new Dimension();
                 dimension.setSize(width, height);
 
-                Door door = new Door("Door", clickPoint, dimension);
-                door.setLocation(clickPoint);
-                door.setDimension(width, height);
+                Table table = new Table("Table", clickPoint, dimension);
+                table.setLocation(clickPoint);
+                table.setDimension(width, height);
 
-                DoorPainter doorPainter = new DoorPainter(door);
-                roomView.addElement(doorPainter);
+                TablePainter tablePainter = new TablePainter(table);
+                roomView.addElement(tablePainter);
                 roomView.repaint();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Please insert valid dimensions!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
-
-    public void printDoor(Point2D clickPoint, RoomView roomView) {
-        Dimension2D d = new Dimension();
-        Door door = new Door("Bed", clickPoint, d);
-
-        door.setLocation(clickPoint);
-        door.setDimension(30, 30);
-        DoorPainter bedPainter = new DoorPainter(door);
-
-        roomView.addElement(bedPainter);
-        roomView.repaint();
     }
 }

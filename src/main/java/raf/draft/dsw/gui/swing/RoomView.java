@@ -233,6 +233,31 @@ public class RoomView extends JPanel implements ISubscriber {
         this.stateManager.setAddDoorState();
     }
 
+    public void startAddTableState() {
+        this.stateManager.setAddTableState();
+    }
+
+    public void startAddClosetState() {
+        this.stateManager.setAddClosetState();
+    }
+
+    public void startAddBathtubState() {
+        this.stateManager.setAddBathtubState();
+    }
+    public void startAddWashingMachineState() {
+        this.stateManager.setAddWashingMachineState();
+    }
+    public void startAddBoilerState() {
+        this.stateManager.setAddBoilerState();
+    }
+    public void startAddToiletState() {
+        this.stateManager.setAddToiletState();
+    }
+    public void startAddSinkState() {
+        this.stateManager.setAddSinkState();
+    }
+
+
 
     public Room getRoom() {
         return room;
