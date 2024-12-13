@@ -1,9 +1,13 @@
 package raf.draft.dsw.controller.state.concrete;
 
 import raf.draft.dsw.controller.state.State;
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.BathtubPainter;
 import raf.draft.dsw.gui.swing.painter.DoorPainter;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.nodes.DraftNode;
+import raf.draft.dsw.model.structures.Room;
 import raf.draft.dsw.model.structures.roomElements.Bathtub;
 import raf.draft.dsw.model.structures.roomElements.Door;
 
@@ -39,19 +43,68 @@ public class AddBathtubState implements State {
                 double width = Double.parseDouble(widthField.getText());
                 double height = Double.parseDouble(heightField.getText());
 
+                double roomWidth = roomView.getRoom().getWidth();
+                double roomHeight = roomView.getRoom().getHeight();
+
+                double panelWidth = roomView.getWidth();
+                double panelHeight = roomView.getHeight();
+
+                double panelRatio = panelWidth / panelHeight;
+                double roomRatio = roomWidth / roomHeight;
+
+                double scaledX, scaledY, scaledWidth, scaledHeight;
+
+                if (panelRatio > roomRatio) {
+                    double adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+                    double adjustedRoomHeight = panelHeight * 0.9;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                } else {
+                    double adjustedRoomWidth = panelWidth * 0.9;
+                    double adjustedRoomHeight = panelHeight * 0.9 * panelRatio / roomRatio;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                }
+
                 Dimension2D dimension = new Dimension();
-                dimension.setSize(width, height);
+                dimension.setSize(scaledWidth, scaledHeight);
 
                 Bathtub bathtub = new Bathtub("Bathtub", clickPoint, dimension);
                 bathtub.setLocation(clickPoint);
-                bathtub.setDimension(width, height);
+                bathtub.setDimension(scaledWidth, scaledHeight);
 
-                 BathtubPainter bathtubPainter = new BathtubPainter(bathtub);
+                BathtubPainter bathtubPainter = new BathtubPainter(bathtub);
                 roomView.addElement(bathtubPainter);
                 roomView.repaint();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Please insert valid dimensions!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
+        // Ako je trenutni čvor traženi `Room`
+        if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
+            return root;
+        }
+
+        // Pretraga kroz decu
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DraftTreeItem child = (DraftTreeItem) root.getChildAt(i);
+            DraftTreeItem found = findTreeItemForRoom(child, room);
+            if (found != null) {
+                return found;
+            }
+        }
+
+        return null; // Ako nije pronađen
     }
 }

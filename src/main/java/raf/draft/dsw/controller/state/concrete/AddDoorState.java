@@ -1,6 +1,7 @@
 package raf.draft.dsw.controller.state.concrete;
 
 import raf.draft.dsw.controller.state.State;
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.BedPainter;
 import raf.draft.dsw.gui.swing.painter.DoorPainter;
@@ -38,12 +39,43 @@ public class AddDoorState implements State {
                 double width = Double.parseDouble(widthField.getText());
                 double height = Double.parseDouble(heightField.getText());
 
+                double roomWidth = roomView.getRoom().getWidth();
+                double roomHeight = roomView.getRoom().getHeight();
+
+                double panelWidth = roomView.getWidth();
+                double panelHeight = roomView.getHeight();
+
+                double panelRatio = panelWidth / panelHeight;
+                double roomRatio = roomWidth / roomHeight;
+
+                double scaledX, scaledY, scaledWidth, scaledHeight;
+
+                if (panelRatio > roomRatio) {
+                    double adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+                    double adjustedRoomHeight = panelHeight * 0.9;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                } else {
+                    double adjustedRoomWidth = panelWidth * 0.9;
+                    double adjustedRoomHeight = panelHeight * 0.9 * panelRatio / roomRatio;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                }
+
                 Dimension2D dimension = new Dimension();
-                dimension.setSize(width, height);
+                dimension.setSize(scaledWidth, scaledHeight);
 
                 Door door = new Door("Door", clickPoint, dimension);
                 door.setLocation(clickPoint);
-                door.setDimension(width, height);
+                door.setDimension(scaledWidth, scaledHeight);
 
                 DoorPainter doorPainter = new DoorPainter(door);
                 roomView.addElement(doorPainter);

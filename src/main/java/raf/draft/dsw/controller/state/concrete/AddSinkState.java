@@ -33,12 +33,37 @@ public class AddSinkState implements State {
             try {
                 double width = Double.parseDouble(widthField.getText());
 
+                double roomWidth = roomView.getRoom().getWidth();
+                double roomHeight = roomView.getRoom().getHeight();
+
+                double panelWidth = roomView.getWidth();
+                double panelHeight = roomView.getHeight();
+
+                double panelRatio = panelWidth / panelHeight;
+                double roomRatio = roomWidth / roomHeight;
+
+                double scaledWidth;
+
+                if (panelRatio > roomRatio) {
+                    double adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+
+                    scaledWidth = width * scaleX;
+                } else {
+                    double adjustedRoomWidth = panelWidth * 0.9;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+
+                    scaledWidth = width * scaleX;
+                }
+
                 Dimension2D dimension = new Dimension();
-                dimension.setSize(width, width);
+                dimension.setSize(scaledWidth, scaledWidth);
 
                 Sink sink = new Sink("Sink", clickPoint, dimension);
                 sink.setLocation(clickPoint);
-                sink.setDimension(width, width);
+                sink.setDimension(scaledWidth, scaledWidth);
 
                 SinkPainter sinkPainter = new SinkPainter(sink);
                 roomView.addElement(sinkPainter);
