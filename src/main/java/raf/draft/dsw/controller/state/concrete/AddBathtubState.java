@@ -52,11 +52,11 @@ public class AddBathtubState implements State {
                 double panelRatio = panelWidth / panelHeight;
                 double roomRatio = roomWidth / roomHeight;
 
-                double scaledX, scaledY, scaledWidth, scaledHeight;
+                double adjustedRoomWidth, adjustedRoomHeight, scaledX, scaledY, scaledWidth, scaledHeight;
 
                 if (panelRatio > roomRatio) {
-                    double adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
-                    double adjustedRoomHeight = panelHeight * 0.9;
+                    adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+                    adjustedRoomHeight = panelHeight * 0.9;
 
                     double scaleX = adjustedRoomWidth / roomWidth;
                     double scaleY = adjustedRoomHeight / roomHeight;
@@ -64,14 +64,26 @@ public class AddBathtubState implements State {
                     scaledWidth = width * scaleX;
                     scaledHeight = height * scaleY;
                 } else {
-                    double adjustedRoomWidth = panelWidth * 0.9;
-                    double adjustedRoomHeight = panelHeight * 0.9 * panelRatio / roomRatio;
+                    adjustedRoomWidth = panelWidth * 0.9;
+                    adjustedRoomHeight = panelHeight * 0.9 * panelRatio / roomRatio;
 
                     double scaleX = adjustedRoomWidth / roomWidth;
                     double scaleY = adjustedRoomHeight / roomHeight;
 
                     scaledWidth = width * scaleX;
                     scaledHeight = height * scaleY;
+                }
+
+//                if () {
+//
+//                }
+
+                System.out.println(clickPoint.getX());
+                System.out.println(clickPoint.getY());
+
+                if(adjustedRoomWidth<scaledWidth || adjustedRoomHeight<scaledHeight || clickPoint.getX() + scaledWidth > roomView.getPoint().getX() + adjustedRoomWidth || clickPoint.getY() + scaledHeight > roomView.getPoint().getY() + adjustedRoomHeight || clickPoint.getX() < roomView.getPoint().getX() || clickPoint.getY() < roomView.getPoint().getY()) {
+                    JOptionPane.showMessageDialog(null, "Element exceeds room boundaries!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
 
                 Dimension2D dimension = new Dimension();

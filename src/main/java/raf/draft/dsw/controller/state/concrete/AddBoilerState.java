@@ -43,20 +43,25 @@ public class AddBoilerState implements State {
                 double panelRatio = panelWidth / panelHeight;
                 double roomRatio = roomWidth / roomHeight;
 
-                double scaledWidth;
+                double scaledWidth, adjustedRoomWidth;
 
                 if (panelRatio > roomRatio) {
-                    double adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+                    adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
 
                     double scaleX = adjustedRoomWidth / roomWidth;
 
                     scaledWidth = width * scaleX;
                 } else {
-                    double adjustedRoomWidth = panelWidth * 0.9;
+                    adjustedRoomWidth = panelWidth * 0.9;
 
                     double scaleX = adjustedRoomWidth / roomWidth;
 
                     scaledWidth = width * scaleX;
+                }
+
+                if(adjustedRoomWidth<scaledWidth || clickPoint.getX() + scaledWidth > roomView.getPoint().getX() + adjustedRoomWidth || clickPoint.getY() + scaledWidth > roomView.getPoint().getY() + adjustedRoomWidth || clickPoint.getX() < roomView.getPoint().getX() || clickPoint.getY() < roomView.getPoint().getY()) {
+                    JOptionPane.showMessageDialog(null, "Element exceeds room boundaries!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
 
                 Dimension2D dimension = new Dimension();

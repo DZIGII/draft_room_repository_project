@@ -23,6 +23,8 @@ public class BathtubPainter implements ElementPainter{
 
         g.setColor(Color.BLACK);
         g.drawRect((int) x, (int) y, (int) width, (int) height);
+        g.setColor(Color.GRAY);
+        g.fillRect((int) x, (int) y, (int) width, (int) height);
 
         double ovalX = x + width * 0.1;
         double ovalY = y + height * 0.1;
