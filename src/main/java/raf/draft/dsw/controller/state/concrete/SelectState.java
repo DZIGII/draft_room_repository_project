@@ -17,4 +17,8 @@ public class SelectState implements State {
 
     }
 
+    public void selectElements() {
+
+    }
+
 }

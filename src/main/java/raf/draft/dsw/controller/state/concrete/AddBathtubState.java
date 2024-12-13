@@ -74,13 +74,6 @@ public class AddBathtubState implements State {
                     scaledHeight = height * scaleY;
                 }
 
-//                if () {
-//
-//                }
-
-                System.out.println(clickPoint.getX());
-                System.out.println(clickPoint.getY());
-
                 if(adjustedRoomWidth<scaledWidth || adjustedRoomHeight<scaledHeight || clickPoint.getX() + scaledWidth > roomView.getPoint().getX() + adjustedRoomWidth || clickPoint.getY() + scaledHeight > roomView.getPoint().getY() + adjustedRoomHeight || clickPoint.getX() < roomView.getPoint().getX() || clickPoint.getY() < roomView.getPoint().getY()) {
                     JOptionPane.showMessageDialog(null, "Element exceeds room boundaries!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -103,12 +96,10 @@ public class AddBathtubState implements State {
     }
 
     public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
-        // Ako je trenutni čvor traženi `Room`
         if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
             return root;
         }
 
-        // Pretraga kroz decu
         for (int i = 0; i < root.getChildCount(); i++) {
             DraftTreeItem child = (DraftTreeItem) root.getChildAt(i);
             DraftTreeItem found = findTreeItemForRoom(child, room);
@@ -117,6 +108,6 @@ public class AddBathtubState implements State {
             }
         }
 
-        return null; // Ako nije pronađen
+        return null;
     }
 }

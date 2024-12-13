@@ -279,6 +279,14 @@ public class RoomView extends JPanel implements ISubscriber {
         this.roomName = roomName;
     }
 
+    public List<ElementPainter> getPainters() {
+        return painters;
+    }
+
+    public void setPainters(List<ElementPainter> painters) {
+        this.painters = painters;
+    }
+
     public Point getPoint() {
         return point;
     }

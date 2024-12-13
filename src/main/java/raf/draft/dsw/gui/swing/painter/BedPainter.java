@@ -56,7 +56,20 @@ public class BedPainter implements ElementPainter {
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
-        return false;
+        if (!(roomElement instanceof Bed)) {
+            System.out.println("Nije");
+            return false;
+        }
+
+        double x = bed.getLocation().getX();
+        double y = bed.getLocation().getY();
+        double widthEl = bed.getDimension().getWidth();
+        double heightEl = bed.getDimension().getHeight();
+
+        Rectangle bounds = new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+
+        System.out.println("Jestet");
+        return bounds.contains(pos);
     }
 
 
