@@ -20,12 +20,12 @@ public class BoilerPainter implements ElementPainter{
         double radius = diameter / 2;
 
         g.setColor(Color.BLACK);
-        g.drawOval((int) (x - radius), (int) (y - radius), (int) diameter, (int) diameter);
+        g.drawOval((int) x, (int) y, (int) diameter, (int) diameter);
 
         double innerMargin = radius * 0.5;
 
-        g.drawLine((int) (x - radius + innerMargin), (int) (y - radius + innerMargin),(int) (x + radius - innerMargin), (int) (y + radius - innerMargin));
-        g.drawLine((int) (x - radius + innerMargin), (int) (y + radius - innerMargin),(int) (x + radius - innerMargin), (int) (y - radius + innerMargin));
+        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin),(int) (x + innerMargin+radius), (int) (y + innerMargin+radius));
+        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin+radius),(int) (x + innerMargin+radius), (int) (y + innerMargin));
     }
 
     @Override
