@@ -17,6 +17,7 @@ import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
 public class AddBathtubState implements State {
+    private static int brojac = 1;
 
     @Override
     public void log() {
@@ -82,7 +83,15 @@ public class AddBathtubState implements State {
                 Dimension2D dimension = new Dimension();
                 dimension.setSize(scaledWidth, scaledHeight);
 
-                Bathtub bathtub = new Bathtub("Bathtub", clickPoint, dimension);
+                Bathtub bathtub = new Bathtub("Bathtub " + brojac++, clickPoint, dimension);
+
+                DraftTreeItem parentItem = findTreeItemForRoom((DraftTreeItem) MainFrame.getInstance().getDraftTree().getTreeView().getModel().getRoot(), roomView.getRoom());
+                parentItem.add(new DraftTreeItem(bathtub));
+                roomView.getRoom().addChild(bathtub);
+                MainFrame.getInstance().getDraftTree().getTreeView().expandPath(MainFrame.getInstance().getDraftTree().getTreeView().getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
+                roomView.getRoom().addChild(bathtub);
+
                 bathtub.setLocation(clickPoint);
                 bathtub.setDimension(scaledWidth, scaledHeight);
 

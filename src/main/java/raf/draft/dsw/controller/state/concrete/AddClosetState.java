@@ -1,9 +1,12 @@
 package raf.draft.dsw.controller.state.concrete;
 
 import raf.draft.dsw.controller.state.State;
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.BedPainter;
 import raf.draft.dsw.gui.swing.painter.ClosetPainter;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.structures.Room;
 import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.Closet;
 
@@ -13,6 +16,8 @@ import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
 public class AddClosetState implements State {
+    private static int brojac = 1;
+
 
     @Override
     public void log() {
@@ -78,7 +83,14 @@ public class AddClosetState implements State {
                 Dimension2D dimension = new Dimension();
                 dimension.setSize(scaledWidth, scaledHeight);
 
-                Closet closet = new Closet("Closet", clickPoint, dimension);
+                Closet closet = new Closet("Closet " + brojac++, clickPoint, dimension);
+                DraftTreeItem parentItem = findTreeItemForRoom((DraftTreeItem) MainFrame.getInstance().getDraftTree().getTreeView().getModel().getRoot(), roomView.getRoom());
+                parentItem.add(new DraftTreeItem(closet));
+                roomView.getRoom().addChild(closet);
+                MainFrame.getInstance().getDraftTree().getTreeView().expandPath(MainFrame.getInstance().getDraftTree().getTreeView().getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
+                roomView.getRoom().addChild(closet);
+
                 closet.setLocation(clickPoint);
                 closet.setDimension(scaledWidth, scaledHeight);
 
@@ -89,5 +101,21 @@ public class AddClosetState implements State {
                 JOptionPane.showMessageDialog(null, "Please insert valid dimensions!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
+        if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
+            return root;
+        }
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DraftTreeItem child = (DraftTreeItem) root.getChildAt(i);
+            DraftTreeItem found = findTreeItemForRoom(child, room);
+            if (found != null) {
+                return found;
+            }
+        }
+
+        return null;
     }
 }

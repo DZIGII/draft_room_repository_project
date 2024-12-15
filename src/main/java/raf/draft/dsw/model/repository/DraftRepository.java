@@ -26,9 +26,10 @@ public class DraftRepository {
             return chosenFactory;
         } else if (parent instanceof Building) {
             return roomFactory;
-        } else if (parent instanceof Room) {
-            return chosenFactory;
         }
+//        else if (parent instanceof Room) {
+//            return chosenFactory;
+//        }
         return null;
     }
 

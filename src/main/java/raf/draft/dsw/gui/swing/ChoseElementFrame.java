@@ -93,47 +93,47 @@ public class ChoseElementFrame extends JDialog {
     private void controller() {
         RoomView roomView = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent(); // trenutno aktivan tab
         bedBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BedFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BedFactory());
             roomView.startAddBedState();
             this.dispose();
         });
         doorBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new DoorFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new DoorFactory());
             roomView.startAddDoorState();
             this.dispose();
         });
         tableBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new TableFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new TableFactory());
             roomView.startAddTableState();
             this.dispose();
         });
         closetBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new ClosetFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new ClosetFactory());
             roomView.startAddClosetState();
             this.dispose();
         });
         bathBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BathtabFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BathtabFactory());
             roomView.startAddBathtubState();
             this.dispose();
         });
         washingMachineBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new WashingMachineFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new WashingMachineFactory());
             roomView.startAddWashingMachineState();
             this.dispose();
         });
         boilerBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BoilerFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new BoilerFactory());
             roomView.startAddBoilerState();
             this.dispose();
         });
         toiletBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new ToiletFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new ToiletFactory());
             roomView.startAddToiletState();
             this.dispose();
         });
         sinkBtn.addActionListener(e -> {
-            MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new SinkFactory());
+            //MainFrame.getInstance().getDraftTree().getRepository().setChosenFactory(new SinkFactory());
             roomView.startAddSinkState();
             this.dispose();
         });
