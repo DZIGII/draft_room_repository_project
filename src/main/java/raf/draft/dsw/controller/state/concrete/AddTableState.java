@@ -9,6 +9,8 @@ import raf.draft.dsw.model.structures.roomElements.Table;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
@@ -52,5 +54,25 @@ public class AddTableState implements State {
                 JOptionPane.showMessageDialog(null, "Please insert valid dimensions!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e, RoomView roomView) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e, RoomView roomView) {
+
+    }
+
+    @Override
+    public void mouseRelease(MouseEvent e, RoomView roomView) {
+
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e, RoomView roomView) {
+
     }
 }

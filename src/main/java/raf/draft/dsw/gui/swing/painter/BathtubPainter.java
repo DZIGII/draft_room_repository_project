@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class BathtubPainter implements ElementPainter{
     private Bathtub bathtub;
+    private boolean selected;
 
     public BathtubPainter(Bathtub bathtub) {
         this.bathtub = bathtub;
@@ -21,6 +22,8 @@ public class BathtubPainter implements ElementPainter{
         double width = bathtub.getDimension().getWidth();
         double height = bathtub.getDimension().getHeight();
 
+        Color fillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
+
         g.setColor(Color.BLACK);
         g.drawRect((int) x, (int) y, (int) width, (int) height);
 
@@ -29,7 +32,7 @@ public class BathtubPainter implements ElementPainter{
         double ovalWidth = width * 0.8;
         double ovalHeight = height * 0.8;
 
-        g.setColor(Color.WHITE);
+        g.setColor(fillColor);
         g.fillOval((int) ovalX, (int) ovalY, (int) ovalWidth, (int) ovalHeight);
         g.setColor(Color.BLACK);
         g.drawOval((int) ovalX, (int) ovalY, (int) ovalWidth, (int) ovalHeight);
@@ -37,7 +40,48 @@ public class BathtubPainter implements ElementPainter{
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
+        if (!(roomElement instanceof Bathtub)) {
+            return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof Bathtub)) {
+            return null;
+        }
+
+        double x = bathtub.getLocation().getX();
+        double y = bathtub.getLocation().getY();
+        double widthEl = bathtub.getDimension().getWidth();
+        double heightEl = bathtub.getDimension().getHeight();
+
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
+
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof Bathtub) {
+            this.selected = isSelected;
+        }
+    }
+
+    @Override
+    public boolean isSelected() {
         return false;
+    }
+
+    @Override
+    public void resetSelected() {
+        this.selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return bathtub;
     }
 
     public Bathtub getBathtub() {

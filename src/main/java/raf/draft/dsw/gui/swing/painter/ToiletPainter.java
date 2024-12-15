@@ -1,6 +1,8 @@
 package raf.draft.dsw.gui.swing.painter;
 
+import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
+import raf.draft.dsw.model.structures.roomElements.Table;
 import raf.draft.dsw.model.structures.roomElements.Toilet;
 
 import java.awt.*;
@@ -9,6 +11,7 @@ import java.awt.geom.Rectangle2D;
 
 public class ToiletPainter implements ElementPainter{
     private Toilet toilet;
+    private boolean selected;
 
     public ToiletPainter(Toilet toilet) {
         this.toilet = toilet;
@@ -40,7 +43,7 @@ public class ToiletPainter implements ElementPainter{
         double innerArcWidth = widthEl * 0.5;
         double innerArcHeight = arcHeight * 0.5;
         double innerArcX = x + (widthEl - innerArcWidth) / 2;
-        double innerArcY = y + rectHeight-(innerArcHeight/2);
+        double innerArcY = y + rectHeight - (innerArcHeight / 2);
 
         Arc2D innerArc = new Arc2D.Double(
                 innerArcX,
@@ -52,12 +55,14 @@ public class ToiletPainter implements ElementPainter{
                 Arc2D.OPEN
         );
 
-        g.setColor(Color.DARK_GRAY);
+        Color rectFillColor = selected ? new Color(173, 216, 230) : Color.DARK_GRAY;
+
+        g.setColor(rectFillColor);
         g.fill(rectangle);
         g.setColor(Color.BLACK);
         g.draw(rectangle);
 
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY);
         g.fill(outerArc);
         g.setColor(Color.BLACK);
         g.draw(outerArc);
@@ -70,7 +75,48 @@ public class ToiletPainter implements ElementPainter{
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
-        return false;
+        if (!(roomElement instanceof Toilet)) {
+            return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof Toilet)) {
+            return null;
+        }
+
+        double x = toilet.getLocation().getX();
+        double y = toilet.getLocation().getY();
+        double widthEl = toilet.getDimension().getWidth();
+        double heightEl = toilet.getDimension().getHeight();
+
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
+
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof Toilet) {
+            this.selected = isSelected;
+        }
+    }
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void resetSelected() {
+        this.selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return toilet;
     }
 
     public Toilet getToilet() {

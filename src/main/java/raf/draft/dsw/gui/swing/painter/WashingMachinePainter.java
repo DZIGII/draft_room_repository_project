@@ -1,12 +1,15 @@
 package raf.draft.dsw.gui.swing.painter;
 
+import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
+import raf.draft.dsw.model.structures.roomElements.Toilet;
 import raf.draft.dsw.model.structures.roomElements.WashingMachine;
 
 import java.awt.*;
 
 public class WashingMachinePainter implements ElementPainter{
     private WashingMachine machine;
+    private boolean selected;
 
     public WashingMachinePainter(WashingMachine machine) {
         this.machine = machine;
@@ -18,6 +21,10 @@ public class WashingMachinePainter implements ElementPainter{
         double y = machine.getLocation().getY();
         double width = machine.getDimension().getWidth();
 
+        Color rectFillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
+
+        g.setColor(rectFillColor);
+        g.fillRect((int) x, (int) y, (int) width, (int) width);
         g.setColor(Color.BLACK);
         g.drawRect((int) x, (int) y, (int) width, (int) width);
 
@@ -26,7 +33,7 @@ public class WashingMachinePainter implements ElementPainter{
         double ovalWidth = width * 0.8;
         double ovalHeight = width * 0.8;
 
-        g.setColor(Color.WHITE);
+        g.setColor(selected ? new Color(173, 216, 230) : Color.WHITE);
         g.fillOval((int) ovalX, (int) ovalY, (int) ovalWidth, (int) ovalHeight);
         g.setColor(Color.BLACK);
         g.drawOval((int) ovalX, (int) ovalY, (int) ovalWidth, (int) ovalHeight);
@@ -34,7 +41,48 @@ public class WashingMachinePainter implements ElementPainter{
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
-        return false;
+        if (!(roomElement instanceof WashingMachine)) {
+            return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof WashingMachine)) {
+            return null;
+        }
+
+        double x = machine.getLocation().getX();
+        double y = machine.getLocation().getY();
+        double widthEl = machine.getDimension().getWidth();
+        double heightEl = machine.getDimension().getHeight();
+
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
+
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof WashingMachine) {
+            this.selected = isSelected;
+        }
+    }
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void resetSelected() {
+        this.selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return machine;
     }
 
     public WashingMachine getMachine() {

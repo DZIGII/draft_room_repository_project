@@ -4,6 +4,7 @@ import raf.draft.dsw.controller.HandleEvent;
 import raf.draft.dsw.controller.actions.AddDimensionAction;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.controller.state.StateManager;
+import raf.draft.dsw.controller.state.concrete.SelectState;
 import raf.draft.dsw.gui.swing.painter.ElementPainter;
 import raf.draft.dsw.model.messages.Message;
 import raf.draft.dsw.model.nodes.DraftNode;
@@ -28,7 +29,7 @@ public class RoomView extends JPanel implements ISubscriber {
     private Room room;
     private String roomName;
     private JLabel jLabel;
-    private List<ElementPainter> painters;
+    private ArrayList<ElementPainter> painters;
 
     private StateManager stateManager = new StateManager();
 
@@ -38,6 +39,7 @@ public class RoomView extends JPanel implements ISubscriber {
         this.painters = new ArrayList<>();
         this.addMouseListener(new AddDimensionAction(room));
         this.addMouseListener(new HandleEvent(stateManager, this));
+        this.addMouseMotionListener(new HandleEvent(stateManager, this));
         initialize();
         showel();
     }
@@ -177,6 +179,23 @@ public class RoomView extends JPanel implements ISubscriber {
             painter.paint(graphics, null);
         }
 
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+            Point start = selectState.getStart();
+            Point end = selectState.getEnd();
+            if (start != null && end != null) {
+                graphics.setColor(new Color(0, 50, 200, 50));
+                Rectangle selectionRect = new Rectangle(
+                        Math.min(start.x, end.x),
+                        Math.min(start.y, end.y),
+                        Math.abs(start.x - end.x),
+                        Math.abs(start.y - end.y)
+                );
+                graphics.fill(selectionRect);
+                graphics.setColor(Color.BLUE);
+                graphics.draw(selectionRect);
+            }
+        }
 
     }
 
@@ -275,11 +294,11 @@ public class RoomView extends JPanel implements ISubscriber {
         this.roomName = roomName;
     }
 
-    public List<ElementPainter> getPainters() {
+    public ArrayList<ElementPainter> getPainters() {
         return painters;
     }
 
-    public void setPainters(List<ElementPainter> painters) {
+    public void setPainters(ArrayList<ElementPainter> painters) {
         this.painters = painters;
     }
 }
