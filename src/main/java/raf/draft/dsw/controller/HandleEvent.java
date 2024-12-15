@@ -11,8 +11,9 @@ import raf.draft.dsw.gui.swing.painter.ElementPainter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class HandleEvent implements MouseListener {
+public class HandleEvent implements MouseListener, MouseMotionListener {
 
     private StateManager stateManager;
     private RoomView roomView;
@@ -41,7 +42,6 @@ public class HandleEvent implements MouseListener {
         for (ElementPainter elementPainter : roomView.getPainters()) {
             elementPainter.elementAt(null, e.getPoint());
         }
-//        if (stateManager.getCurrentState() instanceof vfdsfa)
 
         if(stateManager.getCurrentState() instanceof AddBathtubState)
         {
@@ -85,17 +85,32 @@ public class HandleEvent implements MouseListener {
             Point point = e.getPoint();
             addSinkState.paintElement(point, roomView);
         }
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+            Point point = e.getPoint();
+            selectState.unselect(roomView);
+        }
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            System.out.println("Kliknuto");
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+            selectState.mousePressed(e, roomView);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            System.out.println("Pusteno");
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+            selectState.mouseRelease(e, roomView);
+        }
     }
+
 
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -104,6 +119,20 @@ public class HandleEvent implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (stateManager.getCurrentState() instanceof SelectState) {
+            System.out.println("pomera se");
+            SelectState selectState = (SelectState) stateManager.getCurrentState();
+            selectState.mouseDragged(e, roomView);
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }

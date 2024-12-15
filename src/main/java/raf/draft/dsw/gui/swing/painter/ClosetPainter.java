@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing.painter;
 
+import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.Closet;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
@@ -10,6 +11,7 @@ import java.awt.geom.GeneralPath;
 public class ClosetPainter implements ElementPainter {
 
     private Closet closet;
+    private boolean selected;
 
     public ClosetPainter(Closet closet) {
         this.closet = closet;
@@ -32,7 +34,9 @@ public class ClosetPainter implements ElementPainter {
 
         double centerX = x + width / 2;
 
-        g.setColor(Color.LIGHT_GRAY);
+        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+
+        g.setColor(fillColor);
         g.fill(rectangle);
         g.setColor(Color.BLACK);
         g.draw(rectangle);
@@ -44,23 +48,64 @@ public class ClosetPainter implements ElementPainter {
 
         g.setColor(Color.BLACK);
         g.fillOval(
-                (int)(centerX - width * 0.1 - handleWidth / 2),
-                (int)(handleY - handleWidth / 2),
-                (int)handleWidth,
-                (int)handleWidth
+                (int) (centerX - width * 0.1 - handleWidth / 2),
+                (int) (handleY - handleWidth / 2),
+                (int) handleWidth,
+                (int) handleWidth
         );
 
         g.fillOval(
-                (int)(centerX + width * 0.1 - handleWidth / 2),
-                (int)(handleY - handleWidth / 2),
-                (int)handleWidth,
-                (int)handleWidth
+                (int) (centerX + width * 0.1 - handleWidth / 2),
+                (int) (handleY - handleWidth / 2),
+                (int) handleWidth,
+                (int) handleWidth
         );
     }
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
-        return false;
+        if (!(roomElement instanceof Closet)) {
+            return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof Closet)) {
+            return null;
+        }
+
+        double x = closet.getLocation().getX();
+        double y = closet.getLocation().getY();
+        double widthEl = closet.getDimension().getWidth();
+        double heightEl = closet.getDimension().getHeight();
+
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
+
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof Closet) {
+            this.selected = isSelected;
+        }
+    }
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void resetSelected() {
+        selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return closet;
     }
 
     public Closet getCloset() {

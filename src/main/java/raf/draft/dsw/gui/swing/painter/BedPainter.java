@@ -9,7 +9,8 @@ import java.awt.geom.GeneralPath;
 
 public class BedPainter implements ElementPainter {
 
-    public Bed bed;
+    private Bed bed;
+    private boolean selected;
 
     public BedPainter(Bed bed) {
         this.bed = bed;
@@ -43,7 +44,11 @@ public class BedPainter implements ElementPainter {
         pillow.lineTo(pillowX, pillowY + pillowHeight);
         pillow.closePath();
 
-        g.setColor(Color.LIGHT_GRAY);
+        if (selected) {
+            g.setColor(new Color(173, 216, 230));
+        } else {
+            g.setColor(Color.LIGHT_GRAY);
+        }
         g.fill(bedShape);
         g.setColor(Color.BLACK);
         g.draw(bedShape);
@@ -57,8 +62,17 @@ public class BedPainter implements ElementPainter {
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
         if (!(roomElement instanceof Bed)) {
-            System.out.println("Nije");
             return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof Bed)) {
+            return null;
         }
 
         double x = bed.getLocation().getX();
@@ -66,10 +80,14 @@ public class BedPainter implements ElementPainter {
         double widthEl = bed.getDimension().getWidth();
         double heightEl = bed.getDimension().getHeight();
 
-        Rectangle bounds = new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
 
-        System.out.println("Jestet");
-        return bounds.contains(pos);
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof Bed) {
+            this.selected = isSelected;
+        }
     }
 
 
@@ -79,5 +97,19 @@ public class BedPainter implements ElementPainter {
 
     public void setBed(Bed bed) {
         this.bed = bed;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void resetSelected() {
+        selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return bed;
     }
 }

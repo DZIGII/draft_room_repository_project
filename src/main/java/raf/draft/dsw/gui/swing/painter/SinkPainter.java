@@ -1,5 +1,7 @@
 package raf.draft.dsw.gui.swing.painter;
 
+import raf.draft.dsw.model.structures.roomElements.Bed;
+import raf.draft.dsw.model.structures.roomElements.Closet;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 import raf.draft.dsw.model.structures.roomElements.Sink;
 
@@ -10,6 +12,7 @@ import java.awt.geom.GeneralPath;
 
 public class SinkPainter implements ElementPainter{
     private Sink sink;
+    private boolean selected;
 
     public SinkPainter(Sink sink) {
         this.sink = sink;
@@ -45,7 +48,9 @@ public class SinkPainter implements ElementPainter{
 
         triangle.transform(transform);
 
-        g.setColor(Color.LIGHT_GRAY);
+        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+
+        g.setColor(fillColor);
         g.fill(triangle);
         g.setColor(Color.BLACK);
         g.draw(triangle);
@@ -64,7 +69,48 @@ public class SinkPainter implements ElementPainter{
 
     @Override
     public boolean elementAt(RoomElement roomElement, Point pos) {
-        return false;
+        if (!(roomElement instanceof Sink)) {
+            return false;
+        }
+
+        Rectangle bounds = getBound(roomElement);
+        return bounds.contains(pos);
+    }
+
+    @Override
+    public Rectangle getBound(RoomElement roomElement) {
+        if (!(roomElement instanceof Sink)) {
+            return null;
+        }
+
+        double x = sink.getLocation().getX();
+        double y = sink.getLocation().getY();
+        double widthEl = sink.getDimension().getWidth();
+        double heightEl = sink.getDimension().getHeight();
+
+        return new Rectangle((int) x, (int) y, (int) widthEl, (int) heightEl);
+    }
+
+    @Override
+    public void setSelected(RoomElement roomElement, boolean isSelected) {
+        if (roomElement instanceof Sink) {
+            this.selected = isSelected;
+        }
+    }
+
+    @Override
+    public boolean isSelected() {
+        return selected;
+    }
+
+    @Override
+    public void resetSelected() {
+        this.selected = false;
+    }
+
+    @Override
+    public RoomElement getElement() {
+        return sink;
     }
 
     public Sink getSink() {
