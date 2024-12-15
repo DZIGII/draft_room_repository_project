@@ -40,12 +40,48 @@ public class AddTableState implements State {
                 double width = Double.parseDouble(widthField.getText());
                 double height = Double.parseDouble(heightField.getText());
 
+                double roomWidth = roomView.getRoom().getWidth();
+                double roomHeight = roomView.getRoom().getHeight();
+
+                double panelWidth = roomView.getWidth();
+                double panelHeight = roomView.getHeight();
+
+                double panelRatio = panelWidth / panelHeight;
+                double roomRatio = roomWidth / roomHeight;
+
+                double adjustedRoomWidth, adjustedRoomHeight, scaledX, scaledY, scaledWidth, scaledHeight;
+
+                if (panelRatio > roomRatio) {
+                    adjustedRoomWidth = panelWidth * 0.9 * roomRatio / panelRatio;
+                    adjustedRoomHeight = panelHeight * 0.9;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                } else {
+                    adjustedRoomWidth = panelWidth * 0.9;
+                    adjustedRoomHeight = panelHeight * 0.9 * panelRatio / roomRatio;
+
+                    double scaleX = adjustedRoomWidth / roomWidth;
+                    double scaleY = adjustedRoomHeight / roomHeight;
+
+                    scaledWidth = width * scaleX;
+                    scaledHeight = height * scaleY;
+                }
+
+                if(adjustedRoomWidth<scaledWidth || adjustedRoomHeight<scaledHeight || clickPoint.getX() + scaledWidth > roomView.getPoint().getX() + adjustedRoomWidth || clickPoint.getY() + scaledHeight > roomView.getPoint().getY() + adjustedRoomHeight || clickPoint.getX() < roomView.getPoint().getX() || clickPoint.getY() < roomView.getPoint().getY()) {
+                    JOptionPane.showMessageDialog(null, "Element exceeds room boundaries!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 Dimension2D dimension = new Dimension();
-                dimension.setSize(width, height);
+                dimension.setSize(scaledWidth, scaledHeight);
 
                 Table table = new Table("Table", clickPoint, dimension);
                 table.setLocation(clickPoint);
-                table.setDimension(width, height);
+                table.setDimension(scaledWidth, scaledHeight);
 
                 TablePainter tablePainter = new TablePainter(table);
                 roomView.addElement(tablePainter);

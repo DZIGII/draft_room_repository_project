@@ -29,6 +29,7 @@ public class RoomView extends JPanel implements ISubscriber {
     private Room room;
     private String roomName;
     private JLabel jLabel;
+    private Point point;
     private ArrayList<ElementPainter> painters;
 
     private StateManager stateManager = new StateManager();
@@ -168,11 +169,14 @@ public class RoomView extends JPanel implements ISubscriber {
         Double roomRatio = ((double) this.room.getWidth() / (double) this.room.getHeight());
 
 
+
         if(panelRatio > roomRatio) {
-            graphics.drawRect((int) (this.getWidth()*5/100 + this.getWidth()*9/10*((panelRatio-roomRatio)/2/panelRatio)), this.getHeight()*5/100, (int) (this.getWidth()*9/10*roomRatio/panelRatio), this.getHeight()*90/100);
+            point = new Point((int) (this.getWidth()*5/100 + this.getWidth()*9/10*((panelRatio-roomRatio)/2/panelRatio)), this.getHeight()*5/100);
+            graphics.drawRect((int)point.getX(),(int)point.getY(),(int) (this.getWidth()*9/10*roomRatio/panelRatio), this.getHeight()*90/100);
 
         }else {
-            graphics.drawRect(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomRatio-panelRatio)/2/roomRatio)), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomRatio));
+            point = new Point(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomRatio-panelRatio)/2/roomRatio)));
+            graphics.drawRect((int)point.getX(),(int)point.getY(), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomRatio));
         }
 
         for (ElementPainter painter : painters) {
@@ -300,5 +304,13 @@ public class RoomView extends JPanel implements ISubscriber {
 
     public void setPainters(ArrayList<ElementPainter> painters) {
         this.painters = painters;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }

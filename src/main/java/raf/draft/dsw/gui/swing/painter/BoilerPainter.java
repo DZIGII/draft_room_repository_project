@@ -25,7 +25,7 @@ public class BoilerPainter implements ElementPainter{
         Color fillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
 
         g.setColor(Color.BLACK);
-        g.drawOval((int) (x - radius), (int) (y - radius), (int) diameter, (int) diameter);
+        g.drawOval((int) x, (int) y, (int) diameter, (int) diameter);
 
         g.setColor(fillColor);
         g.fillOval((int) (x - radius), (int) (y - radius), (int) diameter, (int) diameter);
@@ -36,6 +36,9 @@ public class BoilerPainter implements ElementPainter{
                 (int) (x + radius - innerMargin), (int) (y + radius - innerMargin));
         g.drawLine((int) (x - radius + innerMargin), (int) (y + radius - innerMargin),
                 (int) (x + radius - innerMargin), (int) (y - radius + innerMargin));
+
+        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin),(int) (x + innerMargin+radius), (int) (y + innerMargin+radius));
+        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin+radius),(int) (x + innerMargin+radius), (int) (y + innerMargin));
     }
 
     @Override
