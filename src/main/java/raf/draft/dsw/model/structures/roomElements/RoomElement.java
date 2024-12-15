@@ -4,6 +4,7 @@ import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.nodes.Leaf;
 import raf.draft.dsw.model.structures.Prototype;
 
+import java.awt.*;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
@@ -41,6 +42,10 @@ public abstract class RoomElement extends Leaf implements Prototype {
 
     public void setDimension(double width, double height) {
         this.dimension.setSize(width, height);
+    }
+
+    public void setDimension2(Dimension dimension) {
+        this.dimension = dimension;
     }
 
     public int getRotateRatio() {

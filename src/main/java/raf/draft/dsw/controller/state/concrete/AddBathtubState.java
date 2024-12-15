@@ -118,6 +118,11 @@ public class AddBathtubState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
     public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
         if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
             return root;

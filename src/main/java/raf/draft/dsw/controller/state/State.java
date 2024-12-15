@@ -20,5 +20,7 @@ public interface State {
 
     void mouseWheelMoved(MouseWheelEvent e, RoomView roomView);
 
+    void copy();
+
 
 }

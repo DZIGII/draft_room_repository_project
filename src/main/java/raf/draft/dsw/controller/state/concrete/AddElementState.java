@@ -46,5 +46,10 @@ public class AddElementState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 
 }

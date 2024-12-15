@@ -39,4 +39,9 @@ public class ResizeState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 }

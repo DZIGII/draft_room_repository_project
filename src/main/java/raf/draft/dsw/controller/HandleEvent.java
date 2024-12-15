@@ -87,27 +87,31 @@ public class HandleEvent implements MouseListener, MouseMotionListener {
         }
         if (stateManager.getCurrentState() instanceof SelectState) {
             SelectState selectState = (SelectState) stateManager.getCurrentState();
-            Point point = e.getPoint();
             selectState.unselect(roomView);
         }
-
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (stateManager.getCurrentState() instanceof SelectState) {
-            System.out.println("Kliknuto");
             SelectState selectState = (SelectState) stateManager.getCurrentState();
             selectState.mousePressed(e, roomView);
+        }
+        if (stateManager.getCurrentState() instanceof MoveState) {
+            MoveState moveState = (MoveState) stateManager.getCurrentState();
+            moveState.mousePressed(e, roomView);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if (stateManager.getCurrentState() instanceof SelectState) {
-            System.out.println("Pusteno");
             SelectState selectState = (SelectState) stateManager.getCurrentState();
             selectState.mouseRelease(e, roomView);
+        }
+        if (stateManager.getCurrentState() instanceof MoveState) {
+            MoveState moveState = (MoveState) stateManager.getCurrentState();
+            moveState.mouseRelease(e, roomView);
         }
     }
 
@@ -125,9 +129,12 @@ public class HandleEvent implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if (stateManager.getCurrentState() instanceof SelectState) {
-            System.out.println("pomera se");
             SelectState selectState = (SelectState) stateManager.getCurrentState();
             selectState.mouseDragged(e, roomView);
+        }
+        if (stateManager.getCurrentState() instanceof MoveState) {
+            MoveState moveState = (MoveState) stateManager.getCurrentState();
+            moveState.mouseDragged(e, roomView);
         }
     }
 

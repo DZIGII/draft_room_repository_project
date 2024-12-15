@@ -17,5 +17,6 @@ public class CopyPasteAction extends AbstactRoomAction {
     public void actionPerformed(ActionEvent e) {
         RoomView selectedComponent = (RoomView) MainFrame.getInstance().getTabFrame().getSelectedComponent();
         selectedComponent.startCopyPasteState();
+
     }
 }

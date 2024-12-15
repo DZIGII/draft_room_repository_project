@@ -3,6 +3,7 @@ package raf.draft.dsw.model.structures.roomElements;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Prototype;
 
+import java.awt.*;
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
@@ -22,6 +23,12 @@ public class Closet extends RoomElement {
 
     @Override
     public Prototype clone() {
-        return null;
+        Closet clonedCloset = new Closet(this.getName(), this.getParent());
+
+        clonedCloset.setLocation(new Point((int) (this.getLocation().getX()+15), (int) (this.getLocation().getY()+15)));
+        clonedCloset.setDimension2((Dimension) this.getDimension());
+        //clonedBed.setRotateRatio(this.getRotateRatio());
+
+        return clonedCloset;
     }
 }

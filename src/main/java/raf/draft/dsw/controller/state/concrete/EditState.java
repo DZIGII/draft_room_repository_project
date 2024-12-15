@@ -39,5 +39,10 @@ public class EditState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 
 }

@@ -39,4 +39,9 @@ public class RotateState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 }

@@ -6,6 +6,8 @@ import raf.draft.dsw.model.structures.roomElements.Boiler;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 
 public class BoilerPainter implements ElementPainter{
     private Boiler boiler;
@@ -19,26 +21,36 @@ public class BoilerPainter implements ElementPainter{
     public void paint(Graphics2D g, RoomElement roomElement) {
         double x = boiler.getLocation().getX();
         double y = boiler.getLocation().getY();
-        double diameter = boiler.getDimension().getWidth();
-        double radius = diameter / 2;
+        double diameter = Math.min(boiler.getDimension().getWidth(), boiler.getDimension().getHeight());
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
+        double padding = diameter * 0.1;
+        double innerDiameter = diameter - 2 * padding;
+
+        double centerX = x + diameter / 2;
+        double centerY = y + diameter / 2;
+
+        Ellipse2D circle = new Ellipse2D.Double(x, y, diameter, diameter);
+
+        if (selected) {
+            g.setColor(new Color(173, 216, 230));
+        } else {
+            g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fill(circle);
+        g.setColor(Color.BLACK);
+        g.draw(circle);
+
+        GeneralPath xShape = new GeneralPath();
+
+        xShape.moveTo(centerX - innerDiameter / 2, centerY - innerDiameter / 2);
+        xShape.lineTo(centerX + innerDiameter / 2, centerY + innerDiameter / 2);
+
+        xShape.moveTo(centerX + innerDiameter / 2, centerY - innerDiameter / 2);
+        xShape.lineTo(centerX - innerDiameter / 2, centerY + innerDiameter / 2);
 
         g.setColor(Color.BLACK);
-        g.drawOval((int) x, (int) y, (int) diameter, (int) diameter);
-
-        g.setColor(fillColor);
-        g.fillOval((int) (x - radius), (int) (y - radius), (int) diameter, (int) diameter);
-
-        double innerMargin = radius * 0.5;
-        g.setColor(Color.BLACK);
-        g.drawLine((int) (x - radius + innerMargin), (int) (y - radius + innerMargin),
-                (int) (x + radius - innerMargin), (int) (y + radius - innerMargin));
-        g.drawLine((int) (x - radius + innerMargin), (int) (y + radius - innerMargin),
-                (int) (x + radius - innerMargin), (int) (y - radius + innerMargin));
-
-        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin),(int) (x + innerMargin+radius), (int) (y + innerMargin+radius));
-        g.drawLine((int) (x + innerMargin), (int) (y + innerMargin+radius),(int) (x + innerMargin+radius), (int) (y + innerMargin));
+        g.setStroke(new BasicStroke(2)); // Debljina linije za "X"
+        g.draw(xShape);
     }
 
     @Override

@@ -112,4 +112,9 @@ public class AddToiletState implements State {
     public void mouseWheelMoved(MouseWheelEvent e, RoomView roomView) {
 
     }
+
+    @Override
+    public void copy() {
+
+    }
 }

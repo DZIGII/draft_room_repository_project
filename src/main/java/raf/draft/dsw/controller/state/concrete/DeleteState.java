@@ -40,5 +40,10 @@ public class DeleteState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 
 }

@@ -82,6 +82,11 @@ public class SelectState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
     public void selectElements() {
 
     }

@@ -86,4 +86,16 @@ public class DoorPainter implements ElementPainter{
     public RoomElement getElement() {
         return door;
     }
+
+    public Door getDoor() {
+        return door;
+    }
+
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

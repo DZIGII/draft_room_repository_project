@@ -113,6 +113,11 @@ public class AddBedState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
     public void misKliknut(RoomView roomView, MouseEvent e) {
 
     }

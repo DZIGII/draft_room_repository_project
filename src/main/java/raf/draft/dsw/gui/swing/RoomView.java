@@ -11,18 +11,12 @@ import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.Room;
-import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.Dimension2D;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RoomView extends JPanel implements ISubscriber {
 
@@ -30,7 +24,9 @@ public class RoomView extends JPanel implements ISubscriber {
     private String roomName;
     private JLabel jLabel;
     private Point point;
+    private Point pointEnd;
     private ArrayList<ElementPainter> painters;
+
 
     private StateManager stateManager = new StateManager();
 
@@ -173,10 +169,11 @@ public class RoomView extends JPanel implements ISubscriber {
         if(panelRatio > roomRatio) {
             point = new Point((int) (this.getWidth()*5/100 + this.getWidth()*9/10*((panelRatio-roomRatio)/2/panelRatio)), this.getHeight()*5/100);
             graphics.drawRect((int)point.getX(),(int)point.getY(),(int) (this.getWidth()*9/10*roomRatio/panelRatio), this.getHeight()*90/100);
-
+            pointEnd = new Point(point.x + (int) (this.getWidth()*9/10*roomRatio/panelRatio), point.y + this.getHeight()*90/100);
         }else {
             point = new Point(this.getWidth()*5/100, (int) (this.getHeight()*5/100 + this.getHeight()*9/10*((roomRatio-panelRatio)/2/roomRatio)));
             graphics.drawRect((int)point.getX(),(int)point.getY(), this.getWidth()*90/100, (int) (this.getHeight()*9/10*panelRatio/roomRatio));
+            pointEnd = new Point(point.x + this.getWidth()*90/100, point.y + (int) (this.getHeight()*9/10*panelRatio/roomRatio));
         }
 
         for (ElementPainter painter : painters) {
@@ -214,6 +211,7 @@ public class RoomView extends JPanel implements ISubscriber {
 
     public void startCopyPasteState() {
         this.stateManager.setCopyPasteState();
+        this.stateManager.getCurrentState().copy();
     }
 
     public void startDeleteState() {
@@ -312,5 +310,58 @@ public class RoomView extends JPanel implements ISubscriber {
 
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public boolean isOverlap(ElementPainter elementPainter) {
+        for (ElementPainter existingPainter : painters) {
+            if (elementPainter == existingPainter) {
+                continue;
+            }
+
+            RoomElement element = elementPainter.getElement();
+            RoomElement existingElement = existingPainter.getElement();
+
+            Point elementLocation = (Point) element.getLocation();
+            Dimension elementDimension = (Dimension) element.getDimension();
+
+            Point existingLocation = (Point) existingElement.getLocation();
+            Dimension existingDimension = (Dimension) existingElement.getDimension();
+
+            boolean horizontalOverlap = (elementLocation.x + elementDimension.width > existingLocation.x) &&
+                    (existingLocation.x + existingDimension.width > elementLocation.x);
+
+            boolean verticalOverlap = (elementLocation.y + elementDimension.height > existingLocation.y) &&
+                    (existingLocation.y + existingDimension.height > elementLocation.y);
+
+            if (horizontalOverlap && verticalOverlap) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isOverbound(ElementPainter elementPainter) {
+        RoomElement element = elementPainter.getElement();
+
+        Point elementLocation = (Point) element.getLocation();
+        Dimension elementDimension = (Dimension) element.getDimension();
+
+        int elementLeft = elementLocation.x;
+        int elementTop = elementLocation.y;
+        int elementRight = elementLeft + elementDimension.width;
+        int elementBottom = elementTop + elementDimension.height;
+
+        int roomLeft = (int) point.getX();
+        int roomTop = (int) point.getY();
+        int roomRight = (int) pointEnd.getX();
+        int roomBottom = (int) pointEnd.getY();
+
+        boolean isInside = (elementLeft >= roomLeft) &&
+                (elementTop >= roomTop) &&
+                (elementRight <= roomRight) &&
+                (elementBottom <= roomBottom);
+
+        return !isInside;
     }
 }

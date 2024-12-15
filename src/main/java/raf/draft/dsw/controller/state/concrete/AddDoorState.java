@@ -113,6 +113,11 @@ public class AddDoorState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
     public void printDoor(Point2D clickPoint, RoomView roomView) {
         Dimension2D d = new Dimension();
         Door door = new Door("Bed", clickPoint, d);

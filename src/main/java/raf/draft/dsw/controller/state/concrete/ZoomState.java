@@ -39,4 +39,9 @@ public class ZoomState implements State {
 
     }
 
+    @Override
+    public void copy() {
+
+    }
+
 }
