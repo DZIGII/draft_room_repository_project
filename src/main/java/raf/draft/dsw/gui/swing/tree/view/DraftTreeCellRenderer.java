@@ -5,6 +5,7 @@ import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
 import raf.draft.dsw.model.structures.ProjectExplorer;
 import raf.draft.dsw.model.structures.Room;
+import raf.draft.dsw.model.structures.roomElements.*;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -27,6 +28,33 @@ public class DraftTreeCellRenderer extends DefaultTreeCellRenderer {
         }
         else if (((DraftTreeItem)value).getDraftNode() instanceof Room) {
             imageURL = getClass().getResource("/images/roomTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Boiler) {
+            imageURL = getClass().getResource("/images/boilerTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Bathtub) {
+            imageURL = getClass().getResource("/images/bathTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Bed) {
+            imageURL = getClass().getResource("/images/bedTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Closet) {
+            imageURL = getClass().getResource("/images/closetTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Door) {
+            imageURL = getClass().getResource("/images/doorTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Sink) {
+            imageURL = getClass().getResource("/images/sinkTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Table) {
+            imageURL = getClass().getResource("/images/tableTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof Toilet) {
+            imageURL = getClass().getResource("/images/toiletTreeIcon.png");
+        }
+        else if (((DraftTreeItem)value).getDraftNode() instanceof WashingMachine) {
+            imageURL = getClass().getResource("/images/washing-machineTreeIcon.png");
         }
 
         Icon icon = null;

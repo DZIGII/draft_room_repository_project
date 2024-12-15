@@ -1,9 +1,12 @@
 package raf.draft.dsw.controller.state.concrete;
 
 import raf.draft.dsw.controller.state.State;
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.DoorPainter;
 import raf.draft.dsw.gui.swing.painter.SinkPainter;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.structures.Room;
 import raf.draft.dsw.model.structures.roomElements.Door;
 import raf.draft.dsw.model.structures.roomElements.Sink;
 
@@ -15,6 +18,8 @@ import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
 public class AddSinkState implements State {
+    private static int brojac = 1;
+
     @Override
     public void log() {
 
@@ -67,7 +72,14 @@ public class AddSinkState implements State {
                 Dimension2D dimension = new Dimension();
                 dimension.setSize(scaledWidth, scaledWidth);
 
-                Sink sink = new Sink("Sink", clickPoint, dimension);
+                Sink sink = new Sink("Sink " + brojac++, clickPoint, dimension);
+                DraftTreeItem parentItem = findTreeItemForRoom((DraftTreeItem) MainFrame.getInstance().getDraftTree().getTreeView().getModel().getRoot(), roomView.getRoom());
+                parentItem.add(new DraftTreeItem(sink));
+                roomView.getRoom().addChild(sink);
+                MainFrame.getInstance().getDraftTree().getTreeView().expandPath(MainFrame.getInstance().getDraftTree().getTreeView().getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
+                roomView.getRoom().addChild(sink);
+
                 sink.setLocation(clickPoint);
                 sink.setDimension(scaledWidth, scaledWidth);
 
@@ -98,5 +110,21 @@ public class AddSinkState implements State {
     @Override
     public void mouseWheelMoved(MouseWheelEvent e, RoomView roomView) {
 
+    }
+
+    public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
+        if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
+            return root;
+        }
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DraftTreeItem child = (DraftTreeItem) root.getChildAt(i);
+            DraftTreeItem found = findTreeItemForRoom(child, room);
+            if (found != null) {
+                return found;
+            }
+        }
+
+        return null;
     }
 }

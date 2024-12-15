@@ -5,6 +5,8 @@ import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.RoomView;
 import raf.draft.dsw.gui.swing.painter.BedPainter;
 import raf.draft.dsw.gui.swing.painter.DoorPainter;
+import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
+import raf.draft.dsw.model.structures.Room;
 import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.Door;
 
@@ -16,6 +18,8 @@ import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 
 public class AddDoorState implements State {
+    private static int brojac = 1;
+
     @Override
     public void log() {
 
@@ -80,7 +84,14 @@ public class AddDoorState implements State {
                 Dimension2D dimension = new Dimension();
                 dimension.setSize(scaledWidth, scaledHeight);
 
-                Door door = new Door("Door", clickPoint, dimension);
+                Door door = new Door("Door " + brojac++, clickPoint, dimension);
+                DraftTreeItem parentItem = findTreeItemForRoom((DraftTreeItem) MainFrame.getInstance().getDraftTree().getTreeView().getModel().getRoot(), roomView.getRoom());
+                parentItem.add(new DraftTreeItem(door));
+                roomView.getRoom().addChild(door);
+                MainFrame.getInstance().getDraftTree().getTreeView().expandPath(MainFrame.getInstance().getDraftTree().getTreeView().getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getDraftTree().getTreeView());
+                roomView.getRoom().addChild(door);
+
                 door.setLocation(clickPoint);
                 door.setDimension(scaledWidth, scaledHeight);
 
@@ -112,6 +123,23 @@ public class AddDoorState implements State {
     public void mouseWheelMoved(MouseWheelEvent e, RoomView roomView) {
 
     }
+
+    public DraftTreeItem findTreeItemForRoom(DraftTreeItem root, Room room) {
+        if (root.getDraftNode() instanceof Room && root.getDraftNode().equals(room)) {
+            return root;
+        }
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            DraftTreeItem child = (DraftTreeItem) root.getChildAt(i);
+            DraftTreeItem found = findTreeItemForRoom(child, room);
+            if (found != null) {
+                return found;
+            }
+        }
+
+        return null;
+    }
+
 
     public void printDoor(Point2D clickPoint, RoomView roomView) {
         Dimension2D d = new Dimension();
