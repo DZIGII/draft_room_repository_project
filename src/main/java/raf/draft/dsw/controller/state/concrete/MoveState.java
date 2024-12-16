@@ -51,6 +51,14 @@ public class MoveState implements State {
             Point newPoint = new Point(end.x - (start.x - elStart.x), end.y - (start.y - elStart.y));
 
             element.getElement().setLocation(newPoint);
+
+            if (roomView.isOverbound(element) || roomView.isOverlap(element)) {
+                element.setOverlap();
+            }
+            else {
+                element.resetOverlap();
+            }
+
             roomView.repaint();
         }
     }
@@ -63,6 +71,7 @@ public class MoveState implements State {
         if (roomView.isOverbound(element) || roomView.isOverlap(element)) {
             element.getElement().setLocation(elStart);
         }
+        element.resetOverlap();
         roomView.repaint();
         element = null;
     }

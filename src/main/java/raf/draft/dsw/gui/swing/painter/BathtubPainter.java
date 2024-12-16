@@ -1,7 +1,6 @@
 package raf.draft.dsw.gui.swing.painter;
 
 import raf.draft.dsw.model.structures.roomElements.Bathtub;
-import raf.draft.dsw.model.structures.roomElements.Bed;
 import raf.draft.dsw.model.structures.roomElements.RoomElement;
 
 import java.awt.*;
@@ -9,6 +8,7 @@ import java.awt.*;
 public class BathtubPainter implements ElementPainter{
     private Bathtub bathtub;
     private boolean selected;
+    private boolean overlap;
 
     public BathtubPainter(Bathtub bathtub) {
         this.bathtub = bathtub;
@@ -22,11 +22,22 @@ public class BathtubPainter implements ElementPainter{
         double width = bathtub.getDimension().getWidth();
         double height = bathtub.getDimension().getHeight();
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
+        Color fillColor = Color.WHITE;
 
-        g.setColor(Color.BLACK);
+        if (selected) {
+            fillColor = new Color(173, 216, 230);
+        }
+        if (overlap) {
+            fillColor = Color.red;
+            g.setColor(Color.red);
+            g.setColor(Color.red);
+        }
+        else {
+            g.setColor(Color.BLACK);
+            g.setColor(Color.GRAY);
+        }
+
         g.drawRect((int) x, (int) y, (int) width, (int) height);
-        g.setColor(Color.GRAY);
         g.fillRect((int) x, (int) y, (int) width, (int) height);
 
         double ovalX = x + width * 0.1;
@@ -86,11 +97,25 @@ public class BathtubPainter implements ElementPainter{
         return bathtub;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Bathtub getBathtub() {
         return bathtub;
     }
 
     public void setBathtub(Bathtub bathtub) {
         this.bathtub = bathtub;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

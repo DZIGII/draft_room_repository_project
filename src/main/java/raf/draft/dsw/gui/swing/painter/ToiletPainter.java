@@ -12,6 +12,7 @@ import java.awt.geom.Rectangle2D;
 public class ToiletPainter implements ElementPainter{
     private Toilet toilet;
     private boolean selected;
+    private boolean overlap;
 
     public ToiletPainter(Toilet toilet) {
         this.toilet = toilet;
@@ -55,7 +56,17 @@ public class ToiletPainter implements ElementPainter{
                 Arc2D.OPEN
         );
 
-        Color rectFillColor = selected ? new Color(173, 216, 230) : Color.DARK_GRAY;
+        Color rectFillColor;
+
+        if (selected) {
+            rectFillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            rectFillColor = Color.red;
+        }
+        else  {
+            rectFillColor = Color.DARK_GRAY;
+        }
 
         g.setColor(rectFillColor);
         g.fill(rectangle);
@@ -119,11 +130,25 @@ public class ToiletPainter implements ElementPainter{
         return toilet;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Toilet getToilet() {
         return toilet;
     }
 
     public void setToilet(Toilet toilet) {
         this.toilet = toilet;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

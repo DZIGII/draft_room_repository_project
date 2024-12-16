@@ -10,6 +10,7 @@ import java.awt.*;
 public class WashingMachinePainter implements ElementPainter{
     private WashingMachine machine;
     private boolean selected;
+    private boolean overlap;
 
     public WashingMachinePainter(WashingMachine machine) {
         this.machine = machine;
@@ -21,7 +22,17 @@ public class WashingMachinePainter implements ElementPainter{
         double y = machine.getLocation().getY();
         double width = machine.getDimension().getWidth();
 
-        Color rectFillColor = selected ? new Color(173, 216, 230) : Color.WHITE;
+        Color rectFillColor;
+
+        if (selected) {
+            rectFillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            rectFillColor = Color.red;
+        }
+        else {
+            rectFillColor = Color.WHITE;
+        }
 
         g.setColor(rectFillColor);
         g.fillRect((int) x, (int) y, (int) width, (int) width);
@@ -85,11 +96,25 @@ public class WashingMachinePainter implements ElementPainter{
         return machine;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public WashingMachine getMachine() {
         return machine;
     }
 
     public void setMachine(WashingMachine machine) {
         this.machine = machine;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

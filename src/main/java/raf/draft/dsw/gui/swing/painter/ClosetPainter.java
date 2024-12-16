@@ -12,6 +12,7 @@ public class ClosetPainter implements ElementPainter {
 
     private Closet closet;
     private boolean selected;
+    private boolean overlap;
 
     public ClosetPainter(Closet closet) {
         this.closet = closet;
@@ -34,7 +35,17 @@ public class ClosetPainter implements ElementPainter {
 
         double centerX = x + width / 2;
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+        Color fillColor;
+
+        if (selected) {
+            fillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            fillColor = Color.red;
+        }
+        else {
+            fillColor = Color.LIGHT_GRAY;
+        }
 
         g.setColor(fillColor);
         g.fill(rectangle);
@@ -108,11 +119,25 @@ public class ClosetPainter implements ElementPainter {
         return closet;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Closet getCloset() {
         return closet;
     }
 
     public void setCloset(Closet closet) {
         this.closet = closet;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

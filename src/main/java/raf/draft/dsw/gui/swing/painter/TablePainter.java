@@ -15,6 +15,7 @@ public class TablePainter implements ElementPainter {
 
     private Table table;
     private boolean selected;
+    private boolean overlap;
 
     public TablePainter(Table table) {
         this.table = table;
@@ -38,7 +39,17 @@ public class TablePainter implements ElementPainter {
                 {x + widthEl - circleRadius, y + heightEl - circleRadius}
         };
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+        Color fillColor;
+
+        if (selected) {
+            fillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            fillColor = Color.red;
+        }
+        else {
+            fillColor = Color.LIGHT_GRAY;
+        }
 
         g.setColor(fillColor);
         g.fill(rectangle);
@@ -105,11 +116,25 @@ public class TablePainter implements ElementPainter {
         return table;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Table getTable() {
         return table;
     }
 
     public void setTable(Table table) {
         this.table = table;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

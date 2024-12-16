@@ -11,6 +11,7 @@ public class BedPainter implements ElementPainter {
 
     private Bed bed;
     private boolean selected;
+    private boolean overlap;
 
     public BedPainter(Bed bed) {
         this.bed = bed;
@@ -46,11 +47,17 @@ public class BedPainter implements ElementPainter {
 
         if (selected) {
             g.setColor(new Color(173, 216, 230));
-        } else {
+        }
+        else if (overlap) {
+            g.setColor(Color.red);
+            g.setColor(Color.red);
+        }
+        else {
+            g.setColor(Color.BLACK);
             g.setColor(Color.LIGHT_GRAY);
         }
+
         g.fill(bedShape);
-        g.setColor(Color.BLACK);
         g.draw(bedShape);
 
         g.setColor(Color.WHITE);
@@ -111,5 +118,19 @@ public class BedPainter implements ElementPainter {
     @Override
     public RoomElement getElement() {
         return bed;
+    }
+
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

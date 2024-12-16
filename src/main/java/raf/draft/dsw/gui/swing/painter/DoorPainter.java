@@ -12,6 +12,7 @@ public class DoorPainter implements ElementPainter{
 
     private Door door;
     private boolean selected;
+    private boolean overlap;
 
     public DoorPainter(Door door) {
         this.door = door;
@@ -32,7 +33,17 @@ public class DoorPainter implements ElementPainter{
         doorShape.lineTo(x + widthEl, y + heightEl);
         doorShape.closePath();
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+        Color fillColor;
+
+        if (selected) {
+            fillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            fillColor = Color.red;
+        }
+        else {
+            fillColor = Color.LIGHT_GRAY;
+        }
 
         g.setColor(fillColor);
         g.fill(doorShape);
@@ -87,6 +98,16 @@ public class DoorPainter implements ElementPainter{
         return door;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Door getDoor() {
         return door;
     }
@@ -97,5 +118,9 @@ public class DoorPainter implements ElementPainter{
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

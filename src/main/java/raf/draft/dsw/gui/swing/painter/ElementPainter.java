@@ -13,5 +13,7 @@ public interface ElementPainter {
     boolean isSelected();
     void resetSelected();
     RoomElement getElement();
+    void setOverlap();
+    void resetOverlap();
 
 }

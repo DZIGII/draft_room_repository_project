@@ -12,6 +12,7 @@ import java.awt.geom.GeneralPath;
 public class BoilerPainter implements ElementPainter{
     private Boiler boiler;
     private boolean selected;
+    private boolean overlap;
 
     public BoilerPainter(Boiler boiler) {
         this.boiler = boiler;
@@ -33,9 +34,14 @@ public class BoilerPainter implements ElementPainter{
 
         if (selected) {
             g.setColor(new Color(173, 216, 230));
-        } else {
+        }
+        else if (overlap) {
+            g.setColor(Color.red);
+        }
+        else {
             g.setColor(Color.LIGHT_GRAY);
         }
+
         g.fill(circle);
         g.setColor(Color.BLACK);
         g.draw(circle);
@@ -99,11 +105,25 @@ public class BoilerPainter implements ElementPainter{
         return boiler;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Boiler getBoiler() {
         return boiler;
     }
 
     public void setBoiler(Boiler boiler) {
         this.boiler = boiler;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }

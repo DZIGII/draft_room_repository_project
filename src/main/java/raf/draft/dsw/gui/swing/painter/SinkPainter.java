@@ -13,6 +13,7 @@ import java.awt.geom.GeneralPath;
 public class SinkPainter implements ElementPainter{
     private Sink sink;
     private boolean selected;
+    private boolean overlap;
 
     public SinkPainter(Sink sink) {
         this.sink = sink;
@@ -39,7 +40,6 @@ public class SinkPainter implements ElementPainter{
         triangle.lineTo(x3, y3);
         triangle.closePath();
 
-        // Rotacija oko centra trougla
         double centerX = x + widthEl / 2;
         double centerY = y + heightEl / 2;
 
@@ -48,7 +48,17 @@ public class SinkPainter implements ElementPainter{
 
         triangle.transform(transform);
 
-        Color fillColor = selected ? new Color(173, 216, 230) : Color.LIGHT_GRAY;
+        Color fillColor;
+
+        if (selected) {
+            fillColor = new Color(173, 216, 230);
+        }
+        else if (overlap) {
+            fillColor = Color.red;
+        }
+        else {
+            fillColor = Color.LIGHT_GRAY;
+        }
 
         g.setColor(fillColor);
         g.fill(triangle);
@@ -113,11 +123,25 @@ public class SinkPainter implements ElementPainter{
         return sink;
     }
 
+    @Override
+    public void setOverlap() {
+        overlap = true;
+    }
+
+    @Override
+    public void resetOverlap() {
+        overlap = false;
+    }
+
     public Sink getSink() {
         return sink;
     }
 
     public void setSink(Sink sink) {
         this.sink = sink;
+    }
+
+    public boolean isOverlap() {
+        return overlap;
     }
 }
