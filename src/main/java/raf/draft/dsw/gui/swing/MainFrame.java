@@ -94,7 +94,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         messageGenerator.subscribe(this);
         messageGenerator.subscribe(cl);
-        messageGenerator.subscribe(fl);
+        //messageGenerator.subscribe(fl);
 
         //add(infoLabel, BorderLayout.EAST);
     }

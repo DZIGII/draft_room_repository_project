@@ -16,5 +16,12 @@ public class MyToolBar extends JToolBar {
         add(am.getRenameAction());
         add(am.getDeleteNodeAction());
         add(am.getEditProjectAction());
+        add(am.getUndoAction());
+        add(am.getRedoAction());
+        add(am.getSaveAction());
+        add(am.getSaveAsAction());
+        add(am.getOpenProjectAction());
+        add(am.getOrganizeMyRoomAction());
+        add(am.getTemplateMenuAction());
     }
 }

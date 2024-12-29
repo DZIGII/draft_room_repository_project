@@ -14,6 +14,13 @@ public class ActionManager {
     private EditProjectExitAction editProjectExitAction;
     private EditProjectSaveAction editProjectSaveAction;
     private RenameExitAction renameExitAction;
+    private OpenProjectAction openProjectAction;
+    private OrganizeMyRoomAction organizeMyRoomAction;
+    private RedoAction redoAction;
+    private UndoAction undoAction;
+    private SaveAction saveAction;
+    private SaveAsAction saveAsAction;
+    private TemplateMenuAction templateMenuAction;
 
     private AddElementAction addElementAction;
     private  CopyPasteAction copyPasteAction;
@@ -44,6 +51,13 @@ public class ActionManager {
         editProjectAction = new EditProjectAction();
         editProjectExitAction = new EditProjectExitAction();
         editProjectSaveAction = new EditProjectSaveAction();
+        openProjectAction = new OpenProjectAction();
+        organizeMyRoomAction = new OrganizeMyRoomAction();
+        redoAction = new RedoAction();
+        undoAction = new UndoAction();
+        saveAction = new SaveAction();
+        saveAsAction = new SaveAsAction();
+        templateMenuAction = new TemplateMenuAction();
 
         addElementAction = new AddElementAction();
         copyPasteAction = new CopyPasteAction();
@@ -231,5 +245,61 @@ public class ActionManager {
 
     public void setZoomAction(ZoomAction zoomAction) {
         this.zoomAction = zoomAction;
+    }
+
+    public OpenProjectAction getOpenProjectAction() {
+        return openProjectAction;
+    }
+
+    public void setOpenProjectAction(OpenProjectAction openProjectAction) {
+        this.openProjectAction = openProjectAction;
+    }
+
+    public OrganizeMyRoomAction getOrganizeMyRoomAction() {
+        return organizeMyRoomAction;
+    }
+
+    public void setOrganizeMyRoomAction(OrganizeMyRoomAction organizeMyRoomAction) {
+        this.organizeMyRoomAction = organizeMyRoomAction;
+    }
+
+    public RedoAction getRedoAction() {
+        return redoAction;
+    }
+
+    public void setRedoAction(RedoAction redoAction) {
+        this.redoAction = redoAction;
+    }
+
+    public UndoAction getUndoAction() {
+        return undoAction;
+    }
+
+    public void setUndoAction(UndoAction undoAction) {
+        this.undoAction = undoAction;
+    }
+
+    public SaveAction getSaveAction() {
+        return saveAction;
+    }
+
+    public void setSaveAction(SaveAction saveAction) {
+        this.saveAction = saveAction;
+    }
+
+    public SaveAsAction getSaveAsAction() {
+        return saveAsAction;
+    }
+
+    public void setSaveAsAction(SaveAsAction saveAsAction) {
+        this.saveAsAction = saveAsAction;
+    }
+
+    public TemplateMenuAction getTemplateMenuAction() {
+        return templateMenuAction;
+    }
+
+    public void setTemplateMenuAction(TemplateMenuAction templateMenuAction) {
+        this.templateMenuAction = templateMenuAction;
     }
 }
