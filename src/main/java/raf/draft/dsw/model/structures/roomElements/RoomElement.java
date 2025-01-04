@@ -58,4 +58,8 @@ public abstract class RoomElement extends Leaf implements Prototype {
 
     public abstract Prototype clone();
 
+    @Override
+    public String toString() {
+        return getName() + " (" + dimension.getWidth() + " x " + dimension.getHeight() + ")";
+    }
 }
