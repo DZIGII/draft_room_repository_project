@@ -30,7 +30,6 @@ public class OrganizeMyRoomAction extends AbstactRoomAction{
             DraftTreeItem selected = (DraftTreeItem) MainFrame.getInstance().getDraftTree().getSelectedNode();
             if(selected.getDraftNode() instanceof Project || selected.getDraftNode() instanceof Building)
             {
-                roomDimensionsFrame = new RoomDimensionsFrame(new Room("Organize My Room", selected.getDraftNode()));
                 frame = new OrganizeMyRoomFrame();
                 frame.setVisible(true);
             }
