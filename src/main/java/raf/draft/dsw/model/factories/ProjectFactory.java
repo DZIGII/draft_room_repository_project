@@ -1,6 +1,7 @@
 package raf.draft.dsw.model.factories;
 
 import raf.draft.dsw.gui.swing.ChooseDraftNodeFrame;
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.model.nodes.DraftNode;
 import raf.draft.dsw.model.structures.Project;
 
@@ -10,6 +11,8 @@ public class ProjectFactory implements DraftNodeFactory{
     @Override
     public DraftNode createNode(DraftNode parent) {
         brojac++;
-        return new Project("Project " + brojac, parent);
+        Project project = new Project("Project " + brojac, parent);
+        MainFrame.getInstance().getProjectController().setCurrentProject(project);
+        return project;
     }
 }

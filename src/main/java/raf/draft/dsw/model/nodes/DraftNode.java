@@ -1,5 +1,7 @@
 package raf.draft.dsw.model.nodes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.model.messages.Message;
@@ -11,6 +13,7 @@ import java.util.Objects;
 
 public abstract class DraftNode {
     private String name;
+    @JsonIgnore
     private DraftNode parent = null;
 
     public DraftNode(String name) {

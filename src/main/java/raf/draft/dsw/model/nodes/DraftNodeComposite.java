@@ -1,5 +1,7 @@
 package raf.draft.dsw.model.nodes;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 
 public abstract class DraftNodeComposite extends DraftNode {

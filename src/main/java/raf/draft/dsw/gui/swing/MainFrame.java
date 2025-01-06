@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing;
 
+import raf.draft.dsw.controller.ProjectController;
 import raf.draft.dsw.controller.actions.ActionManager;
 import raf.draft.dsw.controller.messagegenerator.ConsoleLogger;
 import raf.draft.dsw.controller.messagegenerator.FileLogger;
@@ -30,6 +31,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private LoggerFactory loggerFactory;
     private StateToolBar stateToolBar;
     private static MainFrame instance;
+    private ProjectController projectController;
 
     private MainFrame() {
     }
@@ -46,6 +48,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         draftTree = new DraftTreeImplementation();
         stateToolBar = new StateToolBar(actionManager);
+        projectController = new ProjectController();
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -197,5 +200,13 @@ public class MainFrame extends JFrame implements ISubscriber {
         else if(message.getMessageType().equalsIgnoreCase("INFORMATION")) {
             JOptionPane.showMessageDialog(this, message.toString(), "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public ProjectController getProjectController() {
+        return projectController;
+    }
+
+    public void setProjectController(ProjectController projectController) {
+        this.projectController = projectController;
     }
 }

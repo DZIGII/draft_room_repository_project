@@ -1,5 +1,6 @@
 package raf.draft.dsw.model.structures;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import raf.draft.dsw.controller.observer.IPublisher;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.model.nodes.DraftNode;
@@ -12,7 +13,9 @@ public class Project extends DraftNodeComposite implements IPublisher {
     private String projectName;
     private String creatorName;
     private String pathToProjectResources;
+    private boolean changed = false;
 
+    @JsonIgnore
     private List<ISubscriber> subscribers = new ArrayList<>();
 
     public Project(String name, DraftNode parent) {
@@ -26,13 +29,13 @@ public class Project extends DraftNodeComposite implements IPublisher {
         this.pathToProjectResources = pathToProjectResources;
     }
 
+    @JsonIgnore
     public Project(String name, ArrayList<DraftNode> children, String projectName, String creatorName, String pathToProjectResources) {
         super(name, children);
         this.projectName = projectName;
         this.creatorName = creatorName;
         this.pathToProjectResources = pathToProjectResources;
     }
-
     public Project(String name, DraftNode parent, ArrayList<DraftNode> children, String projectName, String creatorName, String pathToProjectResources) {
         super(name, parent, children);
         this.projectName = projectName;
@@ -45,6 +48,7 @@ public class Project extends DraftNodeComposite implements IPublisher {
     }
 
     public void setProjectName(String projectName) {
+        this.changed = true;
         this.projectName = projectName;
     }
 
@@ -53,6 +57,7 @@ public class Project extends DraftNodeComposite implements IPublisher {
     }
 
     public void setCreatorName(String creatorName) {
+        this.changed = true;
         this.creatorName = creatorName;
     }
 
@@ -94,6 +99,7 @@ public class Project extends DraftNodeComposite implements IPublisher {
 
     @Override
     public void notifyDeleted() {
+        this.changed = true;
         for (ISubscriber s : subscribers) {
             s.nodeDeleted();
         }
@@ -101,6 +107,7 @@ public class Project extends DraftNodeComposite implements IPublisher {
 
     @Override
     public void notifyAdded() {
+        this.changed = true;
         for (ISubscriber s : subscribers) {
             s.nodeAdded();
         }
@@ -109,6 +116,14 @@ public class Project extends DraftNodeComposite implements IPublisher {
     public void select() {
         String info =  "Project name: " + projectName + " / Author: " + creatorName;
         notifySubscribers(info);
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 
 }

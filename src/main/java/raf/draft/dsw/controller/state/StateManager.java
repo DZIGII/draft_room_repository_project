@@ -59,43 +59,43 @@ public class StateManager {
     }
 
     public void setAddElementState() {
-        currentState = (State) addElementState;
+        currentState =  addElementState;
     }
 
     public void setCopyPasteState() {
-        currentState = (State) copyPasteState;
+        currentState = copyPasteState;
     }
 
     public void setDeleteState() {
-        currentState = (State) deleteState;
+        currentState = deleteState;
     }
 
     public void setEditRoomState() {
-        currentState = (State) editRoomState;
+        currentState = editRoomState;
     }
 
     public void setEditState() {
-        currentState = (State) editState;
+        currentState = editState;
     }
 
     public void setMoveState() {
-        currentState = (State) moveState;
+        currentState =  moveState;
     }
 
     public void setResizeState() {
-        currentState = (State) resizeState;
+        currentState = resizeState;
     }
 
     public void setRoteteState() {
-        currentState = (State) roteteState;
+        currentState = roteteState;
     }
 
     public void setSelectState() {
-        currentState = (State) selectState;
+        currentState =  selectState;
     }
 
     public void setZoomState() {
-        currentState = (State) zoomState;
+        currentState = zoomState;
     }
 
     public void setAddBedState() {
