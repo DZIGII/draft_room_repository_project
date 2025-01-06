@@ -13,6 +13,7 @@ public class ProjectFactory implements DraftNodeFactory{
         brojac++;
         Project project = new Project("Project " + brojac, parent);
         MainFrame.getInstance().getProjectController().setCurrentProject(project);
+        project.setChanged(true);
         return project;
     }
 }

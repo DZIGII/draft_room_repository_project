@@ -1,5 +1,6 @@
 package raf.draft.dsw.model.structures;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import raf.draft.dsw.controller.observer.IPublisher;
 import raf.draft.dsw.controller.observer.ISubscriber;
 import raf.draft.dsw.gui.swing.RoomView;
@@ -14,7 +15,9 @@ import java.util.List;
 
 public class Room extends DraftNodeComposite implements IPublisher {
 
+    @JsonIgnore
     private RoomView tab;
+    @JsonIgnore
     private List<ISubscriber> subscribers = new ArrayList<>();
     private Color color;
     private Dimension dimension = new Dimension();
@@ -94,10 +97,12 @@ public class Room extends DraftNodeComposite implements IPublisher {
         return new Color(red, green, blue);
     }
 
+    @JsonIgnore
     public List<ISubscriber> getSubscribers() {
         return subscribers;
     }
 
+    @JsonIgnore
     public void setSubscribers(List<ISubscriber> subscribers) {
         this.subscribers = subscribers;
     }

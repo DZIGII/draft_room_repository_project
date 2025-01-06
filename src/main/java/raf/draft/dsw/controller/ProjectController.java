@@ -24,7 +24,7 @@ public class ProjectController {
                 currentProject.setChanged(false);
             } catch (IOException e) {
                 System.out.println(e);
-                //JOptionPane.showMessageDialog(null, "Error saving file: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error saving file: " + e.getMessage());
             }
         }
     }
