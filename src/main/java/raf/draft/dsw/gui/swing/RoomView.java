@@ -364,4 +364,11 @@ public class RoomView extends JPanel implements ISubscriber {
 
         return !isInside;
     }
+
+    @Override
+    public String toString() {
+        return "RoomView{" +
+                "room=" + room +
+                '}';
+    }
 }
