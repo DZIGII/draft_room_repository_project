@@ -29,7 +29,7 @@ public class Project extends DraftNodeComposite implements IPublisher {
         this.pathToProjectResources = pathToProjectResources;
     }
 
-    @JsonIgnore
+
     public Project(String name, ArrayList<DraftNode> children, String projectName, String creatorName, String pathToProjectResources) {
         super(name, children);
         this.projectName = projectName;

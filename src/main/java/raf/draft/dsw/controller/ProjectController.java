@@ -1,7 +1,10 @@
 package raf.draft.dsw.controller;
 
+import raf.draft.dsw.gui.swing.tree.DraftTreeImplementation;
+import raf.draft.dsw.gui.swing.tree.view.DraftTreeView;
 import raf.draft.dsw.model.Serializer;
 import raf.draft.dsw.model.structures.Project;
+import raf.draft.dsw.model.structures.ProjectExplorer;
 
 import javax.swing.*;
 import java.io.File;
@@ -53,6 +56,17 @@ public class ProjectController {
                 JOptionPane.showMessageDialog(null, "Error loading file: " + e.getMessage());
             }
         }
+    }
+
+
+    public void displayProjectInTree(DraftTreeImplementation draftTree, ProjectExplorer projectExplorer) {
+        if (projectExplorer == null) {
+            JOptionPane.showMessageDialog(null, "No project loaded to display.");
+            return;
+        }
+        DraftTreeView treeView = draftTree.generateTree(projectExplorer);
+        draftTree.setTreeView(treeView);
+        SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     public Project getCurrentProject() {

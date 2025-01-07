@@ -209,4 +209,13 @@ public class MainFrame extends JFrame implements ISubscriber {
     public void setProjectController(ProjectController projectController) {
         this.projectController = projectController;
     }
+
+    public void loadAndDisplayProject() {
+        projectController.openProject();
+
+        if (projectController.getCurrentProject() != null) {
+            //draftTree.generateTree(projectController.getCurrentProject());
+            SwingUtilities.updateComponentTreeUI(draftTree.getTreeView());
+        }
+    }
 }

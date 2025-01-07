@@ -1,5 +1,6 @@
 package raf.draft.dsw.gui.swing.tree.controller;
 
+import raf.draft.dsw.gui.swing.MainFrame;
 import raf.draft.dsw.gui.swing.tree.model.DraftTreeItem;
 import raf.draft.dsw.model.structures.Building;
 import raf.draft.dsw.model.structures.Project;
@@ -19,6 +20,7 @@ public class DraftTreeSelectionListener implements TreeSelectionListener {
         if(treeItemSelected.getDraftNode() instanceof Project)
         {
             Project project = (Project) treeItemSelected.getDraftNode();
+            MainFrame.getInstance().getProjectController().setCurrentProject(project);
             project.select();
             System.out.println(treeItemSelected.getDraftNode());
         }
